@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -15,7 +16,7 @@ public class GalleryEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", updatable = false)
+    @Column(name = "ID", updatable = false, unique = true)
     private int id;
 
     @Column(name = "NAME")
@@ -24,4 +25,7 @@ public class GalleryEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "MUSEUM_ID", referencedColumnName = "ID")
     private MuseumEntity museum;
+
+    @OneToMany(mappedBy = "gallery", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ArtworkEntity> artworks;
 }

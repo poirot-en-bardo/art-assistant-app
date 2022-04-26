@@ -16,7 +16,7 @@ public class ArtworkEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", updatable = false)
+    @Column(name = "ID", updatable = false, unique = true)
     private int id;
 
     @Column(name = "TITLE")
@@ -31,6 +31,9 @@ public class ArtworkEntity {
     @Column(name = "IMAGE_PATH")
     private byte[] imagePath;
 
+    @Column(name = "ROOM_NUMBER")
+    private int roomNumber;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ARTIST_ID", referencedColumnName = "ID")
     private ArtistEntity artist;
@@ -40,8 +43,8 @@ public class ArtworkEntity {
     private GenreEntity genre;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ROOM_ID", referencedColumnName = "ID")
-    private RoomEntity room;
+    @JoinColumn(name = "GALLERY_ID", referencedColumnName = "ID")
+    private GalleryEntity gallery;
 
     @OneToMany(mappedBy = "artwork", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CommentEntity> comments;

@@ -16,7 +16,7 @@ public class CountryEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID", updatable = false)
+    @Column(name = "ID", updatable = false, unique = true)
     private int id;
 
     @Column(name = "NAME")

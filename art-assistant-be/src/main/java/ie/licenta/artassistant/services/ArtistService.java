@@ -1,4 +1,4 @@
-package ie.licenta.artassistant.service;
+package ie.licenta.artassistant.services;
 
 import ie.licenta.artassistant.dto.ArtistRequestDTO;
 import ie.licenta.artassistant.dto.ArtistResponseDTO;

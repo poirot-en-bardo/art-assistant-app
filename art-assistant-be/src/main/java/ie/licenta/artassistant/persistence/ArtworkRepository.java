@@ -8,11 +8,11 @@ import java.util.List;
 
 public interface ArtworkRepository extends JpaRepository<ArtworkEntity, Integer> {
 
-    List<ArtworkEntity> findAllByArtistId(int artistId);
+    List<ArtworkEntity> findAllByArtistIdOrderByTitle(int artistId);
 
-    List<ArtworkEntity> findAllByGenreId(int genreId);
+    List<ArtworkEntity> findAllByGenreIdOrderByTitle(int genreId);
 
-    List<ArtworkEntity> findAllByGalleryId(int galleryId);
+    List<ArtworkEntity> findAllByGalleryIdOrderByTitle(int galleryId);
 
-    List<ArtworkEntity> findAllByRoomNumberAndGalleryId(int roomNumber, int galleryId);
+    List<ArtworkEntity> findAllByRoomNumberAndGalleryIdOrderByPosition(int roomNumber, int galleryId);
 }

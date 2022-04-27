@@ -1,12 +1,16 @@
 package ie.licenta.artassistant.services;
 
+import ie.licenta.artassistant.common.ArtNotFoundException;
+import ie.licenta.artassistant.common.ErrorCode;
 import ie.licenta.artassistant.dto.ArtistRequestDTO;
 import ie.licenta.artassistant.dto.ArtistResponseDTO;
 import ie.licenta.artassistant.mappers.ArtMapper;
+import ie.licenta.artassistant.models.ArtistEntity;
 import ie.licenta.artassistant.persistence.ArtistRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -23,21 +27,33 @@ public class ArtistServiceImpl implements ArtistService {
 
     @Override
     public ArtistResponseDTO getArtistById(int id) {
-        return null;
+        ArtistEntity artist = artistRepository.findById(id).orElseThrow(() ->
+            new ArtNotFoundException(ErrorCode.ERR_01_ARTIST_NOT_FOUND));
+        return artMapper.artistEntityToArtistResponseDTO(artist);
     }
 
     @Override
+    @Transactional
     public ArtistResponseDTO addArtist(ArtistRequestDTO artistRequestDTO) {
-        return null;
+        return artMapper.artistEntityToArtistResponseDTO(artistRepository.save(
+                artMapper.artistRequestDTOToArtistEntity(artistRequestDTO)
+        ));
     }
 
     @Override
+    @Transactional
     public ArtistResponseDTO updateArtist(int id, ArtistRequestDTO artistRequestDTO) {
-        return null;
+        ArtistEntity artistEntity = artistRepository.findById(id).orElseThrow(() ->
+                new ArtNotFoundException(ErrorCode.ERR_01_ARTIST_NOT_FOUND));
+//        artistEntity.setArtworks(artistRequestDTO.getArtworks());
+        return artMapper.artistEntityToArtistResponseDTO(artistRepository.save(artistEntity));
     }
 
     @Override
+    @Transactional
     public void deleteArtistById(int id) {
-
+        ArtistEntity artist = artistRepository.findById(id).orElseThrow(() ->
+                new ArtNotFoundException(ErrorCode.ERR_01_ARTIST_NOT_FOUND));
+        artistRepository.deleteById(id);
     }
 }

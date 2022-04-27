@@ -34,6 +34,9 @@ public class ArtworkEntity {
     @Column(name = "ROOM_NUMBER")
     private int roomNumber;
 
+    @Column(name = "POSITION")
+    private int position;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ARTIST_ID", referencedColumnName = "ID")
     private ArtistEntity artist;

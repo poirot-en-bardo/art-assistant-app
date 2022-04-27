@@ -22,8 +22,8 @@ public class MuseumEntity {
     @Column(name = "NAME")
     private String name;
 
-    @Column(name = "CITY")
-    private String city;
+    @Column(name = "ADDRESS")
+    private String address;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "COUNTRY_ID", referencedColumnName = "ID")

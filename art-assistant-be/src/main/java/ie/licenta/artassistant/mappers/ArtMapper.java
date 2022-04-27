@@ -3,17 +3,22 @@ package ie.licenta.artassistant.mappers;
 import ie.licenta.artassistant.dto.*;
 import ie.licenta.artassistant.models.*;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ArtMapper {
 
     ArtistResponseDTO artistEntityToArtistResponseDTO(ArtistEntity artistEntity);
-
     ArtistEntity artistRequestDTOToArtistEntity(ArtistRequestDTO artistRequestDTO);
 
     ArtworkResponseDTO artworkEntityToArtworkResponseDTO(ArtworkEntity artworkEntity);
-
+    List<ArtworkResponseDTO> artworkEntityListToArtworkResponseDTOList(List<ArtworkEntity> artworkEntityList);
     ArtworkEntity artworkRequestDTOToArtworkEntity(ArtworkRequestDTO artworkRequestDTO);
+
+    @Mapping(target = "id", source = "artworkId")
+    ArtworkEntity artworkRequestDTOToArtworkEntityWithId(Integer artworkId, ArtworkRequestDTO artworkRequestDTO);
 
     CommentResponseDTO commentEntityToCommentResponseDTO(CommentEntity commentEntity);
 

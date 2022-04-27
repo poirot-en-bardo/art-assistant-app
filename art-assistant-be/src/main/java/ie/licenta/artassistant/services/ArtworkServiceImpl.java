@@ -6,7 +6,6 @@ import ie.licenta.artassistant.dto.ArtworkRequestDTO;
 import ie.licenta.artassistant.dto.ArtworkResponseDTO;
 import ie.licenta.artassistant.mappers.ArtMapper;
 import ie.licenta.artassistant.models.ArtworkEntity;
-import ie.licenta.artassistant.models.RoomIdEntity;
 import ie.licenta.artassistant.persistence.ArtworkRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -30,7 +29,7 @@ public class ArtworkServiceImpl implements  ArtworkService {
     @Override
     public ArtworkResponseDTO getArtworkById(int id) {
         ArtworkEntity artwork = artworkRepository.findById(id).orElseThrow(() ->
-                new ArtNotFoundException(ErrorCode.ERR_02_ARTWORK_NOT_FOUND));
+                new ArtNotFoundException(ErrorCode.ERR_03_ARTWORK_NOT_FOUND));
         return artMapper.artworkEntityToArtworkResponseDTO(artwork);
     }
 
@@ -45,7 +44,7 @@ public class ArtworkServiceImpl implements  ArtworkService {
     @Transactional
     public ArtworkResponseDTO updateArtwork(int id, ArtworkRequestDTO artworkRequestDTO) {
         ArtworkEntity oldArtwork = artworkRepository.findById(id).orElseThrow(() ->
-                new ArtNotFoundException(ErrorCode.ERR_02_ARTWORK_NOT_FOUND));
+                new ArtNotFoundException(ErrorCode.ERR_03_ARTWORK_NOT_FOUND));
         if (oldArtwork == null) {
             return null;
         } else {
@@ -58,7 +57,7 @@ public class ArtworkServiceImpl implements  ArtworkService {
     @Transactional
     public void deleteArtworkById(int id) {
         ArtworkEntity artwork = artworkRepository.findById(id).orElseThrow(() ->
-                new ArtNotFoundException(ErrorCode.ERR_02_ARTWORK_NOT_FOUND));
+                new ArtNotFoundException(ErrorCode.ERR_03_ARTWORK_NOT_FOUND));
         artworkRepository.deleteById(id);
     }
 
@@ -67,7 +66,7 @@ public class ArtworkServiceImpl implements  ArtworkService {
         Optional<List<ArtworkEntity>> artworkListOptional = Optional.ofNullable(
                 artworkRepository.findAllByArtistIdOrderByTitle(artistId));
         if (artworkListOptional.isEmpty()) {
-            throw new ArtNotFoundException(ErrorCode.ERR_02_ARTWORK_NOT_FOUND);
+            throw new ArtNotFoundException(ErrorCode.ERR_03_ARTWORK_NOT_FOUND);
         }
         return artMapper.artworkEntityListToArtworkResponseDTOList(artworkListOptional.get());
     }
@@ -77,7 +76,7 @@ public class ArtworkServiceImpl implements  ArtworkService {
         Optional<List<ArtworkEntity>> artworkListOptional = Optional.ofNullable(
                 artworkRepository.findAllByRoomNumberAndGalleryIdOrderByPosition(roomNumber, galleryId));
         if (artworkListOptional.isEmpty()) {
-            throw new ArtNotFoundException(ErrorCode.ERR_02_ARTWORK_NOT_FOUND);
+            throw new ArtNotFoundException(ErrorCode.ERR_03_ARTWORK_NOT_FOUND);
         }
         return artMapper.artworkEntityListToArtworkResponseDTOList(artworkListOptional.get());
     }
@@ -87,7 +86,7 @@ public class ArtworkServiceImpl implements  ArtworkService {
         Optional<List<ArtworkEntity>> artworkListOptional = Optional.ofNullable(
                 artworkRepository.findAllByGenreIdOrderByTitle(genreId));
         if (artworkListOptional.isEmpty()) {
-            throw new ArtNotFoundException(ErrorCode.ERR_02_ARTWORK_NOT_FOUND);
+            throw new ArtNotFoundException(ErrorCode.ERR_03_ARTWORK_NOT_FOUND);
         }
         return artMapper.artworkEntityListToArtworkResponseDTOList(artworkListOptional.get());
     }

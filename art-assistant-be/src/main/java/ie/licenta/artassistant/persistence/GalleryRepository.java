@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface GalleryRepository extends JpaRepository<GalleryEntity, Integer> {
 
-    List<GalleryEntity> findGalleryEntitiesByMuseumId(int museumId);
+    List<GalleryEntity> findGalleryEntitiesByMuseumIdOrderByName(int museumId);
 }

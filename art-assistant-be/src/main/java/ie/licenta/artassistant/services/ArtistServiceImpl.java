@@ -28,7 +28,7 @@ public class ArtistServiceImpl implements ArtistService {
     @Override
     public ArtistResponseDTO getArtistById(int id) {
         ArtistEntity artist = artistRepository.findById(id).orElseThrow(() ->
-            new ArtNotFoundException(ErrorCode.ERR_01_ARTIST_NOT_FOUND));
+            new ArtNotFoundException(ErrorCode.ERR_02_ARTIST_NOT_FOUND));
         return artMapper.artistEntityToArtistResponseDTO(artist);
     }
 
@@ -44,7 +44,7 @@ public class ArtistServiceImpl implements ArtistService {
     @Transactional
     public ArtistResponseDTO updateArtist(int id, ArtistRequestDTO artistRequestDTO) {
         ArtistEntity artistEntity = artistRepository.findById(id).orElseThrow(() ->
-                new ArtNotFoundException(ErrorCode.ERR_01_ARTIST_NOT_FOUND));
+                new ArtNotFoundException(ErrorCode.ERR_02_ARTIST_NOT_FOUND));
 //        artistEntity.setArtworks(artistRequestDTO.getArtworks());
         return artMapper.artistEntityToArtistResponseDTO(artistRepository.save(artistEntity));
     }
@@ -53,7 +53,7 @@ public class ArtistServiceImpl implements ArtistService {
     @Transactional
     public void deleteArtistById(int id) {
         ArtistEntity artist = artistRepository.findById(id).orElseThrow(() ->
-                new ArtNotFoundException(ErrorCode.ERR_01_ARTIST_NOT_FOUND));
+                new ArtNotFoundException(ErrorCode.ERR_02_ARTIST_NOT_FOUND));
         artistRepository.deleteById(id);
     }
 }

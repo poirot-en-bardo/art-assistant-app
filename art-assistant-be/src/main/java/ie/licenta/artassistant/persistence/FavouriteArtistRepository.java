@@ -7,4 +7,8 @@ import java.util.List;
 
 public interface FavouriteArtistRepository extends JpaRepository<FavouriteArtistEntity, Integer> {
     List<FavouriteArtistEntity> findAllByUserId(int userId);
+
+    FavouriteArtistEntity findFavouriteArtistEntityByUserIdAndArtistId(int userId, int artistId);
+
+    void deleteFavouriteArtistEntityByUserIdAndArtistId(int userId, int artistId);
 }

@@ -72,7 +72,7 @@ public class ArtworkServiceImpl implements  ArtworkService {
     }
 
     @Override
-    public List<ArtworkResponseDTO> getAllArtworksByRoomNumberAndGalleryId(int roomNumber, int galleryId) {
+    public List<ArtworkResponseDTO> getAllArtworksByGalleryIdAndRoomNumber(int galleryId, int roomNumber) {
         Optional<List<ArtworkEntity>> artworkListOptional = Optional.ofNullable(
                 artworkRepository.findAllByRoomNumberAndGalleryIdOrderByPosition(roomNumber, galleryId));
         if (artworkListOptional.isEmpty()) {

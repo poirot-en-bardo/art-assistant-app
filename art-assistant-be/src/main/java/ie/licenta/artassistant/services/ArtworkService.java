@@ -2,7 +2,6 @@ package ie.licenta.artassistant.services;
 
 import ie.licenta.artassistant.dto.ArtworkRequestDTO;
 import ie.licenta.artassistant.dto.ArtworkResponseDTO;
-import ie.licenta.artassistant.models.RoomIdEntity;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ public interface ArtworkService {
 
     List<ArtworkResponseDTO> getAllArtworksByArtistId(int artistId);
 
-    List<ArtworkResponseDTO> getAllArtworksByRoomNumberAndGalleryId(int roomNumber, int galleryId);
+    List<ArtworkResponseDTO> getAllArtworksByGalleryIdAndRoomNumber(int galleryId, int roomNumber);
 
     List<ArtworkResponseDTO> getAllArtworksByGenreId(int genreId);
 

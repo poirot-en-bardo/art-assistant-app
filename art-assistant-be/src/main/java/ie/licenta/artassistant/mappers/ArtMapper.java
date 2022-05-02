@@ -4,6 +4,7 @@ import ie.licenta.artassistant.dto.*;
 import ie.licenta.artassistant.models.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 
 import java.util.List;
 
@@ -24,6 +25,8 @@ public interface ArtMapper {
     List<CommentResponseDTO> commentEntityListToCommentResponseDTOList(List<CommentEntity> commentEntity);
     CommentEntity commentRequestDTOToCommentEntity(CommentRequestDTO commentRequestDTO);
 
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "name", source = "name")
     CountryResponseDTO countryEntityToCountryResponseDTO(CountryEntity countryEntity);
     CountryEntity countryRequestDTOToCountryEntity(CountryRequestDTO countryRequestDTO);
 

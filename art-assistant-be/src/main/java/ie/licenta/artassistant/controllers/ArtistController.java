@@ -6,7 +6,6 @@ import ie.licenta.artassistant.common.ArtInternalServerErrorException;
 import ie.licenta.artassistant.common.ArtNotFoundException;
 import ie.licenta.artassistant.dto.ArtistRequestDTO;
 import ie.licenta.artassistant.dto.ArtistResponseDTO;
-import ie.licenta.artassistant.persistence.ArtistRepository;
 import ie.licenta.artassistant.services.ArtistService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;

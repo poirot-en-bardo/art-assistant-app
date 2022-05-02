@@ -60,7 +60,7 @@ public class ArtworkController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval",
                     content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ArtworkResponseDTO.class))))
     })
-    @GetMapping("/artwork")
+    @GetMapping("/artworks")
     public ResponseEntity<List<ArtworkResponseDTO>> getArtworksByGalleryIdAndRoomNumber(
             @RequestParam(required = true) int galleryId,
             @RequestParam(required = true) int roomNumber,

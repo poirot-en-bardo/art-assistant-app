@@ -10,7 +10,7 @@ public interface FavouriteArtistService {
 
     List<FavouriteArtistResponseDTO> getFavouriteArtistsByUserId(int id);
 
-    FavouriteArtistResponseDTO addFavouriteArtist(FavouriteArtistRequestDTO FavouriteArtistRequestDTO);
+    FavouriteArtistResponseDTO addFavouriteArtist(int userId, FavouriteArtistRequestDTO FavouriteArtistRequestDTO);
 
     void deleteFavouriteArtistById(FavouriteArtistIdEntity id);
 }

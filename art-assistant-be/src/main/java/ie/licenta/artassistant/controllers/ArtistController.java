@@ -77,7 +77,7 @@ public class ArtistController {
                     content = @Content(mediaType = "application/json"))
     })
     @DeleteMapping("/artist/{id}")
-    public ResponseEntity<ArtistResponseDTO> deleteArtistById(@PathVariable int id,
+    public ResponseEntity<Void> deleteArtistById(@PathVariable int id,
                                                            @RequestHeader("session_id") int sessionId){
         artistService.deleteArtistById(id);
         return new ResponseEntity<>(HttpStatus.OK);

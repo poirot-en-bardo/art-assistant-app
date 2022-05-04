@@ -31,10 +31,12 @@ public class FavouriteArtistServiceImpl implements FavouriteArtistService {
         return artMapper.favouriteArtistEntityListToFavouriteArtistResponseDTOList(favouriteListOptional.get());
     }
 
+
     @Override
-    public FavouriteArtistResponseDTO addFavouriteArtist(FavouriteArtistRequestDTO favouriteArtistRequestDTO) {
-        return artMapper.favouriteArtistEntityToFavouriteArtistResponseDTO(favouriteArtistRepository.save(
-                artMapper.favouriteArtistRequestDTOToFavouriteArtistEntity(favouriteArtistRequestDTO)));
+    public FavouriteArtistResponseDTO addFavouriteArtist(int userId, FavouriteArtistRequestDTO favouriteArtistRequestDTO) {
+        FavouriteArtistEntity favouriteArtistEntity = artMapper.favouriteArtistRequestDTOToFavouriteArtistEntity(favouriteArtistRequestDTO);
+        favouriteArtistEntity.setUserId(userId);
+        return artMapper.favouriteArtistEntityToFavouriteArtistResponseDTO(favouriteArtistRepository.save(favouriteArtistEntity));
     }
 
     @Override

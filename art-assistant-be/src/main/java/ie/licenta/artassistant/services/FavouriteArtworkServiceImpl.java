@@ -31,9 +31,12 @@ public class FavouriteArtworkServiceImpl implements FavouriteArtworkService {
         return artMapper.favouriteArtworkEntityListToFavouriteArtworkResponseDTOList(favouriteListOptional.get());    }
 
     @Override
-    public FavouriteArtworkResponseDTO addFavouriteArtwork(FavouriteArtworkRequestDTO favouriteArtworkRequestDTO) {
-        return artMapper.favouriteArtworkEntityToFavouriteArtworkResponseDTO(favouriteArtworkRepository.save(
-                artMapper.favouriteArtworkRequestDTOToFavouriteArtworkEntity(favouriteArtworkRequestDTO)));
+    public FavouriteArtworkResponseDTO addFavouriteArtwork(int userId, FavouriteArtworkRequestDTO favouriteArtworkRequestDTO) {
+        FavouriteArtworkEntity favouriteArtworkEntity = artMapper
+                .favouriteArtworkRequestDTOToFavouriteArtworkEntity(favouriteArtworkRequestDTO);
+        favouriteArtworkEntity.setUserId(userId);
+        return artMapper.favouriteArtworkEntityToFavouriteArtworkResponseDTO(
+                favouriteArtworkRepository.save(favouriteArtworkEntity));
     }
 
     @Override

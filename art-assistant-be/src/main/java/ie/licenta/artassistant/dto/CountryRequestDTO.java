@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CountryRequestDTO {
 
-    private int id;
+    private String name;
 }

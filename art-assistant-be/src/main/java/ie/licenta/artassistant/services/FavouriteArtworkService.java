@@ -9,7 +9,7 @@ import java.util.List;
 public interface FavouriteArtworkService {
     List<FavouriteArtworkResponseDTO> getFavouriteArtworksByUserId(int id);
 
-    FavouriteArtworkResponseDTO addFavouriteArtwork(FavouriteArtworkRequestDTO FavouriteArtworkRequestDTO);
+    FavouriteArtworkResponseDTO addFavouriteArtwork(int userId, FavouriteArtworkRequestDTO FavouriteArtworkRequestDTO);
 
     void deleteFavouriteArtworkById(FavouriteArtworkIdEntity id);
 }

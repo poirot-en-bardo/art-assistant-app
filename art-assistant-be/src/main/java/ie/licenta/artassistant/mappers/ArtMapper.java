@@ -4,7 +4,6 @@ import ie.licenta.artassistant.dto.*;
 import ie.licenta.artassistant.models.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 
 import java.util.List;
 

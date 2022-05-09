@@ -12,9 +12,11 @@ public enum ErrorCode {
     ERR_06_GENRE_NOT_FOUND("Genre not found"),
     ERR_07_MUSEUM_NOT_FOUND("Museum not found"),
     ERR_08_USER_NOT_FOUND("User not found"),
+    ERR_09_USER_EMAIL_TAKEN("The email is already registered"),
     ERR_02_BAD_REQUEST("Bad Request"),
     ERR_03_INTERNAL_SERVER_ERROR("Internal server error"),
-    ERR_04_SESSION_NOT_FOUND("Session not found");
+    ERR_10_SESSION_NOT_FOUND("Session not found"),
+    ERR_11_SESSION_FORBIDDEN("Session not found");
 
     public final String EN_MESSAGE;
 }

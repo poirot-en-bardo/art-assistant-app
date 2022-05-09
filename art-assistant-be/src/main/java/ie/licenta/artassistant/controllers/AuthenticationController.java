@@ -3,10 +3,8 @@ package ie.licenta.artassistant.controllers;
 import ie.licenta.artassistant.common.ArtBadRequestException;
 import ie.licenta.artassistant.common.ArtInternalServerErrorException;
 import ie.licenta.artassistant.common.ArtNotFoundException;
-import ie.licenta.artassistant.dto.UserRequestDTO;
-import ie.licenta.artassistant.dto.UserResponseDTO;
-import ie.licenta.artassistant.services.UserService;
-import io.swagger.annotations.ApiOperation;
+import ie.licenta.artassistant.dto.*;
+import ie.licenta.artassistant.services.AuthenticationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -21,47 +19,46 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-
 @RestController
-@ApiOperation("User API")
-@RequestMapping("/api")
 @CrossOrigin("*")
-@Tag(name = "User management")
 @Data
 @AllArgsConstructor
-public class UserController {
+@RequestMapping("/api")
+@Tag(name = "Authentication management")
+public class AuthenticationController {
 
-    private final UserService userService;
+    private final AuthenticationService authenticationService;
 
-    @Operation(summary = "Get User by id")
+    @Operation(summary = "User Sign-Up")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtInternalServerErrorException.class))),
-            @ApiResponse(responseCode = "404", description = "User not found",
+            @ApiResponse(responseCode = "404", description = "Page not found",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtNotFoundException.class))),
-            @ApiResponse(responseCode = "400", description = "Invalid user id",
+            @ApiResponse(responseCode = "400", description = "Invalid input",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtBadRequestException.class))),
-            @ApiResponse(responseCode = "200", description = "Successful retrieval",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDTO.class)))
+            @ApiResponse(responseCode = "200", description = "Sign-up successful",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = SignUpResponseDTO.class)))
     })
-    @GetMapping("/users/{userId}")
-    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable int userId) {
-        return new ResponseEntity<>(userService.getUserById(userId), HttpStatus.OK);
+    @PostMapping("/authentication/signup")
+    public ResponseEntity<SignUpResponseDTO> signUp(@Valid @RequestBody SignUpRequestDTO signUpRequestDTO) {
+        return new ResponseEntity<>(authenticationService.signUp(signUpRequestDTO), HttpStatus.OK);
     }
 
-    @Operation(summary = "Get User by session id")
+    @Operation(summary = "User Sign-In")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtInternalServerErrorException.class))),
-            @ApiResponse(responseCode = "404", description = "User not found",
+            @ApiResponse(responseCode = "404", description = "Page not found",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtNotFoundException.class))),
-            @ApiResponse(responseCode = "400", description = "Invalid session id",
+            @ApiResponse(responseCode = "400", description = "Invalid input",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtBadRequestException.class))),
-            @ApiResponse(responseCode = "200", description = "Successful retrieval",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDTO.class)))
+            @ApiResponse(responseCode = "200", description = "Sign-in successful",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = SignInResponseDTO.class)))
     })
-    @GetMapping("/users/{sessionId}")
-    public ResponseEntity<UserResponseDTO> getUserBySessionId(@PathVariable String sessionId) {
-        return new ResponseEntity<>(userService.getUserBySessionId(sessionId), HttpStatus.OK);
+    @PostMapping("/authentication/signin")
+    public ResponseEntity<SignInResponseDTO> signIn(@Valid @RequestBody SignInRequestDTO signInRequestDTO) {
+        return new ResponseEntity<>(authenticationService.signIn(signInRequestDTO), HttpStatus.OK);
     }
+
 }

@@ -1,5 +1,6 @@
 package ie.licenta.artassistant.mappers;
 
+import ie.licenta.artassistant.constants.Role;
 import ie.licenta.artassistant.dto.*;
 import ie.licenta.artassistant.models.*;
 import org.mapstruct.Mapper;
@@ -48,7 +49,12 @@ public interface ArtMapper {
     List<MuseumResponseDTO> museumEntityListToMuseumResponseDTOList(List<MuseumEntity> museumEntity);
     MuseumEntity museumRequestDTOToMuseumEntity(MuseumRequestDTO museumRequestDTO);
 
-    UserResponseDTO userEntityToUserResponseDTO(UserEntity userEntity);
 
     UserEntity userRequestDTOToUserEntity(UserRequestDTO userRequestDTO);
+
+    @Mapping(target = "roles", source = "roleList")
+    UserResponseDTO userEntityAndRolesToUserReponseDTO(UserEntity userEntity, List<Role> roleList);
+
+    @Mapping(target = "roles", ignore = true)
+    UserEntity signUpRequestDTOToUserEntity(SignUpRequestDTO signUpRequestDTO);
 }

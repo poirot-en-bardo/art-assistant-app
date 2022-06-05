@@ -39,8 +39,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         UserEntity newUser = userRepository.save(
                 artMapper.signUpRequestDTOToUserEntity(signUpRequestDTO));
-        signUpRequestDTO.getRoles().forEach((role) ->
-                roleRepository.save(new RoleEntity(null, newUser, role)));
+        signUpRequestDTO.getRoles().forEach((role) -> {
+                    RoleEntity roleEntity = new RoleEntity();
+                    roleEntity.setRole(role);
+                    roleEntity.setUser(newUser);
+                    roleRepository.save(roleEntity);
+                }
+        );
         SessionEntity savedSession = sessionRepository.save(new SessionEntity(null, newUser));
 
         return new SignUpResponseDTO(savedSession.getId());

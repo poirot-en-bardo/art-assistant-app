@@ -3,6 +3,7 @@ package ie.licenta.artassistant.controllers;
 import ie.licenta.artassistant.common.ArtBadRequestException;
 import ie.licenta.artassistant.common.ArtInternalServerErrorException;
 import ie.licenta.artassistant.common.ArtNotFoundException;
+import ie.licenta.artassistant.common.ErrorCode;
 import ie.licenta.artassistant.dto.UserRequestDTO;
 import ie.licenta.artassistant.dto.UserResponseDTO;
 import ie.licenta.artassistant.services.UserService;
@@ -20,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 
 @RestController
@@ -44,24 +46,14 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDTO.class)))
     })
-    @GetMapping("/users/{userId}")
-    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable int userId) {
-        return new ResponseEntity<>(userService.getUserById(userId), HttpStatus.OK);
-    }
-
-    @Operation(summary = "Get User by session id")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "500", description = "Server error",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtInternalServerErrorException.class))),
-            @ApiResponse(responseCode = "404", description = "User not found",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtNotFoundException.class))),
-            @ApiResponse(responseCode = "400", description = "Invalid session id",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtBadRequestException.class))),
-            @ApiResponse(responseCode = "200", description = "Successful retrieval",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDTO.class)))
-    })
-    @GetMapping("/users/{sessionId}")
-    public ResponseEntity<UserResponseDTO> getUserBySessionId(@PathVariable String sessionId) {
-        return new ResponseEntity<>(userService.getUserBySessionId(sessionId), HttpStatus.OK);
+    @GetMapping("/users")
+    public ResponseEntity<UserResponseDTO> getUserByIdOrSessionId(@RequestParam(required = false) Optional<Integer> userId,
+                                                                  @RequestParam(required = false) Optional<String> sessionId) {
+        if (userId.isPresent()) {
+            return new ResponseEntity<>(userService.getUserById(userId.get()), HttpStatus.OK);
+        } else if (sessionId.isPresent()) {
+            return new ResponseEntity<>(userService.getUserBySessionId(sessionId.get()), HttpStatus.OK);
+        }
+        throw new ArtNotFoundException(ErrorCode.ERR_08_USER_NOT_FOUND);
     }
 }

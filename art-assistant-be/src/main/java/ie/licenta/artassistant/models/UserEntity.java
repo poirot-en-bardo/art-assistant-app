@@ -1,14 +1,13 @@
 package ie.licenta.artassistant.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "USER")
@@ -24,9 +23,6 @@ public class UserEntity {
 
     @Column(name = "LAST_NAME")
     private String lastName;
-
-    @Column(name = "ADMIN")
-    private boolean admin;
 
     @Column(name = "EMAIL")
     private String email;

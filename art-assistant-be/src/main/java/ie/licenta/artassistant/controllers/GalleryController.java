@@ -44,7 +44,7 @@ public class GalleryController {
     })
     @GetMapping("/gallery/{id}")
     public ResponseEntity<GalleryResponseDTO> getGalleryById(@PathVariable int id,
-                                                             @RequestHeader("session_id") int sessionId) {
+                                                             @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(galleryService.getGalleryById(id), HttpStatus.OK);
     }
 
@@ -62,7 +62,7 @@ public class GalleryController {
     })
     @GetMapping("/galleries")
     public ResponseEntity<List<GalleryResponseDTO>> getAllGalleriesByMuseumId(@RequestParam(required = true) int museumId,
-                                                                              @RequestHeader("session_id") int sessionId) {
+                                                                              @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(galleryService.getAllGalleriesByMuseumId(museumId), HttpStatus.OK);
     }
 }

@@ -45,7 +45,7 @@ public class MuseumController {
     })
     @GetMapping("/museums")
     public ResponseEntity<List<MuseumResponseDTO>> getAllMuseums(
-            @RequestHeader("session_id") int sessionId) {
+            @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(museumService.getAllMuseums(), HttpStatus.OK);
     }
 
@@ -62,7 +62,7 @@ public class MuseumController {
     })
     @GetMapping("/museum/{id}")
     public ResponseEntity<MuseumResponseDTO> getMuseumById(@PathVariable int id,
-                                                         @RequestHeader("session_id") int sessionId) {
+                                                         @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(museumService.getMuseumById(id), HttpStatus.OK);
     }
 
@@ -80,7 +80,7 @@ public class MuseumController {
     @GetMapping("/museum")
     public ResponseEntity<List<MuseumResponseDTO>> getMuseumsByCountryId(
             @RequestParam(required = true) int countryId,
-            @RequestHeader("session_id") int sessionId) {
+            @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(museumService.
                 getAllMuseumsByCountryId(countryId), HttpStatus.OK);
     }
@@ -99,7 +99,7 @@ public class MuseumController {
     @PutMapping("/museum/{id}")
     public ResponseEntity<MuseumResponseDTO> updateMuseumById(@Valid @RequestBody MuseumRequestDTO MuseumRequestDTO,
                                                                 @PathVariable int id,
-                                                                @RequestHeader("session_id") int sessionId) {
+                                                                @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(museumService.updateMuseum(id, MuseumRequestDTO), HttpStatus.OK);
     }
 }

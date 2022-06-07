@@ -1,10 +1,8 @@
 package ie.licenta.artassistant.controllers;
 
 import ie.licenta.artassistant.common.ArtBadRequestException;
-import ie.licenta.artassistant.common.ArtInternalServerErrorException;
 import ie.licenta.artassistant.dto.AuthorizeRequestDTO;
 import ie.licenta.artassistant.dto.AuthorizeResponseDTO;
-import ie.licenta.artassistant.services.AuthenticationService;
 import ie.licenta.artassistant.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

@@ -44,7 +44,7 @@ public class CommentController {
     })
     @GetMapping("/comment/{id}")
     public ResponseEntity<CommentResponseDTO> getCommentById(@PathVariable int id,
-                                                           @RequestHeader("session_id") int sessionId) {
+                                                           @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(commentService.getCommentById(id), HttpStatus.OK);
     }
 
@@ -62,7 +62,7 @@ public class CommentController {
     @GetMapping("/comments")
     public ResponseEntity<List<CommentResponseDTO>> getCommentsByArtworkId(
             @RequestParam(required = true) int artworkId,
-            @RequestHeader("session_id") int sessionId) {
+            @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(commentService.getAllCommentsByArtwork(artworkId), HttpStatus.OK);
     }
 
@@ -82,7 +82,7 @@ public class CommentController {
     //TODO: add RequestAttribute id
     @PostMapping("/comment")
     public ResponseEntity<CommentResponseDTO> addComment(@Valid @RequestBody CommentRequestDTO CommentRequestDTO,
-                                                       @RequestHeader("session_id") int sessionId) {
+                                                       @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(commentService.addComment(CommentRequestDTO), HttpStatus.CREATED);
     }
 
@@ -99,7 +99,7 @@ public class CommentController {
     })
     @DeleteMapping("/comment/{id}")
     public ResponseEntity<CommentResponseDTO> deleteCommentById(@PathVariable int id,
-                                                              @RequestHeader("session_id") int sessionId){
+                                                              @RequestHeader("session_id") String sessionId){
         commentService.deleteCommentById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

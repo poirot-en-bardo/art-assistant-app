@@ -17,3 +17,10 @@ springdoc:
     path: /swagger-ui.html
 
 
+urls:
+  encoding: "UTF-8"
+  security:
+    baseUrl: "http://localhost:8080/api/authorize?"
+    sessionId: "sessionId"
+
+

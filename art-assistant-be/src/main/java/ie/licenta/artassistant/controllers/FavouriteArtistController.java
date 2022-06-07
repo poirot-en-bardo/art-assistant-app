@@ -46,7 +46,7 @@ public class FavouriteArtistController {
     @GetMapping("/favourite_artists/{userId}")
     public ResponseEntity<List<FavouriteArtistResponseDTO>> getArtworksByGalleryIdAndRoomNumber(
             @PathVariable int userId,
-            @RequestHeader("session_id") int sessionId) {
+            @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(favouriteArtistService.getFavouriteArtistsByUserId(userId), HttpStatus.OK);
     }
 
@@ -63,7 +63,7 @@ public class FavouriteArtistController {
     })
     @PostMapping("/favourite_artist")
     public ResponseEntity<FavouriteArtistResponseDTO> addArtist(@Valid @RequestBody FavouriteArtistRequestDTO favouriteArtistRequestDTO,
-                                                                @RequestHeader("session_id") int sessionId,
+                                                                @RequestHeader("session_id") String sessionId,
                                                                 @RequestAttribute("userId") int userId) {
         return new ResponseEntity<>(favouriteArtistService.addFavouriteArtist(userId, favouriteArtistRequestDTO), HttpStatus.CREATED);
     }
@@ -81,7 +81,7 @@ public class FavouriteArtistController {
     })
     @DeleteMapping("/favourite_artist/{artistId}")
     public ResponseEntity<FavouriteArtistResponseDTO> deleteFavouriteArtistById(@PathVariable int artistId,
-                                                                                @RequestHeader("session_id") int sessionId,
+                                                                                @RequestHeader("session_id") String sessionId,
                                                                                 @RequestAttribute("userId") int userId) {
         FavouriteArtistIdEntity idEntity = new FavouriteArtistIdEntity(userId, artistId);
         favouriteArtistService.deleteFavouriteArtistById(idEntity);

@@ -1,6 +1,6 @@
 package ie.licenta.artassistant.dto;
 
-import ie.licenta.artassistant.constants.Role;
+import ie.licenta.artassistant.security.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

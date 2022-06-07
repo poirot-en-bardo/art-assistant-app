@@ -41,7 +41,7 @@ public class CountryController {
     })
     @GetMapping("/country/{id}")
     public ResponseEntity<CountryResponseDTO> getCountryById(@PathVariable int id,
-                                                             @RequestHeader("session_id") int sessionId) {
+                                                             @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(countryService.getCountryById(id), HttpStatus.OK);
     }
 

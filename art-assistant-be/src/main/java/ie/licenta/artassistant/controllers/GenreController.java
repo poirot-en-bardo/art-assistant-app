@@ -40,7 +40,7 @@ public class GenreController {
     })
     @GetMapping("/genre/{id}")
     public ResponseEntity<GenreResponseDTO> getGenreById(@PathVariable int id,
-                                                             @RequestHeader("session_id") int sessionId) {
+                                                             @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(genreService.getGenreById(id), HttpStatus.OK);
     }
 }

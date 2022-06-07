@@ -45,7 +45,7 @@ public class ArtworkController {
     })
     @GetMapping("/artwork/{id}")
     public ResponseEntity<ArtworkResponseDTO> getArtworkById(@PathVariable int id,
-                                                           @RequestHeader("session_id") int sessionId) {
+                                                           @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(artworkService.getArtworkById(id), HttpStatus.OK);
     }
 
@@ -64,7 +64,7 @@ public class ArtworkController {
     public ResponseEntity<List<ArtworkResponseDTO>> getArtworksByGalleryIdAndRoomNumber(
             @RequestParam(required = true) int galleryId,
             @RequestParam(required = true) int roomNumber,
-            @RequestHeader("session_id") int sessionId) {
+            @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(artworkService.
                 getAllArtworksByGalleryIdAndRoomNumber(galleryId, roomNumber), HttpStatus.OK);
     }
@@ -83,7 +83,7 @@ public class ArtworkController {
     @GetMapping("/artwork")
     public ResponseEntity<List<ArtworkResponseDTO>> getArtworksByArtistId(
             @RequestParam(required = true) int artistId,
-            @RequestHeader("session_id") int sessionId) {
+            @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(artworkService.
                 getAllArtworksByArtistId(artistId), HttpStatus.OK);
     }
@@ -101,7 +101,7 @@ public class ArtworkController {
     })
     @PostMapping("/artwork")
     public ResponseEntity<ArtworkResponseDTO> addArtwork(@Valid @RequestBody ArtworkRequestDTO artworkRequestDTO,
-                                                       @RequestHeader("session_id") int sessionId) {
+                                                       @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(artworkService.addArtwork(artworkRequestDTO), HttpStatus.CREATED);
     }
 
@@ -119,7 +119,7 @@ public class ArtworkController {
     @PutMapping("/artwork/{id}")
     public ResponseEntity<ArtworkResponseDTO> updateArtworkById(@Valid @RequestBody ArtworkRequestDTO artworkRequestDTO,
                                                          @PathVariable int id,
-                                                         @RequestHeader("session_id") int sessionId) {
+                                                         @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(artworkService.updateArtwork(id, artworkRequestDTO), HttpStatus.OK);
     }
 
@@ -136,7 +136,7 @@ public class ArtworkController {
     })
     @DeleteMapping("/artwork/{id}")
     public ResponseEntity<ArtworkResponseDTO> deleteArtworkById(@PathVariable int id,
-                                                              @RequestHeader("session_id") int sessionId){
+                                                              @RequestHeader("session_id") String sessionId){
         artworkService.deleteArtworkById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

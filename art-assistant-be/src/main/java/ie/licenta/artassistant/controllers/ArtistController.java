@@ -44,7 +44,7 @@ public class ArtistController {
     })
     @GetMapping("/artist/{id}")
     public ResponseEntity<ArtistResponseDTO> getArtistById(@PathVariable int id,
-                                                           @RequestHeader("session_id") int sessionId) {
+                                                           @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(artistService.getArtistById(id), HttpStatus.OK);
     }
 
@@ -61,7 +61,7 @@ public class ArtistController {
     })
     @PostMapping("/artist")
     public ResponseEntity<ArtistResponseDTO> addArtist(@Valid @RequestBody ArtistRequestDTO artistRequestDTO,
-                                                       @RequestHeader("session_id") int sessionId) {
+                                                       @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(artistService.addArtist(artistRequestDTO), HttpStatus.CREATED);
     }
 
@@ -78,7 +78,7 @@ public class ArtistController {
     })
     @DeleteMapping("/artist/{id}")
     public ResponseEntity<Void> deleteArtistById(@PathVariable int id,
-                                                           @RequestHeader("session_id") int sessionId){
+                                                           @RequestHeader("session_id") String sessionId){
         artistService.deleteArtistById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

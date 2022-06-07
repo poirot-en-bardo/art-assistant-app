@@ -11,8 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ArtworkRequestDTO {
 
-    private int id;
-
     private String title;
 
     private String technique;

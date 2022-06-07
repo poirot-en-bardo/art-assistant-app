@@ -12,8 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 public class MuseumRequestDTO {
 
-    private int id;
-
     private String name;
 
     private String address;

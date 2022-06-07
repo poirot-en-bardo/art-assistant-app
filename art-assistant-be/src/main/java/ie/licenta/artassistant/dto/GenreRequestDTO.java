@@ -10,7 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GenreRequestDTO {
-    private int id;
 
     private String name;
 

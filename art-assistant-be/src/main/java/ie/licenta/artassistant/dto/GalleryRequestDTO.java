@@ -10,7 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GalleryRequestDTO {
-    private int id;
 
     private String name;
 

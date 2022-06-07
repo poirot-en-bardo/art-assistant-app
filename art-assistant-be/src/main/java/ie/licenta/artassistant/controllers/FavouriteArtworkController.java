@@ -43,10 +43,10 @@ public class FavouriteArtworkController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval",
                     content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ArtworkResponseDTO.class))))
     })
-    @GetMapping("/favourite_artworks/{userId}")
+    @GetMapping("/favourite_artworks")
     public ResponseEntity<List<FavouriteArtworkResponseDTO>> getArtworksByGalleryIdAndRoomNumber(
-            @PathVariable int userId,
-            @RequestHeader("session_id") String sessionId) {
+            @RequestHeader("session_id") String sessionId,
+            @RequestAttribute("userId") int userId) {
         return new ResponseEntity<>(favouriteArtworkService.getFavouriteArtworksByUserId(userId), HttpStatus.OK);
     }
 

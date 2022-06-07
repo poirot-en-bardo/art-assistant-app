@@ -66,7 +66,7 @@ public class MuseumController {
         return new ResponseEntity<>(museumService.getMuseumById(id), HttpStatus.OK);
     }
 
-    @Operation(summary = "Get museums by gallery id and room number")
+    @Operation(summary = "Get museums by country id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtInternalServerErrorException.class))),

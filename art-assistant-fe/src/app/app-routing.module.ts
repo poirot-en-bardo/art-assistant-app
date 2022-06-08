@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  // { path: '', redirectTo: 'news-feed', pathMatch: 'full'},
-  // { path: 'news-feed', loadChildren: ()=> import('./dashboard/feed/feed.module').then(m => m.FeedModule)},
+  { path: '', redirectTo: 'museums', pathMatch: 'full'},
+  { path: 'museums', loadChildren: ()=> import('./dashboard/museums/museums.module').then(m => m.MuseumsModule)},
   // { path: 'profile', loadChildren: ()=> import('./dashboard/profile/profile.module').then(m => m.ProfileModule)},
   // { path: 'settings',loadChildren: ()=> import('./dashboard/settings/settings.module').then(m => m.SettingsModule)},
   // { path: 'groups', loadChildren: ()=> import('./dashboard/group/group.module').then(m => m.GroupModule)},

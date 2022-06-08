@@ -1,0 +1,5 @@
+<div class="toaster {{_toasterConfig.toasterTypeClass}}" [ngClass]="{'toaster--open': displayToaster}" *ngIf="_toasterConfig">
+  <div class="toaster__text">
+    {{ MESSAGES_MAP.get(_toasterConfig.messageCode) }}
+  </div>
+</div>

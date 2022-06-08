@@ -1,0 +1,30 @@
+@import "src/styles/variables";
+
+.#{$app-name}-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+  border-bottom: 1px solid $color-grey;
+
+  &__link {
+    border: none;
+    color: $color-grey-3;
+    font-weight: bolder;
+    background: none;
+    display: block;
+    padding: 0.5rem 1rem 0.5rem;
+    text-decoration: none;
+    transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out, border-color 0.25s ease-in-out;
+
+    &--active {
+      border-bottom: 2px solid $color-primary;
+    }
+
+    &:hover, &--active {
+      color: $color-black;
+    }
+  }
+}
+

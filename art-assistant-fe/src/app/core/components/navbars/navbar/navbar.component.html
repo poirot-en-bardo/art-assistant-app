@@ -1,0 +1,38 @@
+<div class="container px-5 d-none d-md-block d-lg-block d-xl-block">
+  <nav class="navbar">
+    <div class="p-2 fs-22 fw-bold me-auto">
+      <a class="fw-bold mh-link" routerLink="/"><span>Artefacto</span></a>
+    </div>
+
+    <div *ngIf="loggedUser">
+      <div class="ms-auto d-flex justify-content-end">
+        <button class="mh-tabs__link" (click)="onTabSelected(this.navigatedTab.HOME)"
+                [ngClass]="{'mh-tabs__link--active' : this.currentUrl.includes(navigatedTab.HOME)}">
+          Museums
+        </button>
+        <button class="mh-tabs__link" (click)="onTabSelected(this.navigatedTab.RANDOM_ARTWORK)"
+                [ngClass]="{'mh-tabs__link--active' : this.currentUrl.includes(navigatedTab.RANDOM_ARTWORK)}">
+          Artwork Randomiser
+        </button>
+
+
+        <img class="rounded-circle mh-person-avatar hand dropdown-toggle ms-5 me-2"
+             [src]="personAvatar" aria-expanded="false" (click)="goToProfile()">
+        <div ngbDropdown class="align-self-center" placement="bottom-right" display="dynamic">
+          <i ngbDropdownToggle class="fa-solid fa-chevron-down hand" id="profileDropdown"></i>
+          <div ngbDropdownMenu class="mt-4" aria-labelledby="profileDropdown">
+            <a ngbDropdownItem class="fw-bold" routerLink="profile/friends"><i
+              class="fa fa-fw fa-user-group me-2"></i><span>Friends</span></a>
+            <a ngbDropdownItem class="fw-bold" routerLink="notifications"><i class="fa fa-fw fa-bell me-2"></i><span>Notifications</span></a>
+            <a ngbDropdownItem class="fw-bold" routerLink="settings/notifications"><i class="fa fa-fw fa-gear me-2"></i><span>Settings</span></a>
+            <a ngbDropdownItem class="fw-bold" routerLink="admin/tags" *hasRoles="['ADMIN']"><i
+              class="fa fa-tag me-3"></i><span>Tags</span></a>
+            <a ngbDropdownItem class="fw-bold" routerLink="" (click)="signOut()"><i
+              class="fa fa-sign-out me-2"></i><span>Log out</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+<div class="horizontal-divider"></div>

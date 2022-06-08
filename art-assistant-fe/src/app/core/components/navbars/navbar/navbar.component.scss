@@ -1,0 +1,12 @@
+@import 'src/styles/components/buttons';
+@import 'src/styles/components/tabs';
+@import 'src/styles/components/profile-picture';
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.mh-link {
+  text-decoration: none;
+  color: $color-black;
+}

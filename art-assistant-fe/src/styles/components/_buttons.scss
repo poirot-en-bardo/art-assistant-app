@@ -1,0 +1,36 @@
+@import "src/styles/variables";
+
+.#{$app-name}-btn {
+  &--primary {
+    @include action-button($color-primary, $color-primary, $color-white);
+
+    &:hover {
+      background-color: $color-primary-2;
+    }
+
+    &:active {
+      background-color: $color-primary-3;
+    }
+  }
+
+  &--secondary {
+    @include action-button($color-secondary-border, $color-white, $color-black);
+
+    &:hover {
+      background-color: $color-secondary-2;
+    }
+
+    &:active {
+      background-color: $color-secondary-3;
+    }
+  }
+
+  &:disabled {
+    background-color: $color-grey;
+    cursor: not-allowed;
+  }
+
+  &--large {
+    width: 100%;
+  }
+}

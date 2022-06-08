@@ -1,0 +1,6 @@
+@import "src/styles/variables";
+
+.#{$app-name}-profile-picture {
+  width: $person-avatar-size;
+  height: $person-avatar-size;
+}

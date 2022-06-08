@@ -1,0 +1,26 @@
+@import "src/styles/components/buttons";
+@import "src/styles/components/tabs";
+
+.mobile-navbar {
+  border-top: 1px $color-grey solid;
+  background-color: white;
+
+&__link {
+   border: none;
+   color: $color-grey-3;
+   font-weight: bolder;
+   background-color: white;
+   display: block;
+   padding: 0.5rem 1rem 0.5rem;
+   text-decoration: none;
+   transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out, border-color 0.25s ease-in-out;
+
+&--active, &:hover {
+              color: $color-black
+            }
+}
+}
+
+.dropdown-toggle::after {
+  display: none;
+}

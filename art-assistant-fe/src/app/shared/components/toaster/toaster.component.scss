@@ -1,0 +1,38 @@
+@import 'src/styles/variables';
+
+.toaster {
+  width: 80vw;
+  margin: 0 10vw;
+  padding: 10px 15px;
+  color: $color-white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 5px;
+  position: fixed;
+  bottom: 20px;
+  transform: translateY(200%);
+  z-index: 2000;
+  opacity: 0;
+  transition: 0.5s;
+
+&__text {
+   font-size: 24px;
+ }
+
+&--open {
+   transform: translateY(0%);
+   opacity: 1;
+ }
+
+&--succes {
+   background-color: $color-green;
+ }
+
+&--error {
+   background-color: $color-error;
+ }
+
+&--warning {
+   background-color: $color-warning;
+ }
+}
+

@@ -1,0 +1,65 @@
+$app-name: "af";
+
+$color-black: #000000;
+$color-white: #ffffff;
+
+// main colors
+$color-primary: #e95159;
+$color-primary-2: #d94b52;
+$color-primary-3: #ce4a51;
+$color-secondary-border: #cccccc;
+$color-secondary-2: #f1f1f1;
+$color-secondary-3: #e7e7e7;
+$color-secondary-4: #fbdfe1;
+$color-grey: #E6E6E6;
+$color-grey-2: #6B6B6B;
+$color-grey-3: #8b8b8b;
+$color-grey-4: #fcfcfc;
+$color-error: #de0000;
+$color-red: #ff0000;
+$color-green: #5cb85c;
+$color-warning: #f0ad4e;
+$color-blue: #0707e1;
+
+// Buttons
+$button-border-radius: 6px;
+$button-padding: 10px 20px 10px 20px;
+
+@mixin action-button($borderColor, $backgroundColor, $fontColor) {
+  border-radius: $button-border-radius;
+  border: 1px solid $borderColor;
+  padding: $button-padding;
+  background-color: $backgroundColor;
+  transition: 0.4s;
+  font-weight: bold;
+  cursor: pointer;
+  color: $fontColor;
+}
+
+// Inputs
+$input-border-radius: 6px;
+$input-padding: 7px 12px 7px 12px;
+
+//Breakpoints
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+// Profile picture
+$person-avatar-size: 55px;
+
+// Pagination
+$pagination-item-padding: 1rem;
+
+//Font Sizes
+$title-font-size: 30px;
+$subtitle-font-size: 26px;
+$small-subtitle-font-size: 22px;
+$normal-description-size: 18px;
+$small-description-size: 16px;
+

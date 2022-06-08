@@ -1,0 +1,13 @@
+<div *ngIf="form.get(field)?.errors">
+  <div class="mh-color__error" [ngSwitch]="form.get(field)?.errors | firstKey">
+    <div *ngSwitchCase="'required'">Field is required</div>
+    <div *ngSwitchCase="'minlength'">Please enter a longer text</div>
+    <div *ngSwitchCase="'maxlength'">Please enter a shorter text</div>
+    <div *ngSwitchCase="'min'">Please enter a bigger value</div>
+    <div *ngSwitchCase="'max'">Please enter a smaller value</div>
+    <div *ngSwitchCase="'pattern'">Field must not contain spaces</div>
+    <div *ngSwitchCase="'urlCheck'">The URL is not valid</div>
+    <div *ngSwitchCase="'email'">Invalid email</div>
+    <div *ngSwitchCase="'passwordCheck'">Password should be at least 6 characters long and should contain at least one digit</div>
+  </div>
+</div>

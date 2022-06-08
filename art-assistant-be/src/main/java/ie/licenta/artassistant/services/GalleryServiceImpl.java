@@ -10,6 +10,7 @@ import ie.licenta.artassistant.persistence.GalleryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,17 +45,30 @@ public class GalleryServiceImpl implements GalleryService {
     }
 
     @Override
-    public GalleryResponseDTO addGallery(GalleryRequestDTO GalleryRequestDTO) {
-        return null;
+    @Transactional
+    public GalleryResponseDTO addGallery(GalleryRequestDTO galleryRequestDTO) {
+        return artMapper.galleryEntityToGalleryResponseDTO(galleryRepository.save(
+                artMapper.galleryRequestDTOToGalleryEntity(galleryRequestDTO)));
     }
 
     @Override
-    public GalleryResponseDTO updateGallery(int id, GalleryRequestDTO GalleryRequestDTO) {
-        return null;
+    @Transactional
+    public GalleryResponseDTO updateGallery(int id, GalleryRequestDTO galleryRequestDTO) {
+        GalleryEntity oldGallery = galleryRepository.findById(id).orElseThrow(()->
+                new ArtNotFoundException(ErrorCode.ERR_05_GALLERY_NOT_FOUND));
+        if(oldGallery == null) {
+            return null;
+        } else {
+            GalleryEntity galleryEntity = artMapper.galleryRequestDTOToGalleryEntityWithId(id, galleryRequestDTO);
+            return artMapper.galleryEntityToGalleryResponseDTO(galleryRepository.save(galleryEntity));
+        }
     }
 
     @Override
+    @Transactional
     public void deleteGalleryById(int id) {
-
+        GalleryEntity gallery = galleryRepository.findById(id).orElseThrow(()->
+                new ArtNotFoundException(ErrorCode.ERR_05_GALLERY_NOT_FOUND));
+        galleryRepository.deleteById(id);
     }
 }

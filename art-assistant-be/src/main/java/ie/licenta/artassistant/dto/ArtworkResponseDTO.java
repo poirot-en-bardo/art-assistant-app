@@ -21,7 +21,7 @@ public class ArtworkResponseDTO {
 
     private byte[] imagePath;
 
-    private int roomNumber;
+    private int roomId;
 
     private int position;
 
@@ -30,5 +30,4 @@ public class ArtworkResponseDTO {
     private String artistLastName;
 
     private String genreName;
-
 }

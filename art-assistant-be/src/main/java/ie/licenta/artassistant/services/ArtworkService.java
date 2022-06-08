@@ -18,7 +18,7 @@ public interface ArtworkService {
 
     List<ArtworkResponseDTO> getAllArtworksByArtistId(int artistId);
 
-    List<ArtworkResponseDTO> getAllArtworksByGalleryIdAndRoomNumber(int galleryId, int roomNumber);
+    List<ArtworkResponseDTO> getAllArtworksByRoomIdOrderByPosition(int roomNumber);
 
     List<ArtworkResponseDTO> getAllArtworksByGenreId(int genreId);
 

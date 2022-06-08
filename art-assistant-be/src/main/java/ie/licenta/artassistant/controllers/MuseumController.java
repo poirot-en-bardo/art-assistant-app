@@ -3,6 +3,8 @@ package ie.licenta.artassistant.controllers;
 import ie.licenta.artassistant.common.ArtBadRequestException;
 import ie.licenta.artassistant.common.ArtInternalServerErrorException;
 import ie.licenta.artassistant.common.ArtNotFoundException;
+import ie.licenta.artassistant.dto.GalleryRequestDTO;
+import ie.licenta.artassistant.dto.GalleryResponseDTO;
 import ie.licenta.artassistant.dto.MuseumRequestDTO;
 import ie.licenta.artassistant.dto.MuseumResponseDTO;
 import ie.licenta.artassistant.services.MuseumService;
@@ -81,9 +83,28 @@ public class MuseumController {
     public ResponseEntity<List<MuseumResponseDTO>> getMuseumsByCountryId(
             @RequestParam(required = true) int countryId,
             @RequestHeader("session_id") String sessionId) {
-        return new ResponseEntity<>(museumService.
-                getAllMuseumsByCountryId(countryId), HttpStatus.OK);
+        return new ResponseEntity<>(museumService
+                .getAllMuseumsByCountryId(countryId), HttpStatus.OK);
     }
+
+
+    @Operation(summary = "Add a new museum")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "500", description = "Server error",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtInternalServerErrorException.class))),
+            @ApiResponse(responseCode = "404", description = "Page not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtNotFoundException.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid input",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtBadRequestException.class))),
+            @ApiResponse(responseCode = "201", description = "Museum added successfully",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = MuseumResponseDTO.class)))
+    })
+    @PostMapping("/museum")
+    public ResponseEntity<MuseumResponseDTO> addMuseum(@Valid @RequestBody MuseumRequestDTO museumRequestDTO,
+                                                         @RequestHeader("session_id") String sessionId) {
+        return new ResponseEntity<>(museumService.addMuseum(museumRequestDTO), HttpStatus.CREATED);
+    }
+
 
     @Operation(summary = "Update a museum")
     @ApiResponses(value = {

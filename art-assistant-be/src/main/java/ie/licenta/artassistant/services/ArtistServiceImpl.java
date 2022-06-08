@@ -43,10 +43,14 @@ public class ArtistServiceImpl implements ArtistService {
     @Override
     @Transactional
     public ArtistResponseDTO updateArtist(int id, ArtistRequestDTO artistRequestDTO) {
-        ArtistEntity artistEntity = artistRepository.findById(id).orElseThrow(() ->
+        ArtistEntity oldArtist = artistRepository.findById(id).orElseThrow(() ->
                 new ArtNotFoundException(ErrorCode.ERR_02_ARTIST_NOT_FOUND));
-//        artistEntity.setArtworks(artistRequestDTO.getArtworks());
-        return artMapper.artistEntityToArtistResponseDTO(artistRepository.save(artistEntity));
+        if (oldArtist == null) {
+            return null;
+        } else {
+            ArtistEntity artistEntity = artMapper.artistRequestDTOToArtistEntityWithId(id, artistRequestDTO);
+            return artMapper.artistEntityToArtistResponseDTO(artistRepository.save(artistEntity));
+        }
     }
 
     @Override

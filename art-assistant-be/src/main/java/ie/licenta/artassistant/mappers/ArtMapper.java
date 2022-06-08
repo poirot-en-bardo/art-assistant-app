@@ -23,6 +23,13 @@ public interface ArtMapper {
     ArtistEntity artistRequestDTOToArtistEntity(ArtistRequestDTO artistRequestDTO);
 
     @Mappings({
+            @Mapping(target = "id", source = "artistId"),
+            @Mapping(target = "country.id", source = "artistRequestDTO.countryId")
+    })
+    ArtistEntity artistRequestDTOToArtistEntityWithId(Integer artistId, ArtistRequestDTO artistRequestDTO);
+
+
+    @Mappings({
             @Mapping(target = "artistFirstName", source = "artist.firstName"),
             @Mapping(target = "artistLastName", source = "artist.lastName"),
             @Mapping(target = "genreName", source = "genre.name")
@@ -39,7 +46,7 @@ public interface ArtMapper {
     @Mappings({
             @Mapping(target = "artist.id", source = "artistId"),
             @Mapping(target = "genre.id", source = "genreId"),
-            @Mapping(target = "gallery.id", source = "galleryId")
+            @Mapping(target = "room.id", source = "roomId")
     })
     ArtworkEntity artworkRequestDTOToArtworkEntity(ArtworkRequestDTO artworkRequestDTO);
 
@@ -47,7 +54,7 @@ public interface ArtMapper {
     @Mapping(target = "id", source = "artworkId"),
     @Mapping(target = "artist.id", source = "artworkRequestDTO.artistId"),
     @Mapping(target = "genre.id", source = "artworkRequestDTO.genreId"),
-    @Mapping(target = "gallery.id", source = "artworkRequestDTO.galleryId")
+    @Mapping(target = "room.id", source = "artworkRequestDTO.roomId")
     })
     ArtworkEntity artworkRequestDTOToArtworkEntityWithId(Integer artworkId, ArtworkRequestDTO artworkRequestDTO);
 
@@ -63,6 +70,7 @@ public interface ArtMapper {
     @Mapping(target = "id", source = "id")
     @Mapping(target = "name", source = "name")
     CountryResponseDTO countryEntityToCountryResponseDTO(CountryEntity countryEntity);
+    List<CountryResponseDTO> countryEntityListToCountryResponseDTOList(List<CountryEntity> countryEntity);
     CountryEntity countryRequestDTOToCountryEntity(CountryRequestDTO countryRequestDTO);
 
     FavouriteArtistResponseDTO favouriteArtistEntityToFavouriteArtistResponseDTO(FavouriteArtistEntity favouriteArtistEntity);
@@ -76,19 +84,64 @@ public interface ArtMapper {
     GalleryResponseDTO galleryEntityToGalleryResponseDTO(GalleryEntity galleryEntity);
     List<GalleryResponseDTO> galleryEntityListToGalleryResponseDTOList(List<GalleryEntity> galleryEntity);
     GalleryEntity galleryRequestDTOToGalleryEntity(GalleryRequestDTO galleryRequestDTO);
+    @Mappings({
+            @Mapping(target = "id", source = "galleryId"),
+            @Mapping(target = "museum.id", source = "galleryRequestDTO.museumId")
+    })
+    GalleryEntity galleryRequestDTOToGalleryEntityWithId(Integer galleryId, GalleryRequestDTO galleryRequestDTO);
+
+
 
     GenreResponseDTO genreEntityToGenreResponseDTO(GenreEntity genreEntity);
     GenreEntity genreRequestDTOToGenreEntity(GenreRequestDTO genreRequestDTO);
+    @Mappings({
+            @Mapping(target = "id", source = "genreId"),
+    })
+    GenreEntity genreRequestDTOToGenreEntityWithId(Integer genreId, GenreRequestDTO genreRequestDTO);
+
 
     @Mappings({
             @Mapping(target = "countryName", source = "country.name")
     })
     MuseumResponseDTO museumEntityToMuseumResponseDTO(MuseumEntity museumEntity);
+
     @Mappings({
             @Mapping(target = "countryName", source = "country.name")
     })
     List<MuseumResponseDTO> museumEntityListToMuseumResponseDTOList(List<MuseumEntity> museumEntity);
+
+    @Mappings({
+            @Mapping(target = "country.id", source = "museumRequestDTO.countryId")
+    })
     MuseumEntity museumRequestDTOToMuseumEntity(MuseumRequestDTO museumRequestDTO);
+
+    @Mappings({
+            @Mapping(target = "id", source = "museumId"),
+            @Mapping(target = "country.id", source = "museumRequestDTO.countryId")
+    })
+    MuseumEntity museumRequestDTOToMuseumEntityWithId(Integer museumId, MuseumRequestDTO museumRequestDTO);
+
+
+    @Mappings({
+            @Mapping(target = "galleryId", source = "gallery.id")
+    })
+    RoomResponseDTO roomEntityToRoomResponseDTO(RoomEntity roomEntity);
+
+    @Mappings({
+            @Mapping(target = "galleryId", source = "gallery.id")
+    })
+    List<RoomResponseDTO> roomEntityListToRoomResponseDTOList(List<RoomEntity> roomEntity);
+
+    @Mappings({
+            @Mapping(target = "gallery.id", source = "galleryId")
+    })
+    RoomEntity roomRequestDTOToRoomEntity(RoomRequestDTO roomRequestDTO);
+
+    @Mappings({
+            @Mapping(target = "id", source = "roomId"),
+            @Mapping(target = "gallery.id", source = "roomRequestDTO.galleryId")
+    })
+    RoomEntity roomRequestDTOToRoomEntityWithId(Integer roomId, RoomRequestDTO roomRequestDTO);
 
 
     UserEntity userRequestDTOToUserEntity(UserRequestDTO userRequestDTO);

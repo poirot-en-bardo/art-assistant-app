@@ -10,6 +10,7 @@ import ie.licenta.artassistant.persistence.GenreRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -32,13 +33,24 @@ import java.util.List;
     }
 
     @Override
-    public GenreResponseDTO addGenre(GenreRequestDTO GenreRequestDTO) {
-        return null;
+    @Transactional
+    public GenreResponseDTO addGenre(GenreRequestDTO genreRequestDTO) {
+        return artMapper.genreEntityToGenreResponseDTO(genreRepository.save(
+                artMapper.genreRequestDTOToGenreEntity(genreRequestDTO)));
     }
 
     @Override
-    public GenreResponseDTO updateGenre(int id, GenreRequestDTO GenreRequestDTO) {
-        return null;
+    @Transactional
+    public GenreResponseDTO updateGenre(int id, GenreRequestDTO genreRequestDTO) {
+        GenreEntity oldGenre = genreRepository.findById(id).orElseThrow(() ->
+                new ArtNotFoundException(ErrorCode.ERR_06_GENRE_NOT_FOUND));
+        if (oldGenre == null) {
+            return null;
+        }
+        else {
+            GenreEntity genreEntity = artMapper.genreRequestDTOToGenreEntityWithId(id, genreRequestDTO);
+            return artMapper.genreEntityToGenreResponseDTO(genreRepository.save(genreEntity));
+        }
     }
 
     @Override

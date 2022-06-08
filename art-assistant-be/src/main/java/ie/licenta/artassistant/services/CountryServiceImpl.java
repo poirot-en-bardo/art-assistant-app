@@ -6,11 +6,13 @@ import ie.licenta.artassistant.dto.CountryRequestDTO;
 import ie.licenta.artassistant.dto.CountryResponseDTO;
 import ie.licenta.artassistant.mappers.ArtMapper;
 import ie.licenta.artassistant.models.CountryEntity;
+import ie.licenta.artassistant.models.MuseumEntity;
 import ie.licenta.artassistant.persistence.CountryRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -21,7 +23,12 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public List<CountryResponseDTO> getAllCountries() {
-        return null;
+        Optional<List<CountryEntity>> countryListOptional = Optional.of(countryRepository.findAll());
+        if (countryListOptional.isEmpty()) {
+            throw new ArtNotFoundException(ErrorCode.ERR_14_COUNTRY_NOT_FOUND);
+        }
+        return artMapper
+                .countryEntityListToCountryResponseDTOList(countryListOptional.get());
     }
 
     @Override

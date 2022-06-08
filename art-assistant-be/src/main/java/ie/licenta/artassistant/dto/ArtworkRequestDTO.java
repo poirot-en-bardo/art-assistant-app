@@ -19,13 +19,11 @@ public class ArtworkRequestDTO {
 
     private byte[] imagePath;
 
-    private int roomNumber;
+    private int roomId;
 
     private int position;
 
     private int artistId;
 
     private int genreId;
-
-    private int galleryId;
 }

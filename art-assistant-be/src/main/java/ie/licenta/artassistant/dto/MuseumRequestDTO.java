@@ -16,7 +16,5 @@ public class MuseumRequestDTO {
 
     private String address;
 
-    private CountryEntity country;
-
-    private List<GalleryEntity> galleries;
+    private int countryId;
 }

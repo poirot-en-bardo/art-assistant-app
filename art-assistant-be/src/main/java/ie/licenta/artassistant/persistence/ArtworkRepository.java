@@ -11,7 +11,5 @@ public interface ArtworkRepository extends JpaRepository<ArtworkEntity, Integer>
 
     List<ArtworkEntity> findAllByGenreIdOrderByTitle(int genreId);
 
-    List<ArtworkEntity> findAllByGalleryIdOrderByTitle(int galleryId);
-
-    List<ArtworkEntity> findAllByRoomNumberAndGalleryIdOrderByPosition(int roomNumber, int galleryId);
+    List<ArtworkEntity> findAllByRoomIdOrderByPosition(int roomId);
 }

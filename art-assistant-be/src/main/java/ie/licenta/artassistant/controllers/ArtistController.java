@@ -65,6 +65,25 @@ public class ArtistController {
         return new ResponseEntity<>(artistService.addArtist(artistRequestDTO), HttpStatus.CREATED);
     }
 
+
+    @Operation(summary = "Update an artist")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "500", description = "Server error",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtInternalServerErrorException.class))),
+            @ApiResponse(responseCode = "404", description = "Page not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtNotFoundException.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid input",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtBadRequestException.class))),
+            @ApiResponse(responseCode = "200", description = "Successful update",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtistResponseDTO.class)))
+    })
+    @PutMapping("/artist/{id}")
+    public ResponseEntity<ArtistResponseDTO> updateArtistById(@Valid @RequestBody ArtistRequestDTO artistRequestDTO,
+                                                                @PathVariable int id,
+                                                                @RequestHeader("session_id") String sessionId) {
+        return new ResponseEntity<>(artistService.updateArtist(id, artistRequestDTO), HttpStatus.OK);
+    }
+
     @Operation(summary = "Delete an artist by id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "500", description = "Server error",

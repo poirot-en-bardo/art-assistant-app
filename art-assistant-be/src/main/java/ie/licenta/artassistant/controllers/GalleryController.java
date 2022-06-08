@@ -4,6 +4,7 @@ package ie.licenta.artassistant.controllers;
 import ie.licenta.artassistant.common.ArtBadRequestException;
 import ie.licenta.artassistant.common.ArtInternalServerErrorException;
 import ie.licenta.artassistant.common.ArtNotFoundException;
+import ie.licenta.artassistant.dto.GalleryRequestDTO;
 import ie.licenta.artassistant.dto.GalleryResponseDTO;
 import ie.licenta.artassistant.services.GalleryService;
 import io.swagger.annotations.ApiOperation;
@@ -19,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -53,7 +55,7 @@ public class GalleryController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtInternalServerErrorException.class))),
-            @ApiResponse(responseCode = "404", description = "Favourite Artworks not found",
+            @ApiResponse(responseCode = "404", description = "Gallery not found",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtNotFoundException.class))),
             @ApiResponse(responseCode = "400", description = "Invalid request",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtBadRequestException.class))),
@@ -64,5 +66,43 @@ public class GalleryController {
     public ResponseEntity<List<GalleryResponseDTO>> getAllGalleriesByMuseumId(@RequestParam(required = true) int museumId,
                                                                               @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(galleryService.getAllGalleriesByMuseumId(museumId), HttpStatus.OK);
+    }
+
+
+    @Operation(summary = "Add a new gallery")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "500", description = "Server error",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtInternalServerErrorException.class))),
+            @ApiResponse(responseCode = "404", description = "Page not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtNotFoundException.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid input",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtBadRequestException.class))),
+            @ApiResponse(responseCode = "201", description = "Gallery added successfully",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = GalleryResponseDTO.class)))
+    })
+    @PostMapping("/gallery")
+    public ResponseEntity<GalleryResponseDTO> addGallery(@Valid @RequestBody GalleryRequestDTO galleryRequestDTO,
+                                                         @RequestHeader("session_id") String sessionId) {
+        return new ResponseEntity<>(galleryService.addGallery(galleryRequestDTO), HttpStatus.CREATED);
+    }
+
+
+
+    @Operation(summary = "Update a gallery")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "500", description = "Server error",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtInternalServerErrorException.class))),
+            @ApiResponse(responseCode = "404", description = "Page not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtNotFoundException.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid input",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtBadRequestException.class))),
+            @ApiResponse(responseCode = "200", description = "Successful update",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = GalleryResponseDTO.class)))
+    })
+    @PutMapping("/gallery/{id}")
+    public ResponseEntity<GalleryResponseDTO> updateGalleryById(@Valid @RequestBody GalleryRequestDTO galleryRequestDTO,
+                                                                @PathVariable int id,
+                                                                @RequestHeader("session_id") String sessionId) {
+        return new ResponseEntity<>(galleryService.updateGallery(id, galleryRequestDTO), HttpStatus.OK);
     }
 }

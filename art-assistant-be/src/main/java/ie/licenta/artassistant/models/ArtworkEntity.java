@@ -1,5 +1,6 @@
 package ie.licenta.artassistant.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -31,8 +32,8 @@ public class ArtworkEntity {
     @Column(name = "IMAGE_PATH")
     private byte[] imagePath;
 
-    @Column(name = "ROOM_NUMBER")
-    private int roomNumber;
+//    @Column(name = "ROOM_ID")
+//    private int roomId;
 
     @Column(name = "POSITION")
     private int position;
@@ -46,9 +47,9 @@ public class ArtworkEntity {
     private GenreEntity genre;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "GALLERY_ID", referencedColumnName = "ID")
-    private GalleryEntity gallery;
+    @JoinColumn(name = "ROOM_ID", referencedColumnName = "ID")
+    private RoomEntity room;
 
-    @OneToMany(mappedBy = "artwork", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "artwork", cascade = CascadeType.ALL)
     private List<CommentEntity> comments;
 }

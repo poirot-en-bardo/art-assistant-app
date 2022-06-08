@@ -13,10 +13,12 @@ public enum ErrorCode {
     ERR_07_MUSEUM_NOT_FOUND("Museum not found"),
     ERR_08_USER_NOT_FOUND("User not found"),
     ERR_09_USER_EMAIL_TAKEN("The email is already registered"),
-    ERR_02_BAD_REQUEST("Bad Request"),
-    ERR_03_INTERNAL_SERVER_ERROR("Internal server error"),
     ERR_10_SESSION_NOT_FOUND("Session not found"),
-    ERR_11_SESSION_FORBIDDEN("Session not found");
+    ERR_11_SESSION_FORBIDDEN("Session not found"),
+    ERR_12_BAD_REQUEST("Bad Request"),
+    ERR_13_INTERNAL_SERVER_ERROR("Internal server error"),
+    ERR_14_COUNTRY_NOT_FOUND("No countries found"),
+    ERR_15_ROOM_NOT_FOUND("Room not found");
 
     public final String EN_MESSAGE;
 }

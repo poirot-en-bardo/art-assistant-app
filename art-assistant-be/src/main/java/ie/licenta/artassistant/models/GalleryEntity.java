@@ -26,6 +26,6 @@ public class GalleryEntity {
     @JoinColumn(name = "MUSEUM_ID", referencedColumnName = "ID")
     private MuseumEntity museum;
 
-    @OneToMany(mappedBy = "gallery", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ArtworkEntity> artworks;
+    @OneToMany(mappedBy = "gallery", cascade = CascadeType.ALL)
+    private List<RoomEntity> rooms;
 }

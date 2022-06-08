@@ -10,6 +10,7 @@ import ie.licenta.artassistant.persistence.MuseumRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,23 +50,29 @@ public class MuseumServiceImpl implements MuseumService {
     }
 
     @Override
-    public MuseumResponseDTO addMuseum(MuseumRequestDTO MuseumRequestDTO) {
-        return null;
+    @Transactional
+    public MuseumResponseDTO addMuseum(MuseumRequestDTO museumRequestDTO) {
+        return artMapper.museumEntityToMuseumResponseDTO(museumRepository.save(
+                artMapper.museumRequestDTOToMuseumEntity(museumRequestDTO)));
     }
 
     @Override
+    @Transactional
     public MuseumResponseDTO updateMuseum(int id, MuseumRequestDTO museumRequestDTO) {
-        MuseumEntity museumEntity = museumRepository.findById(id).orElseThrow(() ->
+        MuseumEntity oldMuseum = museumRepository.findById(id).orElseThrow(() ->
                 new ArtNotFoundException(ErrorCode.ERR_07_MUSEUM_NOT_FOUND));
-        museumEntity.setAddress(museumRequestDTO.getAddress());
-        museumEntity.setCountry(museumRequestDTO.getCountry());
-        museumEntity.setName(museumRequestDTO.getName());
-        museumEntity.setGalleries(museumRequestDTO.getGalleries());
-        return artMapper.museumEntityToMuseumResponseDTO(museumRepository.save(museumEntity));
+        if (oldMuseum == null) {
+            return null;
+        } else {
+            MuseumEntity museumEntity = artMapper.museumRequestDTOToMuseumEntityWithId(id, museumRequestDTO);
+            return artMapper.museumEntityToMuseumResponseDTO(museumRepository.save(museumEntity));
+        }
     }
 
     @Override
     public void deleteMuseumById(int id) {
-
+        MuseumEntity museum = museumRepository.findById(id).orElseThrow(() ->
+                new ArtNotFoundException(ErrorCode.ERR_07_MUSEUM_NOT_FOUND));
+        museumRepository.deleteById(id);
     }
 }

@@ -30,6 +30,6 @@ public class MuseumEntity {
     @JoinColumn(name = "COUNTRY_ID", referencedColumnName = "ID")
     private CountryEntity country;
 
-    @OneToMany(mappedBy = "museum", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "museum", cascade = CascadeType.ALL)
     private List<GalleryEntity> galleries;
 }

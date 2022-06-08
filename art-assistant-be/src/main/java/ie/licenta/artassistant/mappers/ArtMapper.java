@@ -81,8 +81,14 @@ public interface ArtMapper {
     List<FavouriteArtworkResponseDTO> favouriteArtworkEntityListToFavouriteArtworkResponseDTOList(List<FavouriteArtworkEntity> favouriteArtworkEntity);
     FavouriteArtworkEntity favouriteArtworkRequestDTOToFavouriteArtworkEntity(FavouriteArtworkRequestDTO favouriteArtworkRequestDTO);
 
+    @Mappings({
+            @Mapping(target = "museumId", source = "museum.id")
+    })
     GalleryResponseDTO galleryEntityToGalleryResponseDTO(GalleryEntity galleryEntity);
     List<GalleryResponseDTO> galleryEntityListToGalleryResponseDTOList(List<GalleryEntity> galleryEntity);
+    @Mappings({
+            @Mapping(target = "museum.id", source = "galleryRequestDTO.museumId")
+    })
     GalleryEntity galleryRequestDTOToGalleryEntity(GalleryRequestDTO galleryRequestDTO);
     @Mappings({
             @Mapping(target = "id", source = "galleryId"),

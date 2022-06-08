@@ -15,4 +15,6 @@ public class GalleryResponseDTO {
 
     private String name;
 
+    private int museumId;
+
 }

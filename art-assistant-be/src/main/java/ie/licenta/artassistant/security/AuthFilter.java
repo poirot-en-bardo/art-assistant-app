@@ -47,10 +47,39 @@ public class AuthFilter implements Filter {
         log.info("Request method: {}", httpRequest.getMethod());
         MethodType requestMethod = MethodType.valueOf(httpRequest.getMethod());
 
-        Endpoint endpoint = new Endpoint(requestUri, requestMethod);
-        if (API_OPEN_URLS.contains(endpoint)) {
-            filterChain.doFilter(servletRequest, servletResponse);
-        } else {
+        Endpoint requestedEndpoint = new Endpoint(requestUri, requestMethod);
+        boolean okay = false;
+        for (Endpoint endpoint : API_OPEN_URLS) {
+            if (Objects.equals(requestMethod, endpoint.getMethod())) {
+                List<String> reqPaths = Arrays.stream(requestUri.split("/")).map(String::trim)
+                        .filter(elem -> elem.length() != 0).toList();
+                List<String> mapPaths = Arrays.stream(endpoint.getPath().split("/")).map(String::trim)
+                        .filter(elem -> elem.length() != 0).toList();
+                if (reqPaths.size() == mapPaths.size()) {
+
+                    for (int i = 0; i < reqPaths.size(); i++) {
+                        log.info(reqPaths.get(i)+ " "+ mapPaths.get(i));
+                        if (mapPaths.get(i).contains("{")) {
+                            if (i == reqPaths.size() - 1) {
+                                okay = true;
+                                filterChain.doFilter(servletRequest, servletResponse);
+                            }
+                            continue;                        }
+                        if (!Objects.equals(reqPaths.get(i), mapPaths.get(i))) {
+                            break;
+                        }
+                        if (i == reqPaths.size() - 1) {
+                            okay = true;
+                            filterChain.doFilter(servletRequest, servletResponse);
+                        }
+                    }
+                }
+            }
+        }
+
+
+
+       if(!okay) {
             List<Role> roleList = new ArrayList<>();
             Map.Entry<Endpoint, List<Role>> matchedEndpoint = API_SECURITY_URLS.entrySet().stream().filter(apiUrl ->
                     httpRequest.getRequestURL().toString().contains(apiUrl.getKey().getPath())).findFirst().orElse(null);

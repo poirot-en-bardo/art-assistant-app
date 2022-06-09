@@ -9,6 +9,8 @@ import { AuthenticationService } from './services/authentication.service';
 import {FirstKeyPipe} from "./pipes/first-key.pipe";
 import {RoleDirective} from "./directives/role.directive";
 import {MuseumService} from "./services/museum.service";
+import {GalleryService} from "./services/gallery.service";
+import {CountryService} from "./services/country.service";
 
 @NgModule({
   imports: [
@@ -32,7 +34,9 @@ import {MuseumService} from "./services/museum.service";
   providers: [
     AuthorisationService,
     AuthenticationService,
-    MuseumService
+    CountryService,
+    MuseumService,
+    GalleryService
   ],
   bootstrap: []
 })

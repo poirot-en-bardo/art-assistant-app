@@ -12,8 +12,6 @@ import {environment} from "../environments/environment";
 import {appStates} from "./shared/redux/app.states";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {SharedModule} from "./shared/shared.module";
-import { ProfileComponent } from './dashboard/profile/profile.component';
-import { FavouritesComponent } from './dashboard/favourites/favourites.component';
 
 @NgModule({
   declarations: [

@@ -1,0 +1,23 @@
+@import "src/styles/variables";
+
+.#{$app-name}-dropdown {
+  position: relative;
+
+  &__list {
+    width: 100%;
+    position: absolute;
+    background-color: $color-white;
+    border: 1.5px solid $color-grey !important;
+    border-radius: $input-border-radius;
+    top: calc(100% + 5px);
+
+    &__item {
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    &__item:hover {
+      background-color: $color-grey-4;
+    }
+  }
+}

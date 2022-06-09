@@ -7,8 +7,6 @@ import java.util.Map;
 
 public class ApiSecurity {
 
-    public static final String API_USERS_URL = "http://localhost:8080/api/users";
-
     public static final List<Endpoint> API_OPEN_URLS = Arrays.asList(
             new Endpoint("/api/country", MethodType.GET),
             new Endpoint("/api/country/{id}", MethodType.GET),

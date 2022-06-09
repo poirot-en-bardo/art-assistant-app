@@ -5,10 +5,12 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
 import {MuseumsComponent} from "./museums.component";
 import {MuseumsRoutingModule} from "./museums-routing.module";
+import { MuseumPageComponent } from './museum-page/museum-page.component';
 
 @NgModule({
   declarations: [
     MuseumsComponent,
+    MuseumPageComponent,
   ],
   imports: [
     CoreModule,
@@ -16,7 +18,7 @@ import {MuseumsRoutingModule} from "./museums-routing.module";
     MuseumsRoutingModule,
     CommonModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [MuseumsComponent]

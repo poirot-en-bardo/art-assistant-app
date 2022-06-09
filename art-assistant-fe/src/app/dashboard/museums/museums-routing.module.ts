@@ -5,13 +5,16 @@ import {AuthorisationGuard} from '../../core/guards/authorisation.guard';
 import {MuseumPageComponent} from "./museum-page/museum-page.component";
 
 const routes: Routes = [
-  {path: '', component: MuseumsComponent, canActivate: [AuthorisationGuard], data: {neededRoles: ['GUEST']},},
-  {path: ':museumId', component: MuseumPageComponent}
+  {path: ':museumId', component: MuseumPageComponent, canActivate: [
+      AuthorisationGuard
+    ],
+    data: { neededRoles: ['GUEST'] }},
+  {path: '', component: MuseumsComponent, canActivate: [AuthorisationGuard], data: {neededRoles: ['GUEST']},}
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
   ],
   exports: [RouterModule]
 })

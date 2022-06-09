@@ -12,7 +12,8 @@
 
 
   <div *ngFor="let museum of museums; let i = index" #triggerScrollElement>
-    <a class="link"  [routerLink]="[museum.id]">
+    <a class="link"  (click)="seeMuseum(museum)">
+<!--      "-->
       <span class="fw-bold light-color link hand">
         {{museum.name}}, {{museum.countryName}}
       </span>

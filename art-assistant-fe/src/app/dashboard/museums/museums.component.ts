@@ -3,6 +3,7 @@ import {BaseComponent} from "../../core/components/base/base.component";
 import {MuseumService} from "../../shared/services/museum.service";
 import {takeUntil} from "rxjs";
 import {MuseumModel} from "../../shared/models/museum.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-museums',
@@ -15,7 +16,7 @@ export class MuseumsComponent extends BaseComponent implements OnInit {
   museums: MuseumModel[];
   searchText = "";
 
-  constructor(private museumService: MuseumService) {
+  constructor(private museumService: MuseumService, private router: Router) {
     super();
   }
 
@@ -46,4 +47,7 @@ export class MuseumsComponent extends BaseComponent implements OnInit {
       }
     }
 
+    seeMuseum(museum: MuseumModel) {
+      this.router.navigate(['museums', museum.id], { state: { museum: museum} });
+    }
 }

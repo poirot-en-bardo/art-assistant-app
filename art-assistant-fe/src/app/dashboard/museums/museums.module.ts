@@ -21,7 +21,7 @@ import { MuseumPageComponent } from './museum-page/museum-page.component';
     ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [MuseumsComponent]
+  bootstrap: []
 })
 
 export class MuseumsModule {

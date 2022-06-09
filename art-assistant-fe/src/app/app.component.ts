@@ -28,9 +28,9 @@ export class AppComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.localStorageService.getItem(AuthorisationEnum.SESSION_ID)) {
-      this.router.navigate([AuthenticationRoutesConstants.HOME]);
-    }
+    // if (!this.localStorageService.getItem(AuthorisationEnum.SESSION_ID)) {
+    //   this.router.navigate([AuthenticationRoutesConstants.HOME]);
+    // }
     this.getToasterConfig();
   }
 

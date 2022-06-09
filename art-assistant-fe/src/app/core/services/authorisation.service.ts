@@ -15,8 +15,10 @@ export class AuthorisationService {
   }
 
   getSignedInUser() {
-    const sessionId = this.localStorageService.getItem(this.authorisationConstants.SESSION_ID);
-    return this.http.get<AuthoriseResponseModel>(`${environment.apiBaseUrl}/${AuthenticationApiConstants.API_AUTHORIZE_URL}/${sessionId}`);
+    // const sessionId = this.localStorageService.getItem(this.authorisationConstants.SESSION_ID);
+    const sessionId = "9a38e007-149f-4f67-9c4f-4ccb2c6ee1db";
+    // return this.http.get<AuthoriseResponseModel>(`${environment.apiBaseUrl}/${AuthenticationApiConstants.API_AUTHORIZE_URL}/${sessionId}`);
+    return this.http.get<AuthoriseResponseModel>(`${environment.apiBaseUrl}/${AuthenticationApiConstants.API_AUTHORIZE_URL}?sessionId=${sessionId}`);
   }
 
   getCurrentSessionId() {

@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="mb-5 af-card smallscreen p-3">
+    <div class="mb-3 self-align-center">
+      <span class="fs-22 fw-bold af-card__title">Welcome back!</span>
+      <span class="float-end">Not a user?
+      <a routerLink="../sign-up">Sign Up!</a>
+    </span>
+    </div>
+
+    <form [formGroup]="signInForm">
+      <div class="mb-1 mt-2">
+        <input class="af-input af-input--large" placeholder="Email"
+               [formControlName]="SIGN_IN_FORM.EMAIL">
+        <app-error-messages [form]="signInForm" [field]="SIGN_IN_FORM.EMAIL"></app-error-messages>
+      </div>
+      <div class="mb-1 mt-2">
+        <div class="position-relative">
+          <input class="af-input af-input--large" placeholder="Password" [type]="passwordTextType"
+                 [formControlName]="SIGN_IN_FORM.PASSWORD">
+          <i class="fa fa-lg position-absolute top-50 end-0 pe-3 hand" [ngClass]=" {
+            'fa-eye-slash': passwordTextType === 'password',
+            'fa-eye': passwordTextType === 'text'
+            }"
+             (click)="togglePasswordTextType()">
+          </i>
+        </div>
+        <app-error-messages [form]="signInForm" [field]="SIGN_IN_FORM.PASSWORD"></app-error-messages>
+      </div>
+
+      <div class="d-flex justify-content-center mt-4">
+        <button type="button" class="af-btn af-btn--primary"
+                [disabled]="signInForm.invalid"
+                (click)="signIn()">
+          Sign In
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+

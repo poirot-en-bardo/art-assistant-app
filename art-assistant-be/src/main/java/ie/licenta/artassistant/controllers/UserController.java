@@ -56,4 +56,16 @@ public class UserController {
         }
         throw new ArtNotFoundException(ErrorCode.ERR_08_USER_NOT_FOUND);
     }
+
+
+//    @GetMapping("/users/{userId}")
+//    public ResponseEntity<UserResponseDTO> getUserInfoById(@PathVariable int userId) {
+//        return new ResponseEntity<>(userService.getUserById(userId), HttpStatus.OK);
+//    }
+//
+//    @GetMapping("/user/{sessionId}")
+//    public ResponseEntity<UserResponseDTO> getUserBySessionId(@PathVariable String sessionId) {
+//        return new ResponseEntity<>(userService.getUserBySessionId(sessionId), HttpStatus.OK);
+//    }
+
 }

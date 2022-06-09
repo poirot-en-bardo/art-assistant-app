@@ -18,9 +18,8 @@
 
         <!--    *ngIf="loggedUser" mai jos-->
 
-        <img class="rounded-circle af-person-avatar hand dropdown-toggle ms-5 me-2"
-             [src]="personAvatar" aria-expanded="false" (click)="goToProfile()">
         <div ngbDropdown class="align-self-center" placement="bottom-right" display="dynamic">
+          <i ngbDropdownToggle class = "fa-solid fa-user hand dropdown-toggle ms-5 me-2 af-tabs__profile"></i>
           <i ngbDropdownToggle class="fa-solid fa-chevron-down hand" id="profileDropdown"></i>
           <div ngbDropdownMenu class="mt-4" aria-labelledby="profileDropdown">
             <a ngbDropdownItem class="fw-bold af-tabs__profile" routerLink="profile"><i

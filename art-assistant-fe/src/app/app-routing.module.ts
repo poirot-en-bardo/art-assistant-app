@@ -10,7 +10,7 @@ const routes: Routes = [
   // { path: 'notifications', loadChildren: ()=> import('./dashboard/notifications/notifications.module').then(m => m.NotificationsModule)},
   // { path: 'admin', loadChildren: ()=> import('./dashboard/admin/admin.module').then(m => m.AdminModule)},
   // { path: 'explore', loadChildren: ()=> import('./dashboard/explore/explore.module').then(m => m.ExploreModule)},
-  // { path: 'authentication', loadChildren: ()=> import('./dashboard/authentication/authentication.module').then(m => m.AuthenticationModule)},
+  { path: 'authentication', loadChildren: ()=> import('./dashboard/authentication/authentication.module').then(m => m.AuthenticationModule)},
 ];
 
 @NgModule({

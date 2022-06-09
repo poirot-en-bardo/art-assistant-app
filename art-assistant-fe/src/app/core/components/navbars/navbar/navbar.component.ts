@@ -23,7 +23,7 @@ export class NavbarComponent extends BaseComponent implements OnInit {
 
   currentUrl = '';
   navigatedTab = NavbarRoutesConstants;
-  personAvatar = `../../../../../assets/images/friendship/avatar-${Math.floor(Math.random() * 10)}.png`;
+  personAvatar = '';
 
   constructor(private store: Store, private router: Router, private localStorageService: LocalStorageService) {
     super();

@@ -1,0 +1,43 @@
+@import "src/styles/variables";
+
+$card-radius: 10px;
+
+.af-card {
+  box-shadow: rgba($color-black, 0.2) 0px 4px 12px;
+  border-radius: $card-radius;
+  border: 10px solid transparent;
+
+  &__calendar-icon {
+    margin-right: 5px;
+  }
+
+  &__gallery {
+    margin-top: 20px;
+  }
+
+  &__date {
+    color: $color-primary;
+  }
+
+  &__spots {
+    color: $color-grey-3;
+  }
+
+  &__img {
+    border-radius: $card-radius;
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  &__img-large {
+    border-radius: $card-radius;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  &__title{
+    color: $color-primary;
+  }
+
+}

@@ -1,5 +1,5 @@
 export enum AuthenticationRoutesConstants {
-  HOME = 'news-feed',
+  HOME = 'museums',
   SIGN_UP = 'authentication/sign-up',
   SIGN_IN = 'authentication/sign-in'
 }

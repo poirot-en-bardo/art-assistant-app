@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="mb-5 af-card smallscreen p-3">
+    <div class="mb-3 self-align-center">
+      <span class="fs-22 fw-bold af-card__title">Sign up</span>
+      <span class="float-end">Already a user?
+        <a routerLink="../sign-in">Sign In!</a>
+      </span>
+    </div>
+
+    <form [formGroup]="signUpForm">
+      <div class="mb-1 mt-2">
+        <input class="af-input af-input--large" placeholder="First name"
+               [formControlName]="SIGN_UP_FORM.FIRSTNAME">
+        <app-error-messages [form]="signUpForm" [field]="SIGN_UP_FORM.FIRSTNAME"></app-error-messages>
+      </div>
+      <div class="mb-1 mt-2">
+        <input class="af-input af-input--large" placeholder="Last name"
+               [formControlName]="SIGN_UP_FORM.LASTNAME">
+        <app-error-messages [form]="signUpForm" [field]="SIGN_UP_FORM.LASTNAME"></app-error-messages>
+      </div>
+      <div class="mb-1 mt-2">
+        <input class="af-input af-input--large" placeholder="Email"
+               [formControlName]="SIGN_UP_FORM.EMAIL">
+        <app-error-messages [form]="signUpForm" [field]="SIGN_UP_FORM.EMAIL"></app-error-messages>
+      </div>
+      <div class="mb-1 mt-2">
+        <div class="position-relative">
+          <input class="af-input af-input--large" placeholder="Password" [type]="passwordTextType"
+                 id="password"
+                 [formControlName]="SIGN_UP_FORM.PASSWORD">
+          <i class="fa fa-lg position-absolute top-50 end-0 pe-3 hand" [ngClass]=" {
+            'fa-eye-slash': passwordTextType === 'password',
+            'fa-eye': passwordTextType === 'text'
+            }"
+             (click)="togglePasswordTextType()">
+          </i>
+        </div>
+        <app-error-messages [form]="signUpForm" [field]="SIGN_UP_FORM.PASSWORD"></app-error-messages>
+      </div>
+
+      <div class="d-flex justify-content-center mt-4">
+        <button type="button" class="af-btn af-btn--primary"
+                [disabled]="signUpForm.invalid"
+                (click)="signUp()">
+          Sign Up
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

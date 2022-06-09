@@ -54,7 +54,7 @@ export class SignUpComponent implements OnInit {
   public signUp(): void {
     const user = {
       ...this.signUpForm.getRawValue(),
-      roles: ["USER"]
+      roles: ["GUEST", "USER"]
     };
     this.authenticationService.signUp(user).subscribe(
       (sessionId) => {

@@ -1,10 +1,10 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { MuseumsComponent } from './museums.component';
 import { AuthorisationGuard } from '../../core/guards/authorisation.guard';
+import {RandomArtComponent} from "./random-art.component";
 
 const routes: Routes = [
-  {path: '', component: MuseumsComponent, canActivate: [AuthorisationGuard], data: {neededRoles: ['GUEST']}},
+  {path: '', component: RandomArtComponent, canActivate: [AuthorisationGuard], data: {neededRoles: ['GUEST']}},
 ];
 
 @NgModule({
@@ -13,5 +13,5 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class MuseumsRoutingModule {
+export class RandomArtRoutingModule {
 }

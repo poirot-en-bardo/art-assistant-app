@@ -1,20 +1,24 @@
-<div *ngIf="loggedUser" class="d-block d-md-none d-lg-none d-xl none">
+
+
+<div  class="d-block d-md-none d-lg-none d-xl none">
   <nav class="navbar justify-content-around navbar-expand-xs navbar-expand-sm navbar-expand-md fixed-bottom mobile-navbar">
     <button class="mobile-navbar__link" (click)="onTabSelected(this.navigatedTab.HOME)" [ngClass]="{'mobile-navbar__link-active' : this.currentUrl.includes(this.navigatedTab.HOME)}" >
-      <i class="fas fa-home"></i>
+<!--      <i class="fas fa-home"></i>-->
+      <img class="mobile-navbar__icon" [src] = "MUSEUM_SRC" />
     </button>
     <button class="mobile-navbar__link" (click)="onTabSelected(this.navigatedTab.RANDOM_ARTWORK)" [ngClass]="{'mobile-navbar__link-active' : this.currentUrl.includes(this.navigatedTab.RANDOM_ARTWORK)}" >
       <i class="fa-solid fa-compass"></i>
     </button>
 
-    <div ngbDropdown class="align-self-center" display="dynamic">
+
+    <!--*ngIf="loggedUser" in div jos-->
+    <div ngbDropdown class="align-self-center mobile-navbar__link" display="dynamic">
       <i ngbDropdownToggle class="hand fa-solid fa-user" id="profileDropdown"></i>
       <div ngbDropdownMenu class="mt-4" aria-labelledby="profileDropdown">
-        <a ngbDropdownItem class="fw-bold" routerLink="profile/friends"><i class="fa fa-fw fa-user-group me-2"></i><span>Friends</span></a>
-        <a ngbDropdownItem class="fw-bold" routerLink="notifications"><i class="fa fa-fw fa-bell me-2"></i><span>Notifications</span></a>
-        <a ngbDropdownItem class="fw-bold" routerLink="settings/notifications"><i class="fa fa-fw fa-gear me-2"></i><span>Settings</span></a>
-        <a ngbDropdownItem class="fw-bold" routerLink="admin/tags" *hasRoles="['ADMIN']"><i class="fa fa-tag me-3"></i><span>Tags</span></a>
-        <a ngbDropdownItem class="fw-bold" routerLink="" (click)="signOut()"><i class="fa fa-sign-out me-2"></i><span>Log out</span></a>
+        <a ngbDropdownItem class="fw-bold mobile-navbar__link" routerLink="profile"><i class="fas fa-fw fa-user me-2"></i><span>My Profile</span></a>
+        <a ngbDropdownItem class="fw-bold mobile-navbar__link" routerLink="favourites"><i class="fas fa-fw fa-heart me-2"></i><span>Favourites</span></a>
+<!--        <a ngbDropdownItem class="fw-bold" routerLink="admin/tags" *hasRoles="['ADMIN']"><i class="fa fa-tag me-3"></i><span>Tags</span></a>-->
+        <a ngbDropdownItem class="fw-bold mobile-navbar__link" routerLink="" (click)="signOut()"><i class="fa fa-sign-out me-2"></i><span>Log out</span></a>
       </div>
     </div>
   </nav>

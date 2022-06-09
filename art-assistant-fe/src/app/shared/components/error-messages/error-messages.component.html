@@ -1,5 +1,5 @@
 <div *ngIf="form.get(field)?.errors">
-  <div class="mh-color__error" [ngSwitch]="form.get(field)?.errors | firstKey">
+  <div class="af-color__error" [ngSwitch]="form.get(field)?.errors | firstKey">
     <div *ngSwitchCase="'required'">Field is required</div>
     <div *ngSwitchCase="'minlength'">Please enter a longer text</div>
     <div *ngSwitchCase="'maxlength'">Please enter a shorter text</div>

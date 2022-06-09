@@ -10,7 +10,7 @@
 
   &__link {
     border: none;
-    color: $color-grey-3;
+    color: $color-primary-2;
     font-weight: bolder;
     background: none;
     display: block;
@@ -19,12 +19,17 @@
     transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out, border-color 0.25s ease-in-out;
 
     &--active {
-      border-bottom: 2px solid $color-primary;
+      border-bottom: 2px solid $color-dark-blue;
     }
 
     &:hover, &--active {
-      color: $color-black;
+      color: $color-dark-blue;
     }
   }
+
+  &__profile {
+    color: $color-primary;
+  }
+
 }
 

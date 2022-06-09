@@ -21,6 +21,8 @@ export class AppComponent extends BaseComponent implements OnInit {
   toasterConfig$: Observable<ToasterModel>;
   toasterConfig: ToasterModel;
 
+  IMG_SRC = '/assets/icons/museum_icon.png';
+
   constructor(private router: Router, private localStorageService: LocalStorageService) {
     super();
   }

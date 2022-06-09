@@ -19,9 +19,11 @@ import { UserState } from '../../../../shared/redux/user/user.state';
 })
 export class MobileNavbarComponent extends BaseComponent implements OnInit {
 
-  @Select(UserState.getLoggedUser)
-  private loggedUser$: Observable<AuthoriseResponseModel>;
-  loggedUser: AuthoriseResponseModel;
+  MUSEUM_SRC = '/assets/icons/museum_icon.png';
+
+  // @Select(UserState.getLoggedUser)
+  // private loggedUser$: Observable<AuthoriseResponseModel>;
+  // loggedUser: AuthoriseResponseModel;
 
   currentUrl = '';
   navigatedTab = NavbarRoutesConstants;
@@ -35,12 +37,12 @@ export class MobileNavbarComponent extends BaseComponent implements OnInit {
       this.currentUrl = this.router.url.toString();
     });
 
-    this.store.dispatch(new GetLoggedUser());
-    this.loggedUser$.pipe(takeUntil(this.unsubscribe$)).subscribe((userModel) => {
-      if (userModel) {
-        this.loggedUser = userModel;
-      }
-    });
+    // this.store.dispatch(new GetLoggedUser());
+    // this.loggedUser$.pipe(takeUntil(this.unsubscribe$)).subscribe((userModel) => {
+    //   if (userModel) {
+    //     this.loggedUser = userModel;
+    //   }
+    // });
   }
 
   onTabSelected(newTab: string) {

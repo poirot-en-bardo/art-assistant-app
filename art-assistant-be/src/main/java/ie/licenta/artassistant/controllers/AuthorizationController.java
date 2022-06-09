@@ -38,5 +38,4 @@ public class AuthorizationController {
         return new ResponseEntity<>(userService.authorizeUser(authorizeRequestDTO), HttpStatus.OK);
     }
 
-
 }

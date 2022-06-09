@@ -107,12 +107,14 @@ public interface ArtMapper {
 
 
     @Mappings({
-            @Mapping(target = "countryName", source = "country.name")
+            @Mapping(target = "countryName", source = "country.name"),
+            @Mapping(target = "countryId", source = "country.id")
     })
     MuseumResponseDTO museumEntityToMuseumResponseDTO(MuseumEntity museumEntity);
 
     @Mappings({
-            @Mapping(target = "countryName", source = "country.name")
+            @Mapping(target = "countryName", source = "country.name"),
+            @Mapping(target = "countryId", source = "country.id")
     })
     List<MuseumResponseDTO> museumEntityListToMuseumResponseDTOList(List<MuseumEntity> museumEntity);
 

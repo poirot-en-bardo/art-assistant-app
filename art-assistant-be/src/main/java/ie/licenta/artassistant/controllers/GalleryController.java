@@ -63,8 +63,7 @@ public class GalleryController {
                     content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = GalleryResponseDTO.class))))
     })
     @GetMapping("/galleries")
-    public ResponseEntity<List<GalleryResponseDTO>> getAllGalleriesByMuseumId(@RequestParam(required = true) int museumId,
-                                                                              @RequestHeader("session_id") String sessionId) {
+    public ResponseEntity<List<GalleryResponseDTO>> getAllGalleriesByMuseumId(@RequestParam(required = true) int museumId) {
         return new ResponseEntity<>(galleryService.getAllGalleriesByMuseumId(museumId), HttpStatus.OK);
     }
 

@@ -25,4 +25,6 @@ public class MuseumResponseDTO {
 
     private String countryName;
 
+    private int countryId;
+
 }

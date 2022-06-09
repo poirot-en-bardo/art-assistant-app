@@ -8,6 +8,7 @@ import { ToasterComponent } from './components/toaster/toaster.component';
 import { AuthenticationService } from './services/authentication.service';
 import {FirstKeyPipe} from "./pipes/first-key.pipe";
 import {RoleDirective} from "./directives/role.directive";
+import {MuseumService} from "./services/museum.service";
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import {RoleDirective} from "./directives/role.directive";
   ],
   providers: [
     AuthorisationService,
-    AuthenticationService
+    AuthenticationService,
+    MuseumService
   ],
   bootstrap: []
 })

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { AuthoriseRequestModel } from '../models/authorise-request.model';
 import { AuthoriseResponseModel } from '../models/authorise-response.model';
-import { UserManagementConstants } from '../../core/constants/user-management.constants';
+import { UserApiConstants } from '../../core/constants/user-api.constants';
 
 @Injectable()
 export class AuthenticationService {
@@ -34,6 +34,6 @@ export class AuthenticationService {
   // }
 
   getUserById(userId: string) {
-    return this.http.get<AuthoriseResponseModel> (`${environment.apiBaseUrl}/${UserManagementConstants.API_USER_BY_ID}/${userId}` );
+    return this.http.get<AuthoriseResponseModel> (`${environment.apiBaseUrl}/${UserApiConstants.API_USER_BY_ID}/${userId}` );
   }
 }

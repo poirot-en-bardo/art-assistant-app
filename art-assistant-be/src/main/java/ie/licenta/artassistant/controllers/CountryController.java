@@ -44,8 +44,7 @@ public class CountryController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = CountryResponseDTO.class)))
     })
     @GetMapping("/country/{id}")
-    public ResponseEntity<CountryResponseDTO> getCountryById(@PathVariable int id,
-                                                             @RequestHeader("session_id") String sessionId) {
+    public ResponseEntity<CountryResponseDTO> getCountryById(@PathVariable int id) {
         return new ResponseEntity<>(countryService.getCountryById(id), HttpStatus.OK);
     }
 
@@ -61,8 +60,7 @@ public class CountryController {
                     content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = CountryResponseDTO.class))))
     })
     @GetMapping("/country")
-    public ResponseEntity<List<CountryResponseDTO>> getAllCountries(
-            @RequestHeader("session_id") String sessionId) {
+    public ResponseEntity<List<CountryResponseDTO>> getAllCountries() {
         return new ResponseEntity<>(countryService.getAllCountries(), HttpStatus.OK);
     }
 }

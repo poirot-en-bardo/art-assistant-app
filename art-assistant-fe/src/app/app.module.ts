@@ -12,10 +12,12 @@ import {environment} from "../environments/environment";
 import {appStates} from "./shared/redux/app.states";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {SharedModule} from "./shared/shared.module";
+import { GalleryComponent } from './dashboard/gallery/gallery.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    GalleryComponent,
   ],
   imports: [
     NgbModule,

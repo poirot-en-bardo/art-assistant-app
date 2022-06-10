@@ -46,4 +46,23 @@ export class MuseumPageComponent extends BaseComponent implements OnInit {
       });
   }
 
+  search(){
+    if(this.searchText!== ""){
+      let searchValue = this.searchText.toLocaleLowerCase();
+
+      this.galleries = this.galleries.filter((gallery:any) =>{
+        if(gallery.name.toLocaleLowerCase().match(searchValue))
+          return gallery;
+      });
+    }
+    else {
+      this.getGalleries();
+    }
+  }
+
+  openMaps(){
+    let address = this.museum.address + this.museum.countryName;
+    let url = "https://www.google.com.sa/maps/search/"+ encodeURI(address);
+    window.open(url, '_blank');
+  }
 }

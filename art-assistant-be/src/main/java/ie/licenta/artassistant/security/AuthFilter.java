@@ -48,7 +48,7 @@ public class AuthFilter implements Filter {
         MethodType requestMethod = MethodType.valueOf(httpRequest.getMethod());
 
         Endpoint requestedEndpoint = new Endpoint(requestUri, requestMethod);
-        boolean okay = false;
+        boolean openUrl = false;
         for (Endpoint endpoint : API_OPEN_URLS) {
             if (Objects.equals(requestMethod, endpoint.getMethod())) {
                 List<String> reqPaths = Arrays.stream(requestUri.split("/")).map(String::trim)
@@ -61,7 +61,7 @@ public class AuthFilter implements Filter {
                         log.info(reqPaths.get(i)+ " "+ mapPaths.get(i));
                         if (mapPaths.get(i).contains("{")) {
                             if (i == reqPaths.size() - 1) {
-                                okay = true;
+                                openUrl = true;
                                 filterChain.doFilter(servletRequest, servletResponse);
                             }
                             continue;                        }
@@ -69,7 +69,7 @@ public class AuthFilter implements Filter {
                             break;
                         }
                         if (i == reqPaths.size() - 1) {
-                            okay = true;
+                            openUrl = true;
                             filterChain.doFilter(servletRequest, servletResponse);
                         }
                     }
@@ -79,7 +79,7 @@ public class AuthFilter implements Filter {
 
 
 
-       if(!okay) {
+       if(!openUrl) {
             List<Role> roleList = new ArrayList<>();
             Map.Entry<Endpoint, List<Role>> matchedEndpoint = API_SECURITY_URLS.entrySet().stream().filter(apiUrl ->
                     httpRequest.getRequestURL().toString().contains(apiUrl.getKey().getPath())).findFirst().orElse(null);

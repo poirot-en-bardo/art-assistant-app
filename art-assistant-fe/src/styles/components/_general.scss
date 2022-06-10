@@ -1,0 +1,30 @@
+@import "src/styles/variables";
+
+
+.color {
+  color: $color-primary-2;
+}
+
+.light-color {
+  color: $color-primary-3;
+}
+
+.link {
+  border: none;
+  color: $color-primary-3;
+  font-weight: bolder;
+  background: none;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  display: block;
+  text-decoration: none;
+  transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out, border-color 0.25s ease-in-out;
+
+  &--active {
+    border-bottom: 2px solid $color-dark-blue;
+  }
+
+  &:hover, &--active {
+    color: $color-dark-blue;
+  }
+}

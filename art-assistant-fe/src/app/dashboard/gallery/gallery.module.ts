@@ -4,10 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
 import {GalleryRoutingModule} from "./gallery-routing.module";
+import { RoomComponent } from './room/room.component';
 
 @NgModule({
   declarations: [
-
+    RoomComponent
   ],
   imports: [
     CoreModule,

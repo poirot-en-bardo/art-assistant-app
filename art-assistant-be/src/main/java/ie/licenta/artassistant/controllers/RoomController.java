@@ -46,8 +46,9 @@ public class RoomController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = RoomResponseDTO.class)))
     })
     @GetMapping("/room/{id}")
-    public ResponseEntity<RoomResponseDTO> getRoomById(@PathVariable int id,
-                                                           @RequestHeader("session_id") String sessionId) {
+    public ResponseEntity<RoomResponseDTO> getRoomById(@PathVariable int id
+//                                                           @RequestHeader("session_id") String sessionId
+    ) {
         return new ResponseEntity<>(roomService.getRoomById(id), HttpStatus.OK);
     }
 
@@ -65,8 +66,9 @@ public class RoomController {
     })
     @GetMapping("/rooms")
     public ResponseEntity<List<RoomResponseDTO>> getRoomsByGalleryId(
-            @RequestParam(required = true) int galleryId,
-            @RequestHeader("session_id") String sessionId) {
+            @RequestParam(required = true) int galleryId
+//            @RequestHeader("session_id") String sessionId
+    ) {
         return new ResponseEntity<>(roomService
                 .getAllRoomsByGalleryId(galleryId), HttpStatus.OK);
     }

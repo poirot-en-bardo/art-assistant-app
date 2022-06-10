@@ -11,6 +11,8 @@ import {RoleDirective} from "./directives/role.directive";
 import {MuseumService} from "./services/museum.service";
 import {GalleryService} from "./services/gallery.service";
 import {CountryService} from "./services/country.service";
+import {RoomService} from "./services/room.service";
+import {ArtworkService} from "./services/artwork.service";
 
 @NgModule({
   imports: [
@@ -36,7 +38,9 @@ import {CountryService} from "./services/country.service";
     AuthenticationService,
     CountryService,
     MuseumService,
-    GalleryService
+    GalleryService,
+    RoomService,
+    ArtworkService
   ],
   bootstrap: []
 })

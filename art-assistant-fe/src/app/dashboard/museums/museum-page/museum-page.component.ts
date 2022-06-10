@@ -1,9 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {BaseComponent} from "../../../core/components/base/base.component";
 import {GalleryModel} from "../../../shared/models/gallery.model";
 import {GalleryService} from "../../../shared/services/gallery.service";
 import {takeUntil} from "rxjs";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {MuseumModel} from "../../../shared/models/museum.model";
 import {MuseumService} from "../../../shared/services/museum.service";
 
@@ -19,7 +19,7 @@ export class MuseumPageComponent extends BaseComponent implements OnInit {
   searchText = "";
 
   constructor(private galleryService: GalleryService, private museumService: MuseumService,
-              private route: ActivatedRoute, private router: Router) {
+              private route: ActivatedRoute) {
     super();
   }
 
@@ -32,7 +32,6 @@ export class MuseumPageComponent extends BaseComponent implements OnInit {
       this.museumService.getMuseumById(params['museumId']).pipe(takeUntil(this.unsubscribe$))
         .subscribe(museum => {
           this.museum = museum;
-          console.log(museum);
           this.getGalleries();
         });
     })
@@ -41,7 +40,6 @@ export class MuseumPageComponent extends BaseComponent implements OnInit {
   getGalleries() {
     this.galleryService.getGalleriesByMuseumId(this.museum.id).pipe(takeUntil(this.unsubscribe$))
       .subscribe(galleries => {
-        console.log(galleries);
         this.galleries = galleries;
       });
   }

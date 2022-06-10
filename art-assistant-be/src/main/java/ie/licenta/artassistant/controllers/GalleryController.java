@@ -45,10 +45,12 @@ public class GalleryController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = GalleryResponseDTO.class)))
     })
     @GetMapping("/gallery/{id}")
-    public ResponseEntity<GalleryResponseDTO> getGalleryById(@PathVariable int id,
-                                                             @RequestHeader("session_id") String sessionId) {
+    public ResponseEntity<GalleryResponseDTO> getGalleryById(@PathVariable int id
+//                                                             @RequestHeader("session_id") String sessionId
+    ) {
         return new ResponseEntity<>(galleryService.getGalleryById(id), HttpStatus.OK);
     }
+    //TODO add the session id back on login implementation
 
 
     @Operation(summary = "Get galleries by museum id")

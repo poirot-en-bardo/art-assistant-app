@@ -30,4 +30,6 @@ public class ArtworkResponseDTO {
     private String artistLastName;
 
     private String genreName;
+
+    private int genreId;
 }

@@ -44,12 +44,13 @@ public class ArtworkController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtworkResponseDTO.class)))
     })
     @GetMapping("/artwork/{id}")
-    public ResponseEntity<ArtworkResponseDTO> getArtworkById(@PathVariable int id,
-                                                           @RequestHeader("session_id") String sessionId) {
+    public ResponseEntity<ArtworkResponseDTO> getArtworkById(@PathVariable int id
+//                                                           @RequestHeader("session_id") String sessionId
+    ) {
         return new ResponseEntity<>(artworkService.getArtworkById(id), HttpStatus.OK);
     }
 
-    @Operation(summary = "Get artworks by gallery id and room number")
+    @Operation(summary = "Get artworks by and room id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtInternalServerErrorException.class))),
@@ -62,8 +63,9 @@ public class ArtworkController {
     })
     @GetMapping("/artworks")
     public ResponseEntity<List<ArtworkResponseDTO>> getArtworksByRoomIdOrderByPosition(
-            @RequestParam(required = true) int roomId,
-            @RequestHeader("session_id") String sessionId) {
+            @RequestParam(required = true) int roomId
+//            @RequestHeader("session_id") String sessionId
+            ) {
         return new ResponseEntity<>(artworkService.
                 getAllArtworksByRoomIdOrderByPosition(roomId), HttpStatus.OK);
     }

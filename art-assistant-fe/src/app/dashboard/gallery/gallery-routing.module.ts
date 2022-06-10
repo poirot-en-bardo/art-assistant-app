@@ -2,10 +2,18 @@ import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 import {AuthorisationGuard} from '../../core/guards/authorisation.guard';
 import {GalleryComponent} from "./gallery.component";
+import {RoomComponent} from "./room/room.component";
 
 const routes: Routes = [
   //TODO change guard role
-  {path: ':galleryId', component: GalleryComponent, canActivate: [AuthorisationGuard], data: {neededRoles: ['GUEST']},},
+  {
+    path: ':galleryId', component: GalleryComponent, canActivate: [AuthorisationGuard], data: {neededRoles: ['GUEST']},
+
+    children: [
+      { path: 'room/:roomId', component: RoomComponent},
+    ]
+
+  },
 
 ];
 

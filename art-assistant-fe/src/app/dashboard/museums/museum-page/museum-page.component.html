@@ -14,12 +14,12 @@
 
   <div>
     <input class="form-control pb-1 pt-1 mb-4" type="text" [(ngModel)]="searchText"
-           (input)="search()" placeholder="Search by name or country" />
+           (input)="search()" placeholder="Search by gallery name" />
   </div>
 
 
   <div *ngFor="let gallery of galleries; let i = index" #triggerScrollElement>
-    <a class="link"  [routerLink]="[gallery.id]">
+    <a class="link"  [routerLink]="['../../gallery', gallery.id]">
       <span class="fw-bold light-color link hand">
         {{gallery.name}}
       </span>

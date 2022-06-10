@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'profile', loadChildren: ()=> import('./dashboard/profile/profile.module').then(m => m.ProfileModule)},
   { path: 'favourites', loadChildren: ()=> import('./dashboard/favourites/favourites.module').then(m => m.FavouritesModule)},
   { path: 'authentication', loadChildren: ()=> import('./dashboard/authentication/authentication.module').then(m => m.AuthenticationModule)},
+  { path: 'gallery', loadChildren: ()=> import('./dashboard/gallery/gallery.module').then(m => m.GalleryModule)},
 ];
 
 @NgModule({

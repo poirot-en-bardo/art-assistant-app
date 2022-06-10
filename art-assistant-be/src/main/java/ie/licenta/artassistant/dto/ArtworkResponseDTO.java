@@ -17,6 +17,8 @@ public class ArtworkResponseDTO {
 
     private String technique;
 
+    private int year;
+
     private String description;
 
     private byte[] imagePath;

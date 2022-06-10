@@ -1,6 +1,7 @@
 export interface ArtworkModel {
   id: number;
   title: string;
+  year: number;
   technique: string;
   description: string;
   imagePath: string;

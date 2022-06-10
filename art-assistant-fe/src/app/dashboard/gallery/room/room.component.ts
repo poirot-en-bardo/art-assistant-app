@@ -6,6 +6,7 @@ import {ActivatedRoute} from "@angular/router";
 import {RoomModel} from "../../../shared/models/room.model";
 import {ArtworkModel} from "../../../shared/models/artwork.model";
 import {takeUntil} from "rxjs";
+import { ImageUtils } from '../../../shared/utils/image.utils';
 
 @Component({
   selector: 'app-room',
@@ -40,6 +41,11 @@ export class RoomComponent extends BaseComponent implements OnInit {
     this.artworkService.getArtworksByRoomId(this.room.id).pipe(takeUntil(this.unsubscribe$))
       .subscribe(artworks => {
         this.artworks = artworks;
+        this.artworks.forEach(artwork =>{
+          if(artwork.imagePath !== null)
+            artwork.imagePath = ImageUtils.appendImageType(artwork.imagePath);
+          }
+        )
         console.log(artworks);
       })
   }

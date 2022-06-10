@@ -23,6 +23,9 @@ public class ArtworkEntity {
     @Column(name = "TITLE")
     private String title;
 
+    @Column(name = "YEAR")
+    private int year;
+
     @Column(name = "TECHNIQUE")
     private String technique;
 

@@ -58,7 +58,6 @@ public class AuthFilter implements Filter {
                 if (reqPaths.size() == mapPaths.size()) {
 
                     for (int i = 0; i < reqPaths.size(); i++) {
-                        log.info(reqPaths.get(i)+ " "+ mapPaths.get(i));
                         if (mapPaths.get(i).contains("{")) {
                             if (i == reqPaths.size() - 1) {
                                 openUrl = true;

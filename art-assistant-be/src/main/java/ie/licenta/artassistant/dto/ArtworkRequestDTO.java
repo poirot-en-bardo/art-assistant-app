@@ -21,6 +21,8 @@ public class ArtworkRequestDTO {
 
     private int roomId;
 
+    private int year;
+
     private int position;
 
     private int artistId;

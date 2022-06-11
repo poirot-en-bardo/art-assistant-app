@@ -45,7 +45,7 @@ public class MuseumController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval",
                     content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = MuseumResponseDTO.class))))
     })
-    @GetMapping("/museums")
+    @GetMapping("/open/museums")
     public ResponseEntity<List<MuseumResponseDTO>> getAllMuseums(
     ) {
         return new ResponseEntity<>(museumService.getAllMuseums(), HttpStatus.OK);
@@ -62,7 +62,7 @@ public class MuseumController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = MuseumResponseDTO.class)))
     })
-    @GetMapping("/museum/{id}")
+    @GetMapping("/open/museum/{id}")
     public ResponseEntity<MuseumResponseDTO> getMuseumById(@PathVariable int id
     ) {
         return new ResponseEntity<>(museumService.getMuseumById(id), HttpStatus.OK);
@@ -79,7 +79,7 @@ public class MuseumController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval",
                     content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = MuseumResponseDTO.class))))
     })
-    @GetMapping("/museum")
+    @GetMapping("/open/museum")
     public ResponseEntity<List<MuseumResponseDTO>> getMuseumsByCountryId(
             @RequestParam(required = true) int countryId
     ) {
@@ -99,7 +99,7 @@ public class MuseumController {
             @ApiResponse(responseCode = "201", description = "Museum added successfully",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = MuseumResponseDTO.class)))
     })
-    @PostMapping("/museum")
+    @PostMapping("/admin/museum")
     public ResponseEntity<MuseumResponseDTO> addMuseum(@Valid @RequestBody MuseumRequestDTO museumRequestDTO,
                                                        @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(museumService.addMuseum(museumRequestDTO), HttpStatus.CREATED);
@@ -117,7 +117,7 @@ public class MuseumController {
             @ApiResponse(responseCode = "200", description = "Successful update",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = MuseumResponseDTO.class)))
     })
-    @PutMapping("/museum/{id}")
+    @PutMapping("/admin/museum/{id}")
     public ResponseEntity<MuseumResponseDTO> updateMuseumById(@Valid @RequestBody MuseumRequestDTO MuseumRequestDTO,
                                                               @PathVariable int id,
                                                               @RequestHeader("session_id") String sessionId) {

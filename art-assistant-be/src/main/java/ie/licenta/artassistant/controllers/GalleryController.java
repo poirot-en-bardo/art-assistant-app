@@ -44,7 +44,7 @@ public class GalleryController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = GalleryResponseDTO.class)))
     })
-    @GetMapping("/gallery/{id}")
+    @GetMapping("/user/gallery/{id}")
     public ResponseEntity<GalleryResponseDTO> getGalleryById(@PathVariable int id
 //                                                             @RequestHeader("session_id") String sessionId
     ) {
@@ -64,7 +64,7 @@ public class GalleryController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval",
                     content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = GalleryResponseDTO.class))))
     })
-    @GetMapping("/galleries")
+    @GetMapping("/open/galleries")
     public ResponseEntity<List<GalleryResponseDTO>> getAllGalleriesByMuseumId(@RequestParam(required = true) int museumId) {
         return new ResponseEntity<>(galleryService.getAllGalleriesByMuseumId(museumId), HttpStatus.OK);
     }
@@ -81,7 +81,7 @@ public class GalleryController {
             @ApiResponse(responseCode = "201", description = "Gallery added successfully",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = GalleryResponseDTO.class)))
     })
-    @PostMapping("/gallery")
+    @PostMapping("/admin/gallery")
     public ResponseEntity<GalleryResponseDTO> addGallery(@Valid @RequestBody GalleryRequestDTO galleryRequestDTO,
                                                          @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(galleryService.addGallery(galleryRequestDTO), HttpStatus.CREATED);
@@ -100,7 +100,7 @@ public class GalleryController {
             @ApiResponse(responseCode = "200", description = "Successful update",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = GalleryResponseDTO.class)))
     })
-    @PutMapping("/gallery/{id}")
+    @PutMapping("/admin/gallery/{id}")
     public ResponseEntity<GalleryResponseDTO> updateGalleryById(@Valid @RequestBody GalleryRequestDTO galleryRequestDTO,
                                                                 @PathVariable int id,
                                                                 @RequestHeader("session_id") String sessionId) {

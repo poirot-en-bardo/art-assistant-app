@@ -42,7 +42,7 @@ public class ArtistController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtistResponseDTO.class)))
     })
-    @GetMapping("/artist/{id}")
+    @GetMapping("/user/artist/{id}")
     public ResponseEntity<ArtistResponseDTO> getArtistById(@PathVariable int id,
                                                            @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(artistService.getArtistById(id), HttpStatus.OK);
@@ -59,7 +59,7 @@ public class ArtistController {
             @ApiResponse(responseCode = "201", description = "Artist added successfully",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtistResponseDTO.class)))
     })
-    @PostMapping("/artist")
+    @PostMapping("/admin/artist")
     public ResponseEntity<ArtistResponseDTO> addArtist(@Valid @RequestBody ArtistRequestDTO artistRequestDTO,
                                                        @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(artistService.addArtist(artistRequestDTO), HttpStatus.CREATED);
@@ -77,7 +77,7 @@ public class ArtistController {
             @ApiResponse(responseCode = "200", description = "Successful update",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtistResponseDTO.class)))
     })
-    @PutMapping("/artist/{id}")
+    @PutMapping("/admin/artist/{id}")
     public ResponseEntity<ArtistResponseDTO> updateArtistById(@Valid @RequestBody ArtistRequestDTO artistRequestDTO,
                                                                 @PathVariable int id,
                                                                 @RequestHeader("session_id") String sessionId) {
@@ -95,7 +95,7 @@ public class ArtistController {
             @ApiResponse(responseCode = "200", description = "Successfully deleted the artist",
                     content = @Content(mediaType = "application/json"))
     })
-    @DeleteMapping("/artist/{id}")
+    @DeleteMapping("/admin/artist/{id}")
     public ResponseEntity<Void> deleteArtistById(@PathVariable int id,
                                                            @RequestHeader("session_id") String sessionId){
         artistService.deleteArtistById(id);

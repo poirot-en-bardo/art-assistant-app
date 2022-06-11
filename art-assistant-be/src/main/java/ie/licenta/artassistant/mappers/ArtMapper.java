@@ -1,6 +1,6 @@
 package ie.licenta.artassistant.mappers;
 
-import ie.licenta.artassistant.security.Role;
+import ie.licenta.artassistant.models.RoleName;
 import ie.licenta.artassistant.dto.*;
 import ie.licenta.artassistant.models.*;
 import org.mapstruct.Mapper;
@@ -160,7 +160,7 @@ public interface ArtMapper {
     UserEntity userRequestDTOToUserEntity(UserRequestDTO userRequestDTO);
 
     @Mapping(target = "roles", source = "roleList")
-    UserResponseDTO userEntityAndRolesToUserReponseDTO(UserEntity userEntity, List<Role> roleList);
+    UserResponseDTO userEntityAndRolesToUserReponseDTO(UserEntity userEntity, List<RoleName> roleList);
 
     @Mapping(target = "roles", ignore = true)
     UserEntity signUpRequestDTOToUserEntity(SignUpRequestDTO signUpRequestDTO);

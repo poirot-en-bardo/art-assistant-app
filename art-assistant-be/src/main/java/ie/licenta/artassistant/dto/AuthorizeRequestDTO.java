@@ -1,6 +1,6 @@
 package ie.licenta.artassistant.dto;
 
-import ie.licenta.artassistant.security.Role;
+import ie.licenta.artassistant.models.RoleName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,5 +13,5 @@ import java.util.List;
 public class AuthorizeRequestDTO {
 
     private String sessionId;
-    private List<Role> roles;
+    private List<RoleName> roles;
 }

@@ -43,7 +43,7 @@ public class ArtworkController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtworkResponseDTO.class)))
     })
-    @GetMapping("/artwork/{id}")
+    @GetMapping("/user/artwork/{id}")
     public ResponseEntity<ArtworkResponseDTO> getArtworkById(@PathVariable int id
 //                                                           @RequestHeader("session_id") String sessionId
     ) {
@@ -61,7 +61,7 @@ public class ArtworkController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval",
                     content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ArtworkResponseDTO.class))))
     })
-    @GetMapping("/artworks")
+    @GetMapping("/user/artworks")
     public ResponseEntity<List<ArtworkResponseDTO>> getArtworksByRoomIdOrderByPosition(
             @RequestParam(required = true) int roomId
 //            @RequestHeader("session_id") String sessionId
@@ -81,7 +81,7 @@ public class ArtworkController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval",
                     content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ArtworkResponseDTO.class))))
     })
-    @GetMapping("/artwork")
+    @GetMapping("/user/artwork")
     public ResponseEntity<List<ArtworkResponseDTO>> getArtworksByArtistId(
             @RequestParam(required = true) int artistId,
             @RequestHeader("session_id") String sessionId) {
@@ -100,7 +100,7 @@ public class ArtworkController {
             @ApiResponse(responseCode = "201", description = "Artwork added successfully",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtworkResponseDTO.class)))
     })
-    @PostMapping("/artwork")
+    @PostMapping("/admin/artwork")
     public ResponseEntity<ArtworkResponseDTO> addArtwork(@Valid @RequestBody ArtworkRequestDTO artworkRequestDTO,
                                                        @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(artworkService.addArtwork(artworkRequestDTO), HttpStatus.CREATED);
@@ -117,7 +117,7 @@ public class ArtworkController {
             @ApiResponse(responseCode = "200", description = "Successful update",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtworkResponseDTO.class)))
     })
-    @PutMapping("/artwork/{id}")
+    @PutMapping("/admin/artwork/{id}")
     public ResponseEntity<ArtworkResponseDTO> updateArtworkById(@Valid @RequestBody ArtworkRequestDTO artworkRequestDTO,
                                                          @PathVariable int id,
                                                          @RequestHeader("session_id") String sessionId) {
@@ -135,7 +135,7 @@ public class ArtworkController {
             @ApiResponse(responseCode = "200", description = "Successfully deleted the artwork",
                     content = @Content(mediaType = "application/json"))
     })
-    @DeleteMapping("/artwork/{id}")
+    @DeleteMapping("/admin/artwork/{id}")
     public ResponseEntity<ArtworkResponseDTO> deleteArtworkById(@PathVariable int id,
                                                               @RequestHeader("session_id") String sessionId){
         artworkService.deleteArtworkById(id);

@@ -18,7 +18,8 @@ public enum ErrorCode {
     ERR_12_BAD_REQUEST("Bad Request"),
     ERR_13_INTERNAL_SERVER_ERROR("Internal server error"),
     ERR_14_COUNTRY_NOT_FOUND("No countries found"),
-    ERR_15_ROOM_NOT_FOUND("Room not found");
+    ERR_15_ROOM_NOT_FOUND("Room not found"),
+    ERR_16_ROLE_NOT_SET("User role not set");
 
     public final String EN_MESSAGE;
 }

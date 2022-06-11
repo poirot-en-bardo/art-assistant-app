@@ -1,6 +1,6 @@
 package ie.licenta.artassistant.dto;
 
-import ie.licenta.artassistant.security.Role;
+import ie.licenta.artassistant.models.RoleName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,5 +16,5 @@ public class UserRequestDTO {
     private String lastName;
     private String email;
     private String password;
-    private List<Role> roles;
+    private List<RoleName> roles;
 }

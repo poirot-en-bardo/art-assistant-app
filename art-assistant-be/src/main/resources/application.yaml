@@ -4,6 +4,10 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
 
 
   hibernate:
@@ -22,5 +26,13 @@ urls:
   security:
     baseUrl: "http://localhost:8080/api/authorize?"
     sessionId: "sessionId"
+
+app:
+  jwtSecret: "secret"
+  jwtExpirationInMs: 1728000000
+  cors:
+    allowedOrigins: "http://localhost:4200"
+
+
 
 

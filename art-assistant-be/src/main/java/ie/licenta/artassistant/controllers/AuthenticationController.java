@@ -3,8 +3,15 @@ package ie.licenta.artassistant.controllers;
 import ie.licenta.artassistant.common.ArtBadRequestException;
 import ie.licenta.artassistant.common.ArtInternalServerErrorException;
 import ie.licenta.artassistant.common.ArtNotFoundException;
+import ie.licenta.artassistant.common.ErrorCode;
 import ie.licenta.artassistant.dto.*;
-import ie.licenta.artassistant.services.AuthenticationService;
+import ie.licenta.artassistant.models.RoleEntity;
+import ie.licenta.artassistant.models.RoleName;
+import ie.licenta.artassistant.models.UserEntity;
+import ie.licenta.artassistant.persistence.RoleRepository;
+import ie.licenta.artassistant.persistence.UserRepository;
+import ie.licenta.artassistant.security.CustomApiResponse;
+import ie.licenta.artassistant.security.JwtTokenProvider;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -13,11 +20,20 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
+import java.util.Collections;
 
 @RestController
 @CrossOrigin("*")
@@ -27,7 +43,18 @@ import javax.validation.Valid;
 @Tag(name = "Authentication management")
 public class AuthenticationController {
 
-    private final AuthenticationService authenticationService;
+    private final UserRepository userRepository;
+
+    private final RoleRepository roleRepository;
+
+    @Autowired
+    private JwtTokenProvider tokenProvider;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Operation(summary = "User Sign-Up")
     @ApiResponses(value = {
@@ -41,8 +68,29 @@ public class AuthenticationController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = SignUpResponseDTO.class)))
     })
     @PostMapping("/authentication/signup")
-    public ResponseEntity<SignUpResponseDTO> signUp(@Valid @RequestBody SignUpRequestDTO signUpRequestDTO) {
-        return new ResponseEntity<>(authenticationService.signUp(signUpRequestDTO), HttpStatus.OK);
+    public ResponseEntity<?> signUp(@Valid @RequestBody SignUpRequestDTO signUpRequestDTO) {
+        if(userRepository.existsByEmail(signUpRequestDTO.getEmail())) {
+            return new ResponseEntity(new CustomApiResponse(false, "Username is already taken!"),
+                    HttpStatus.BAD_REQUEST);
+        }
+
+        UserEntity user = new UserEntity(null, signUpRequestDTO.getFirstName(), signUpRequestDTO.getLastName(),
+                signUpRequestDTO.getEmail(), signUpRequestDTO.getPassword());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        RoleEntity userRole = roleRepository.findByName(RoleName.ROLE_USER).orElseThrow(() ->
+                new ArtBadRequestException(ErrorCode.ERR_16_ROLE_NOT_SET));
+        user.setRoles(Collections.singleton(userRole));
+
+        UserEntity result = userRepository.save(user);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentContextPath().path("api/users/{username}")
+                .buildAndExpand(result.getEmail()).toUri();
+
+        return ResponseEntity.created(location).body(
+                new CustomApiResponse(true, "User registered successfully"));
+        //return jwt?
     }
 
     @Operation(summary = "User Sign-In")
@@ -57,8 +105,13 @@ public class AuthenticationController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = SignInResponseDTO.class)))
     })
     @PostMapping("/authentication/signin")
-    public ResponseEntity<SignInResponseDTO> signIn(@Valid @RequestBody SignInRequestDTO signInRequestDTO) {
-        return new ResponseEntity<>(authenticationService.signIn(signInRequestDTO), HttpStatus.OK);
+    public ResponseEntity<?> signIn(@Valid @RequestBody SignInRequestDTO signInRequestDTO) {
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                signInRequestDTO.getEmail(), signInRequestDTO.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String jwt = tokenProvider.generateToken(authentication);
+        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
 
 }

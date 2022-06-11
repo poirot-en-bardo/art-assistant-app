@@ -43,7 +43,7 @@ public class CountryController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = CountryResponseDTO.class)))
     })
-    @GetMapping("/country/{id}")
+    @GetMapping("/open/country/{id}")
     public ResponseEntity<CountryResponseDTO> getCountryById(@PathVariable int id) {
         return new ResponseEntity<>(countryService.getCountryById(id), HttpStatus.OK);
     }
@@ -59,7 +59,7 @@ public class CountryController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval",
                     content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = CountryResponseDTO.class))))
     })
-    @GetMapping("/country")
+    @GetMapping("/open/country")
     public ResponseEntity<List<CountryResponseDTO>> getAllCountries() {
         return new ResponseEntity<>(countryService.getAllCountries(), HttpStatus.OK);
     }

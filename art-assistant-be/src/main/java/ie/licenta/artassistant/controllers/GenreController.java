@@ -40,7 +40,7 @@ public class GenreController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = GenreResponseDTO.class)))
     })
-    @GetMapping("/genre/{id}")
+    @GetMapping("/user/genre/{id}")
     public ResponseEntity<GenreResponseDTO> getGenreById(@PathVariable int id,
                                                              @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(genreService.getGenreById(id), HttpStatus.OK);
@@ -57,7 +57,7 @@ public class GenreController {
             @ApiResponse(responseCode = "201", description = "Genre added successfully",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = GenreResponseDTO.class)))
     })
-    @PostMapping("/genre")
+    @PostMapping("/admin/genre")
     public ResponseEntity<GenreResponseDTO> addGenre(@Valid @RequestBody GenreRequestDTO genreRequestDTO,
                                                          @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(genreService.addGenre(genreRequestDTO), HttpStatus.CREATED);
@@ -75,7 +75,7 @@ public class GenreController {
             @ApiResponse(responseCode = "200", description = "Successful update",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = GenreResponseDTO.class)))
     })
-    @PutMapping("/genre/{id}")
+    @PutMapping("/admin/genre/{id}")
     public ResponseEntity<GenreResponseDTO> updateGenreById(@Valid @RequestBody GenreRequestDTO genreRequestDTO,
                                                                 @PathVariable int id,
                                                                 @RequestHeader("session_id") String sessionId) {

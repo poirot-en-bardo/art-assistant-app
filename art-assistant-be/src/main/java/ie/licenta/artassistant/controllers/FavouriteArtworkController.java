@@ -43,7 +43,7 @@ public class FavouriteArtworkController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval",
                     content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ArtworkResponseDTO.class))))
     })
-    @GetMapping("/favourite_artworks")
+    @GetMapping("/user/favourite_artworks")
     public ResponseEntity<List<FavouriteArtworkResponseDTO>> getArtworksByGalleryIdAndRoomNumber(
             @RequestHeader("session_id") String sessionId,
             @RequestAttribute("userId") int userId) {
@@ -61,7 +61,7 @@ public class FavouriteArtworkController {
             @ApiResponse(responseCode = "201", description = "Favourite Artwork added successfully",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtworkResponseDTO.class)))
     })
-    @PostMapping("/favourite_artwork")
+    @PostMapping("/user/favourite_artwork")
     public ResponseEntity<FavouriteArtworkResponseDTO> addArtwork(@Valid @RequestBody FavouriteArtworkRequestDTO favouriteArtworkRequestDTO,
                                                                 @RequestHeader("session_id") String sessionId,
                                                                 @RequestAttribute("userId") int userId) {
@@ -79,7 +79,7 @@ public class FavouriteArtworkController {
             @ApiResponse(responseCode = "200", description = "Successfully deleted the Artwork",
                     content = @Content(mediaType = "application/json"))
     })
-    @DeleteMapping("/favourite_artwork/{artworkId}")
+    @DeleteMapping("/user/favourite_artwork/{artworkId}")
     public ResponseEntity<FavouriteArtworkResponseDTO> deleteFavouriteArtworkById(@PathVariable int artworkId,
                                                                                 @RequestHeader("session_id") String sessionId,
                                                                                 @RequestAttribute("userId") int userId) {

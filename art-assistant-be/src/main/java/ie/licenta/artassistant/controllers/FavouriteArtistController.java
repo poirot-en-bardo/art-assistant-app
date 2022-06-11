@@ -43,7 +43,7 @@ public class FavouriteArtistController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval",
                     content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ArtworkResponseDTO.class))))
     })
-    @GetMapping("/favourite_artists")
+    @GetMapping("/user/favourite_artists")
     public ResponseEntity<List<FavouriteArtistResponseDTO>> getArtworksByGalleryIdAndRoomNumber(
             @RequestHeader("session_id") String sessionId,
             @RequestAttribute("userId") int userId) {
@@ -61,7 +61,7 @@ public class FavouriteArtistController {
             @ApiResponse(responseCode = "201", description = "Favourite artist added successfully",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtistResponseDTO.class)))
     })
-    @PostMapping("/favourite_artist")
+    @PostMapping("/user/favourite_artist")
     public ResponseEntity<FavouriteArtistResponseDTO> addArtist(@Valid @RequestBody FavouriteArtistRequestDTO favouriteArtistRequestDTO,
                                                                 @RequestHeader("session_id") String sessionId,
                                                                 @RequestAttribute("userId") int userId) {
@@ -79,7 +79,7 @@ public class FavouriteArtistController {
             @ApiResponse(responseCode = "200", description = "Successfully deleted the artist",
                     content = @Content(mediaType = "application/json"))
     })
-    @DeleteMapping("/favourite_artist/{artistId}")
+    @DeleteMapping("/user/favourite_artist/{artistId}")
     public ResponseEntity<FavouriteArtistResponseDTO> deleteFavouriteArtistById(@PathVariable int artistId,
                                                                                 @RequestHeader("session_id") String sessionId,
                                                                                 @RequestAttribute("userId") int userId) {

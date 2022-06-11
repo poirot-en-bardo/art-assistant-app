@@ -42,7 +42,7 @@ public class CommentController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = CommentResponseDTO.class)))
     })
-    @GetMapping("/comment/{id}")
+    @GetMapping("/user/comment/{id}")
     public ResponseEntity<CommentResponseDTO> getCommentById(@PathVariable int id,
                                                            @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(commentService.getCommentById(id), HttpStatus.OK);
@@ -59,7 +59,7 @@ public class CommentController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval",
                     content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = CommentResponseDTO.class))))
     })
-    @GetMapping("/comments")
+    @GetMapping("/user/comments")
     public ResponseEntity<List<CommentResponseDTO>> getCommentsByArtworkId(
             @RequestParam(required = true) int artworkId,
             @RequestHeader("session_id") String sessionId) {
@@ -80,7 +80,7 @@ public class CommentController {
     })
 
     //TODO: add RequestAttribute id
-    @PostMapping("/comment")
+    @PostMapping("/user/comment")
     public ResponseEntity<CommentResponseDTO> addComment(@Valid @RequestBody CommentRequestDTO CommentRequestDTO,
                                                        @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(commentService.addComment(CommentRequestDTO), HttpStatus.CREATED);
@@ -97,7 +97,7 @@ public class CommentController {
             @ApiResponse(responseCode = "200", description = "Successfully deleted the Comment",
                     content = @Content(mediaType = "application/json"))
     })
-    @DeleteMapping("/comment/{id}")
+    @DeleteMapping("/user/comment/{id}")
     public ResponseEntity<CommentResponseDTO> deleteCommentById(@PathVariable int id,
                                                               @RequestHeader("session_id") String sessionId){
         commentService.deleteCommentById(id);

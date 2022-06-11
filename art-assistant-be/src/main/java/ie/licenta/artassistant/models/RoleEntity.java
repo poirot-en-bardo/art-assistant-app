@@ -1,6 +1,5 @@
 package ie.licenta.artassistant.models;
 
-import ie.licenta.artassistant.security.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,11 +18,8 @@ public class RoleEntity {
     @Column(name = "ID", updatable = false)
     private int id;
 
-    @OneToOne
-    @JoinColumn(name = "USER_ID")
-    private UserEntity user;
 
-    @JoinColumn(name = "ROLE")
     @Enumerated(EnumType.STRING)
-    private Role role;
+    @Column(name = "name")
+    private RoleName name;
 }

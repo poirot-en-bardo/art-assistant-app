@@ -45,7 +45,7 @@ public class RoomController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = RoomResponseDTO.class)))
     })
-    @GetMapping("/room/{id}")
+    @GetMapping("/user/room/{id}")
     public ResponseEntity<RoomResponseDTO> getRoomById(@PathVariable int id
 //                                                           @RequestHeader("session_id") String sessionId
     ) {
@@ -64,7 +64,7 @@ public class RoomController {
             @ApiResponse(responseCode = "200", description = "Successful retrieval",
                     content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = RoomResponseDTO.class))))
     })
-    @GetMapping("/rooms")
+    @GetMapping("/user/rooms")
     public ResponseEntity<List<RoomResponseDTO>> getRoomsByGalleryId(
             @RequestParam(required = true) int galleryId
 //            @RequestHeader("session_id") String sessionId
@@ -84,7 +84,7 @@ public class RoomController {
             @ApiResponse(responseCode = "201", description = "Room added successfully",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = RoomResponseDTO.class)))
     })
-    @PostMapping("/room")
+    @PostMapping("/admin/room")
     public ResponseEntity<RoomResponseDTO> addRoom(@Valid @RequestBody RoomRequestDTO roomRequestDTO,
                                                        @RequestHeader("session_id") String sessionId) {
         return new ResponseEntity<>(roomService.addRoom(roomRequestDTO), HttpStatus.CREATED);
@@ -102,7 +102,7 @@ public class RoomController {
             @ApiResponse(responseCode = "200", description = "Successful update",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = RoomResponseDTO.class)))
     })
-    @PutMapping("/room/{id}")
+    @PutMapping("/admin/room/{id}")
     public ResponseEntity<RoomResponseDTO> updateRoomById(@Valid @RequestBody RoomRequestDTO roomRequestDTO,
                                                               @PathVariable int id,
                                                               @RequestHeader("session_id") String sessionId) {
@@ -120,7 +120,7 @@ public class RoomController {
             @ApiResponse(responseCode = "200", description = "Successfully deleted the room",
                     content = @Content(mediaType = "application/json"))
     })
-    @DeleteMapping("/room/{id}")
+    @DeleteMapping("/admin/room/{id}")
     public ResponseEntity<Void> deleteRoomById(@PathVariable int id,
                                                  @RequestHeader("session_id") String sessionId){
         roomService.deleteRoomById(id);

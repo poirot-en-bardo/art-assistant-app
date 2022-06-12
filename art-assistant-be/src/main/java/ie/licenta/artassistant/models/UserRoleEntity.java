@@ -24,6 +24,7 @@ public class UserRoleEntity {
     @JoinColumn(name = "USER_ID")
     private UserEntity user;
 
+    @Enumerated(EnumType.STRING)
     @JoinColumn(name = "ROLE_NAME")
     private RoleName role;
 }

@@ -17,6 +17,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -65,9 +67,6 @@ public class UserController {
 //
     @GetMapping("/user/{jwt}")
     public ResponseEntity<UserResponseDTO> getLoggedUser(@PathVariable String jwt) {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
-        String username = userDetails.getUsername();
         return new ResponseEntity<>(userService.getUserByToken(jwt), HttpStatus.OK);
     }
 

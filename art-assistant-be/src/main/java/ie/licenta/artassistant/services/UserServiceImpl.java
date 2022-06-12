@@ -47,7 +47,10 @@ public class UserServiceImpl implements UserService {
             throw new ArtForbiddenSessionException(ErrorCode.ERR_08_USER_NOT_FOUND);
         }
         UserEntity user = token.get().getUser();
-        List<RoleName> roleList = userRoleRepository.findAllByUser(user).stream().map(UserRoleEntity::getRole).toList();
+            List<RoleName> roleList = userRoleRepository.findAllByUser(user)
+                .stream()
+                .map(UserRoleEntity::getRole)
+                .toList();
         return artMapper.userEntityAndRolesToUserResponseDTO(user, roleList);
     }
 

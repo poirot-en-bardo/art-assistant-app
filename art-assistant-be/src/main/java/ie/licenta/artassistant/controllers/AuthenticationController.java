@@ -72,7 +72,7 @@ public class AuthenticationController {
             @ApiResponse(responseCode = "400", description = "Invalid input",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtBadRequestException.class))),
             @ApiResponse(responseCode = "200", description = "Sign-up successful",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = SignUpResponseDTO.class)))
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = JwtAuthenticationResponse.class)))
     })
     @PostMapping("/authentication/signup")
     public ResponseEntity<?> signUp(@Valid @RequestBody SignUpRequestDTO signUpRequestDTO) {
@@ -117,7 +117,7 @@ public class AuthenticationController {
             @ApiResponse(responseCode = "400", description = "Invalid input",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtBadRequestException.class))),
             @ApiResponse(responseCode = "200", description = "Sign-in successful",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = SignInResponseDTO.class)))
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = JwtAuthenticationResponse.class)))
     })
     @PostMapping("/authentication/signin")
     public ResponseEntity<?> signIn(@Valid @RequestBody SignInRequestDTO signInRequestDTO) {

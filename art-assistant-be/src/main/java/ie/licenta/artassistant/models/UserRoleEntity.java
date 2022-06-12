@@ -25,7 +25,7 @@ public class UserRoleEntity {
     private UserEntity user;
 
     @Enumerated(EnumType.STRING)
-    @JoinColumn(name = "ROLE_NAME")
+    @Column(name = "ROLE_NAME")
     private RoleName role;
 }
 

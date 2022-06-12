@@ -19,5 +19,4 @@ public class SignUpRequestDTO {
     private String email;
     @NotBlank
     private String password;
-//    private List<RoleName> roles;
  }

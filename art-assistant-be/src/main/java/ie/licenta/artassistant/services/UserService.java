@@ -15,4 +15,6 @@ public interface UserService {
     List<UserResponseDTO> getAllUsers();
 
 //    public UserEntity saveUser(UserEntity user);
+
+    UserResponseDTO getUserByToken(String token);
 }

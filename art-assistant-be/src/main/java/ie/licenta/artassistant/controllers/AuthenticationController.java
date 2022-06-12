@@ -7,11 +7,14 @@ import ie.licenta.artassistant.common.ErrorCode;
 import ie.licenta.artassistant.dto.*;
 import ie.licenta.artassistant.models.RoleEntity;
 import ie.licenta.artassistant.models.RoleName;
+import ie.licenta.artassistant.models.TokenEntity;
 import ie.licenta.artassistant.models.UserEntity;
 import ie.licenta.artassistant.persistence.RoleRepository;
+import ie.licenta.artassistant.persistence.TokenRepository;
 import ie.licenta.artassistant.persistence.UserRepository;
 import ie.licenta.artassistant.security.CustomApiResponse;
 import ie.licenta.artassistant.security.JwtTokenProvider;
+import ie.licenta.artassistant.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -45,7 +48,11 @@ public class AuthenticationController {
 
     private final UserRepository userRepository;
 
+    private final UserService userService;
+
     private final RoleRepository roleRepository;
+
+    private final TokenRepository tokenRepository;
 
     @Autowired
     private JwtTokenProvider tokenProvider;
@@ -74,7 +81,7 @@ public class AuthenticationController {
                     HttpStatus.BAD_REQUEST);
         }
 
-        UserEntity user = new UserEntity(null, signUpRequestDTO.getFirstName(), signUpRequestDTO.getLastName(),
+        UserEntity user = new UserEntity(signUpRequestDTO.getFirstName(), signUpRequestDTO.getLastName(),
                 signUpRequestDTO.getEmail(), signUpRequestDTO.getPassword());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
@@ -88,9 +95,17 @@ public class AuthenticationController {
                 .fromCurrentContextPath().path("api/users/{username}")
                 .buildAndExpand(result.getEmail()).toUri();
 
-        return ResponseEntity.created(location).body(
-                new CustomApiResponse(true, "User registered successfully"));
-        //return jwt?
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                signUpRequestDTO.getEmail(), signUpRequestDTO.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String jwt = tokenProvider.generateToken(authentication);
+        TokenEntity tokenEntity = new TokenEntity(jwt, result);
+        tokenRepository.save(tokenEntity);
+        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+
+//        return ResponseEntity.created(location).body(
+//                new CustomApiResponse(true, "User registered successfully"));
     }
 
     @Operation(summary = "User Sign-In")
@@ -111,6 +126,9 @@ public class AuthenticationController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String jwt = tokenProvider.generateToken(authentication);
+        UserEntity user = userRepository.findByEmail(signInRequestDTO.getEmail()).get();
+        TokenEntity tokenEntity = new TokenEntity(jwt, user);
+        tokenRepository.save(tokenEntity);
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
 

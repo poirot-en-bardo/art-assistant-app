@@ -37,11 +37,12 @@ public class UserEntity {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "USER_ROLES",
     joinColumns = @JoinColumn(name = "user_id"),
-    inverseJoinColumns = @JoinColumn(name = "role_id"))
+    inverseJoinColumns = @JoinColumn(name = "role_name"))
     private Set<RoleEntity> roles = new HashSet<>();
 
 
-    public UserEntity(String firstName, String lastName, String username, String email, String password) {
+
+    public UserEntity(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

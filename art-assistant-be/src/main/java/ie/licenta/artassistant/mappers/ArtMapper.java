@@ -160,7 +160,7 @@ public interface ArtMapper {
     UserEntity userRequestDTOToUserEntity(UserRequestDTO userRequestDTO);
 
     @Mapping(target = "roles", source = "roleList")
-    UserResponseDTO userEntityAndRolesToUserReponseDTO(UserEntity userEntity, List<RoleName> roleList);
+    UserResponseDTO userEntityAndRolesToUserResponseDTO(UserEntity userEntity, List<RoleName> roleList);
 
     @Mapping(target = "roles", ignore = true)
     UserEntity signUpRequestDTOToUserEntity(SignUpRequestDTO signUpRequestDTO);

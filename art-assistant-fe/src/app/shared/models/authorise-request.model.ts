@@ -1,3 +1,4 @@
 export interface AuthoriseRequestModel {
-  sessionId: string
+  accessToken: string,
+  tokenType: string
 }

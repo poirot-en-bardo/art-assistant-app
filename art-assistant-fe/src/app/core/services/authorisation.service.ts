@@ -16,13 +16,17 @@ export class AuthorisationService {
 
   getSignedInUser() {
     // const sessionId = this.localStorageService.getItem(this.authorisationConstants.SESSION_ID);
-    const sessionId = "9a38e007-149f-4f67-9c4f-4ccb2c6ee1db";
     // return this.http.get<AuthoriseResponseModel>(`${environment.apiBaseUrl}/${AuthenticationApiConstants.API_AUTHORIZE_URL}/${sessionId}`);
-    return this.http.get<AuthoriseResponseModel>(`${environment.apiBaseUrl}/${AuthenticationApiConstants.API_AUTHORIZE_URL}?sessionId=${sessionId}`);
+    // const jwt = this.localStorageService.getItem(this.authorisationConstants.JWT);
+    // const jwt = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4IiwiaWF0IjoxNjU1MDUwNTY3LCJleHAiOjE2NTY3Nzg1Njd9.8VUnAjKReKd4CKsYPTBNjJofRSkHmgloLlINUcAGTNfI1odlXM5WEKdIay2pMdBQM3212WvS7FX7PMDC0V3m6w";
+    const jwt = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNiIsImlhdCI6MTY1NTAzNTA0NiwiZXhwIjoxNjU2NzYzMDQ2fQ.vIj45AoP1nnVPR9mNLMC46-yghb26ST1Xo4rZo8_kVKuwsuaGCsPqkrcNIyo_3V_53PYJJ-7Dy26UWyVlmdw8g";
+    // const jwt = null;
+    return this.http.get<AuthoriseResponseModel>(`${environment.apiBaseUrl}/${AuthenticationApiConstants.API_AUTHORIZE_URL}/${jwt}`);
   }
 
-  getCurrentSessionId() {
-    return this.localStorageService.getItem(this.authorisationConstants.SESSION_ID);
+  getCurrentSessionJwt() {
+
+    return this.localStorageService.getItem(this.authorisationConstants.JWT);
   }
 
 }

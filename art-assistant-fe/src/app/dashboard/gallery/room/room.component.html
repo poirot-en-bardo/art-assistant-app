@@ -16,15 +16,12 @@
 
       <div>
         <div id="artworkCarousel" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#artworkCarousel"  *ngFor="let artwork of artworks;let index = index" [attr.data-slide-to]="index"></li>
-          </ol>
 
           <div class="carousel-inner">
                 <div class="carousel-item active mb-3" *ngIf="artworks[index]">
 <!--                     *ngFor="let artwork of artworks; let i = index" [ngClass]="{'active': i == 0 }">-->
                   <div class="card">
-                    <img class="img-fluid" alt="Picture" [src]="artworks[index]?.imagePath">
+                    <img class="card-img-top" alt="Picture" [src]="artworks[index]?.imagePath">
                     <div class="card-body">
                       <h4 class="card-title"><i>{{artworks[index]?.title}}</i></h4>
                       <div> <i><b>Artist:</b></i> {{artworks[index]?.artistFirstName+" "+artworks[index]?.artistLastName}}</div>

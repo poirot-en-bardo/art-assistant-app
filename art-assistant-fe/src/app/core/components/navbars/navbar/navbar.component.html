@@ -16,9 +16,11 @@
         </button>
 
 
-        <!--    *ngIf="loggedUser" mai jos-->
+        <div *ngIf="!loggedUser" routerLink="/authentication/sign-in" class="align-self-center hand" placement="bottom-right" display="dynamic">
+          <i class = "fa-solid fa-user  ms-5 me-2 af-tabs__profile"></i>Log in
+        </div>
 
-        <div ngbDropdown class="align-self-center" placement="bottom-right" display="dynamic">
+        <div *ngIf="loggedUser" ngbDropdown class="align-self-center" placement="bottom-right" display="dynamic">
           <i ngbDropdownToggle class = "fa-solid fa-user hand dropdown-toggle ms-5 me-2 af-tabs__profile"></i>
           <i ngbDropdownToggle class="fa-solid fa-chevron-down hand" id="profileDropdown"></i>
           <div ngbDropdownMenu class="mt-4" aria-labelledby="profileDropdown">

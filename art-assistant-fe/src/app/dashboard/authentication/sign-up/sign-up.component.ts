@@ -54,11 +54,11 @@ export class SignUpComponent implements OnInit {
   public signUp(): void {
     const user = {
       ...this.signUpForm.getRawValue(),
-      roles: ["GUEST", "USER"]
+      roles: ["USER"]
     };
     this.authenticationService.signUp(user).subscribe(
-      (sessionId) => {
-        this.localStorageService.setItem(AuthorisationEnum.SESSION_ID, sessionId.sessionId);
+      (tokenDetails) => {
+        this.localStorageService.setItem(AuthorisationEnum.JWT, tokenDetails.accessToken);
         this.router.navigate([AuthenticationRoutesConstants.HOME]);
         this.store.dispatch(new GetLoggedUser());
         setTimeout(() => window.location.reload(), 600);

@@ -11,10 +11,10 @@ export class AuthorisationGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
-    const role = route.data['neededRoles'][0] as string;
+    const allowedRoles = route.data['neededRoles'];
     return this.authorisationService.getSignedInUser().pipe(map(
       (response) => {
-        return response.roles.includes(role);
+        return allowedRoles.some((item: string) => response.roles.includes(item));
       }));
   }
 }

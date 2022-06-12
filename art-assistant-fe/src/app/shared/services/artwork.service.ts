@@ -13,19 +13,19 @@ export class ArtworkService {
 
   public getArtworksByRoomId(roomId: number): Observable<ArtworkModel[]> {
     return this.http.get<ArtworkModel[]>(
-      `${environment.apiBaseUrl}/${ArtworkApiConstants.API_ARTWORKS_ALL}?roomId=${roomId}`);
+      `${environment.apiBaseUrl}/${ArtworkApiConstants.API_ARTWORKS_ALL_USER}?roomId=${roomId}`);
   }
 
   public getArtworkById(artworkId: number): Observable<ArtworkModel> {
-    return this.http.get<ArtworkModel>(`${environment.apiBaseUrl}/${ArtworkApiConstants.API_ARTWORK}/${artworkId}`);
+    return this.http.get<ArtworkModel>(`${environment.apiBaseUrl}/${ArtworkApiConstants.API_ARTWORK_USER}/${artworkId}`);
   }
 
   public updateArtwork(artwork: ArtworkModel, artworkId: number): Observable<any> {
-    return this.http.put(`${environment.apiBaseUrl}/${ArtworkApiConstants.API_ARTWORK}/${artworkId}`, artwork);
+    return this.http.put(`${environment.apiBaseUrl}/${ArtworkApiConstants.API_ARTWORK_USER}/${artworkId}`, artwork);
   }
 
   public addArtwork(artwork: ArtworkModel): Observable<any> {
-    return this.http.post(`${environment.apiBaseUrl}/${ArtworkApiConstants.API_ARTWORK}`, artwork);
+    return this.http.post(`${environment.apiBaseUrl}/${ArtworkApiConstants.API_ARTWORK_USER}`, artwork);
   }
 
 }

@@ -12,14 +12,14 @@ export class RoomService {
   }
 
   public getRoomsByGalleryId(galleryId: number): Observable<RoomModel[]> {
-    return this.http.get<RoomModel[]>(`${environment.apiBaseUrl}/${RoomApiConstants.API_ROOMS_ALL}?galleryId=${galleryId}`);
+    return this.http.get<RoomModel[]>(`${environment.apiBaseUrl}/${RoomApiConstants.API_ROOMS_ALL_USER}?galleryId=${galleryId}`);
   }
 
   public getRoomById(roomId: number): Observable<RoomModel> {
-    return this.http.get<RoomModel>(`${environment.apiBaseUrl}/${RoomApiConstants.API_ROOM}/${roomId}`);
+    return this.http.get<RoomModel>(`${environment.apiBaseUrl}/${RoomApiConstants.API_ROOM_USER}/${roomId}`);
   }
 
   public updateRoom(room: RoomModel, roomId: number): Observable<any> {
-    return this.http.put(`${environment.apiBaseUrl}/${RoomApiConstants.API_ROOM}/${roomId}`, room);
+    return this.http.put(`${environment.apiBaseUrl}/${RoomApiConstants.API_ROOM_USER}/${roomId}`, room);
   }
 }

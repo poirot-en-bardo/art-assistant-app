@@ -34,10 +34,13 @@ export class NavbarComponent extends BaseComponent implements OnInit {
       this.currentUrl = this.router.url.toString();
     });
 
+    console.log(this.localStorageService.getItem(AuthorisationEnum.JWT));
     this.store.dispatch(new GetLoggedUser());
+    console.log(new GetLoggedUser());
     this.loggedUser$.pipe(takeUntil(this.unsubscribe$)).subscribe((userModel) => {
       if (userModel) {
         this.loggedUser = userModel;
+        console.log(this.loggedUser);
       }
     });
   }
@@ -52,7 +55,7 @@ export class NavbarComponent extends BaseComponent implements OnInit {
   }
 
   signOut() {
-    this.localStorageService.removeItem(AuthorisationEnum.SESSION_ID);
+    this.localStorageService.removeItem(AuthorisationEnum.JWT);
     this.store.dispatch(new RemoveLoggedUser());
     window.location.reload();
   }

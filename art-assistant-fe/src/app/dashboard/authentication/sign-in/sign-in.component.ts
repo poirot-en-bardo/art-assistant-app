@@ -47,8 +47,8 @@ export class SignInComponent implements OnInit {
     };
     this.signInForm.controls[SIGN_IN_FORM.PASSWORD].setValue('');
     this.authenticationService.signIn(user).subscribe(
-      (sessionId) => {
-        this.localStorageService.setItem(AuthorisationEnum.SESSION_ID, sessionId.sessionId);
+      (tokenDetails) => {
+        this.localStorageService.setItem(AuthorisationEnum.JWT, tokenDetails.accessToken);
         this.router.navigate([AuthenticationRoutesConstants.HOME]);
         this.store.dispatch(new GetLoggedUser());
         setTimeout(() => window.location.reload(), 600);

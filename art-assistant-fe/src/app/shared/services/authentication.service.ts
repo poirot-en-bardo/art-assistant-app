@@ -34,6 +34,6 @@ export class AuthenticationService {
   // }
 
   getUserById(userId: string) {
-    return this.http.get<AuthoriseResponseModel> (`${environment.apiBaseUrl}/${UserApiConstants.API_USER_BY_ID}/${userId}` );
+    return this.http.get<AuthoriseResponseModel> (`${environment.apiBaseUrl}/${UserApiConstants.API_USER_BY_JWT}/${userId}` );
   }
 }

@@ -41,6 +41,7 @@ export class MobileNavbarComponent extends BaseComponent implements OnInit {
     this.loggedUser$.pipe(takeUntil(this.unsubscribe$)).subscribe((userModel) => {
       if (userModel) {
         this.loggedUser = userModel;
+        console.log(this.loggedUser);
       }
     });
   }
@@ -50,7 +51,7 @@ export class MobileNavbarComponent extends BaseComponent implements OnInit {
   }
 
   signOut() {
-    this.localStorageService.removeItem(AuthorisationEnum.SESSION_ID);
+    this.localStorageService.removeItem(AuthorisationEnum.JWT);
     this.store.dispatch(new RemoveLoggedUser());
     window.location.reload();
   }

@@ -1,7 +1,7 @@
 export enum AuthorisationEnum {
   GUEST = 'GUEST',
-  USER = 'USER',
-  ADMIN = 'ADMIN',
-  SESSION_ID = 'SESSION_ID',
+  ROLE_USER = 'ROLE_USER',
+  ROLE_ADMIN = 'ROLE_ADMIN',
+  JWT = 'JWT',
   ROLE = 'ROLE'
 }

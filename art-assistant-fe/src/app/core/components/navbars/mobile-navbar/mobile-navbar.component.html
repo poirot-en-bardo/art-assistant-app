@@ -7,9 +7,11 @@
       <i class="fa-solid fa-compass"></i>
     </button>
 
+    <div *ngIf="!loggedUser" routerLink="/authentication/sign-in" class="align-self-center hand" placement="bottom-right" display="dynamic">
+      <i class = "fa-solid fa-user  ms-5 me-2 af-tabs__profile"></i>Log in
+    </div>
 
-    <!--*ngIf="loggedUser" in div jos-->
-    <div ngbDropdown class="align-self-center mobile-navbar__link" display="dynamic">
+    <div *ngIf="loggedUser" ngbDropdown class="align-self-center mobile-navbar__link" display="dynamic">
       <i ngbDropdownToggle class="hand fa-solid fa-user" id="profileDropdown"></i>
       <div ngbDropdownMenu class="mt-4" aria-labelledby="profileDropdown">
         <a ngbDropdownItem class="fw-bold mobile-navbar__link" routerLink="profile"><i class="fas fa-fw fa-user me-2"></i><span>My Profile</span></a>

@@ -37,17 +37,23 @@ public class UserController {
 
     private final UserService userService;
 
-//    @Operation(summary = "Get User by id")
-//    @ApiResponses(value = {
-//            @ApiResponse(responseCode = "500", description = "Server error",
-//                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtInternalServerErrorException.class))),
-//            @ApiResponse(responseCode = "404", description = "User not found",
-//                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtNotFoundException.class))),
-//            @ApiResponse(responseCode = "400", description = "Invalid user id",
-//                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtBadRequestException.class))),
-//            @ApiResponse(responseCode = "200", description = "Successful retrieval",
-//                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDTO.class)))
-//    })
+    @Operation(summary = "Get User by id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "500", description = "Server error",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtInternalServerErrorException.class))),
+            @ApiResponse(responseCode = "404", description = "User not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtNotFoundException.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid user id",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtBadRequestException.class))),
+            @ApiResponse(responseCode = "200", description = "Successful retrieval",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDTO.class)))
+    })
+    @GetMapping("/users/{userId}")
+    public ResponseEntity<UserResponseDTO> getUserInfoById(@PathVariable int userId) {
+        return new ResponseEntity<>(userService.getUserById(userId), HttpStatus.OK);
+    }
+
+
 //    @GetMapping("/user/users")
 //    public ResponseEntity<UserResponseDTO> getUserByIdOrSessionId(@RequestParam(required = false) Optional<Integer> userId,
 //                                                                  @RequestParam(required = false) Optional<String> sessionId) {
@@ -65,6 +71,18 @@ public class UserController {
 //        return new ResponseEntity<>(userService.getUserById(userId), HttpStatus.OK);
 //    }
 //
+
+    @Operation(summary = "Get logged user by jwt")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "500", description = "Server error",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtInternalServerErrorException.class))),
+            @ApiResponse(responseCode = "404", description = "User not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtNotFoundException.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid user id",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtBadRequestException.class))),
+            @ApiResponse(responseCode = "200", description = "Successful retrieval",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = UserResponseDTO.class)))
+    })
     @GetMapping("/user/{jwt}")
     public ResponseEntity<UserResponseDTO> getLoggedUser(@PathVariable String jwt) {
         return new ResponseEntity<>(userService.getUserByToken(jwt), HttpStatus.OK);

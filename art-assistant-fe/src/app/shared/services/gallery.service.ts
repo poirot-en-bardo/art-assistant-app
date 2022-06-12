@@ -13,19 +13,19 @@ export class GalleryService {
 
   public getGalleriesByMuseumId(museumId: number): Observable<GalleryModel[]> {
     return this.http.get<GalleryModel[]>(
-      `${environment.apiBaseUrl}/${GalleryApiConstants.API_GALLERIES}?museumId=${museumId}`);
+      `${environment.apiBaseUrl}/${GalleryApiConstants.API_GALLERIES_OPEN}?museumId=${museumId}`);
   }
 
   public getGalleryById(galleryId: number): Observable<GalleryModel> {
-    return this.http.get<GalleryModel>(`${environment.apiBaseUrl}/${GalleryApiConstants.API_GALLERY}/${galleryId}`);
+    return this.http.get<GalleryModel>(`${environment.apiBaseUrl}/${GalleryApiConstants.API_GALLERY_USER}/${galleryId}`);
   }
 
   public updateGallery(gallery: GalleryModel, galleryId: number): Observable<any> {
-    return this.http.put(`${environment.apiBaseUrl}/${GalleryApiConstants.API_GALLERY}/${galleryId}`, gallery);
+    return this.http.put(`${environment.apiBaseUrl}/${GalleryApiConstants.API_GALLERY_USER}/${galleryId}`, gallery);
   }
 
   public addGallery(gallery: GalleryModel): Observable<any> {
-    return this.http.post(`${environment.apiBaseUrl}/${GalleryApiConstants.API_GALLERY}`, gallery);
+    return this.http.post(`${environment.apiBaseUrl}/${GalleryApiConstants.API_GALLERY_USER}`, gallery);
   }
 
 }

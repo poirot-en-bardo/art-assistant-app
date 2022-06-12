@@ -71,6 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/authentication/**").permitAll()
                 .antMatchers("/api/open/**").permitAll()
                 .antMatchers("/api/user/**").permitAll()
+                .antMatchers("/api/users/**").permitAll()
 //                .antMatchers("/api/admin/**").hasAuthority("ROLE_ADMIN")
                 .antMatchers("/",
         "/favicon.ico",

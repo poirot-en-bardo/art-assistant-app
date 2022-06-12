@@ -1,4 +1,4 @@
 export enum ArtworkApiConstants {
-  API_ARTWORKS_ALL = 'api/artworks',
-  API_ARTWORK = 'api/artwork'
+  API_ARTWORKS_ALL_USER = 'api/user/artworks',
+  API_ARTWORK_USER = 'api/user/artwork'
 }

@@ -7,7 +7,7 @@ import {RoomComponent} from "./room/room.component";
 const routes: Routes = [
   //TODO change guard role
   {
-    path: ':galleryId', component: GalleryComponent, canActivate: [AuthorisationGuard], data: {neededRoles: ['GUEST']},
+    path: ':galleryId', component: GalleryComponent, canActivate: [AuthorisationGuard], data: {neededRoles: ['ROLE_USER','ROLE_ADMIN']},
 
     children: [
       { path: 'room/:roomId', component: RoomComponent},

@@ -12,14 +12,14 @@ export class MuseumService {
   }
 
   public getMuseums(): Observable<MuseumModel[]> {
-    return this.http.get<MuseumModel[]>(`${environment.apiBaseUrl}/${MuseumApiConstants.API_MUSEUMS_ALL}`);
+    return this.http.get<MuseumModel[]>(`${environment.apiBaseUrl}/${MuseumApiConstants.API_MUSEUMS_ALL_OPEN}`);
   }
 
   public getMuseumById(museumId: number): Observable<MuseumModel> {
-    return this.http.get<MuseumModel>(`${environment.apiBaseUrl}/${MuseumApiConstants.API_MUSEUM}/${museumId}`);
+    return this.http.get<MuseumModel>(`${environment.apiBaseUrl}/${MuseumApiConstants.API_MUSEUM_OPEN}/${museumId}`);
   }
 
   public updateMuseum(museum: MuseumModel, museumId: number): Observable<any> {
-    return this.http.put(`${environment.apiBaseUrl}/${MuseumApiConstants.API_MUSEUM}/${museumId}`, museum);
+    return this.http.put(`${environment.apiBaseUrl}/${MuseumApiConstants.API_MUSEUM_OPEN}/${museumId}`, museum);
   }
 }

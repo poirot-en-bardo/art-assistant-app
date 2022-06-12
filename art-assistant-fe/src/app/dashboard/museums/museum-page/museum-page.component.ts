@@ -2,10 +2,14 @@ import {Component, OnInit} from '@angular/core';
 import {BaseComponent} from "../../../core/components/base/base.component";
 import {GalleryModel} from "../../../shared/models/gallery.model";
 import {GalleryService} from "../../../shared/services/gallery.service";
-import {takeUntil} from "rxjs";
-import {ActivatedRoute} from "@angular/router";
+import {Observable, takeUntil} from "rxjs";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MuseumModel} from "../../../shared/models/museum.model";
 import {MuseumService} from "../../../shared/services/museum.service";
+import {Select, Store} from "@ngxs/store";
+import {UserState} from "../../../shared/redux/user/user.state";
+import {AuthoriseResponseModel} from "../../../shared/models/authorise-response.model";
+import {GetLoggedUser} from "../../../shared/redux/user/user.action";
 
 @Component({
   selector: 'app-museum-page',
@@ -14,16 +18,26 @@ import {MuseumService} from "../../../shared/services/museum.service";
 })
 export class MuseumPageComponent extends BaseComponent implements OnInit {
 
+  @Select(UserState.getLoggedUser)
+  private loggedUser$: Observable<AuthoriseResponseModel>;
+  loggedUser: AuthoriseResponseModel;
+
   museum: MuseumModel;
   galleries: GalleryModel[];
   searchText = "";
 
   constructor(private galleryService: GalleryService, private museumService: MuseumService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute, private store: Store, private router: Router) {
     super();
   }
 
   ngOnInit(): void {
+    this.store.dispatch(new GetLoggedUser());
+    this.loggedUser$.pipe(takeUntil(this.unsubscribe$)).subscribe((userModel) => {
+      if (userModel) {
+        this.loggedUser = userModel;
+      }
+    });
     this.getData();
   }
 
@@ -62,5 +76,14 @@ export class MuseumPageComponent extends BaseComponent implements OnInit {
     let address = this.museum.address + this.museum.countryName;
     let url = "https://www.google.com.sa/maps/search/"+ encodeURI(address);
     window.open(url, '_blank');
+  }
+
+  goToGallery(galleryId: number) {
+    if(!this.loggedUser) {
+      alert("Please log in to access the Gallery Page");
+    }
+    // ['../../gallery', gallery.id]
+    this.router.navigate([`../../gallery/${galleryId}`]);
+
   }
 }

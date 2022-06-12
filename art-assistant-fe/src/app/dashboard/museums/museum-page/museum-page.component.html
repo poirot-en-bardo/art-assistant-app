@@ -19,7 +19,7 @@
 
 
   <div *ngFor="let gallery of galleries; let i = index" #triggerScrollElement>
-    <a class="link"  [routerLink]="['../../gallery', gallery.id]">
+    <a class="link"  (click) = "goToGallery(gallery.id)">
       <span class="fw-bold light-color link hand">
         {{gallery.name}}
       </span>

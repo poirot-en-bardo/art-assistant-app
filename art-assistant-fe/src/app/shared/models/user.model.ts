@@ -9,4 +9,5 @@ export interface UserSignUpModel {
   email: string,
   password: string,
   roles: string[]
+    //TODO with roles?
 }

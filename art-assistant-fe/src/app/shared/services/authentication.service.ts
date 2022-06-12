@@ -15,6 +15,7 @@ export class AuthenticationService {
   }
 
   public signIn(user: UserSignInModel): Observable<AuthoriseRequestModel> {
+    console.log(user);
     return this.http.post<AuthoriseRequestModel>(`${environment.apiBaseUrl}/${AuthenticationApiConstants.API_SIGNIN_URL}/`, user);
   }
 

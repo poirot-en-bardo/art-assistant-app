@@ -21,7 +21,8 @@ export class SignUpComponent implements OnInit {
   SIGN_UP_FORM = SIGN_UP_FORM;
   passwordTextType = "password";
 
-  constructor(private store: Store, private formBuilder: FormBuilder, private localStorageService: LocalStorageService, private authenticationService: AuthenticationService, private router: Router) {
+  constructor(private store: Store, private formBuilder: FormBuilder, private localStorageService: LocalStorageService,
+              private authenticationService: AuthenticationService, private router: Router) {
   }
 
   ngOnInit(): void {

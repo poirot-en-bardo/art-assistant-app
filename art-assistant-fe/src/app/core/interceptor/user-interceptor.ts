@@ -12,10 +12,10 @@ export class JwtInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // const sessionJwt = this.authorizationService.getCurrentSessionJwt();
+    const sessionJwt = this.authorizationService.getCurrentSessionJwt();
     // const sessionJwt = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxNiIsImlhdCI6MTY1NTAzNTA0NiwiZXhwIjoxNjU2NzYzMDQ2fQ.vIj45AoP1nnVPR9mNLMC46-yghb26ST1Xo4rZo8_kVKuwsuaGCsPqkrcNIyo_3V_53PYJJ-7Dy26UWyVlmdw8g";
     // const sessionJwt = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI4IiwiaWF0IjoxNjU1MDUwNTY3LCJleHAiOjE2NTY3Nzg1Njd9.8VUnAjKReKd4CKsYPTBNjJofRSkHmgloLlINUcAGTNfI1odlXM5WEKdIay2pMdBQM3212WvS7FX7PMDC0V3m6w";
-    const sessionJwt = null;
+    // const sessionJwt = null;
     const isAuthUrl = request.url.startsWith(environment.apiBaseUrl);
 
     if (sessionJwt && !isAuthUrl) {

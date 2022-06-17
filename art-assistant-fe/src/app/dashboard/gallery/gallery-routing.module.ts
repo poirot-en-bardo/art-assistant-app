@@ -5,16 +5,16 @@ import {GalleryComponent} from "./gallery.component";
 import {RoomComponent} from "./room/room.component";
 
 const routes: Routes = [
-  //TODO change guard role
   {
-    path: ':galleryId', component: GalleryComponent, canActivate: [AuthorisationGuard], data: {neededRoles: ['ROLE_USER','ROLE_ADMIN']},
+    path: ':galleryId',
+    component: GalleryComponent,
+    canActivate: [AuthorisationGuard],
+    data: {neededRoles: ['ROLE_USER','ROLE_ADMIN']},
 
     children: [
       { path: 'room/:roomId', component: RoomComponent},
     ]
-
   },
-
 ];
 
 @NgModule({

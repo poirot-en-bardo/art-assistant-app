@@ -5,8 +5,9 @@ import {ArtworkService} from "../../../shared/services/artwork.service";
 import {ActivatedRoute} from "@angular/router";
 import {RoomModel} from "../../../shared/models/room.model";
 import {ArtworkModel} from "../../../shared/models/artwork.model";
-import {takeUntil} from "rxjs";
+import {take, takeUntil} from "rxjs";
 import {ImageUtils} from '../../../shared/utils/image.utils';
+import {ArtistViewModalService} from "../../../shared/services/artist-view-modal.service";
 
 @Component({
   selector: 'app-room',
@@ -20,7 +21,7 @@ export class RoomComponent extends BaseComponent implements OnInit {
   index: number;
 
   constructor(private roomService: RoomService, private artworkService: ArtworkService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute, private artistModalService: ArtistViewModalService) {
     super();
   }
 
@@ -48,7 +49,6 @@ export class RoomComponent extends BaseComponent implements OnInit {
               artwork.imagePath = ImageUtils.appendImageType(artwork.imagePath);
           }
         )
-        console.log(artworks);
       })
   }
 
@@ -56,15 +56,20 @@ export class RoomComponent extends BaseComponent implements OnInit {
     if (this.index < this.artworks.length - 1) {
       this.index++;
     }
-    console.log(this.index);
   }
 
   next() {
     if (this.index > 0) {
       this.index--;
     }
-    console.log(this.index);
+  }
 
+  viewArtistModal() {
+    this.artworkService.getArtistByArtworkId(this.artworks[this.index].id).pipe(takeUntil(this.unsubscribe$)).subscribe(
+      response => {
+        this.artistModalService.openModal(response);
+      }
+    )
   }
 
 }

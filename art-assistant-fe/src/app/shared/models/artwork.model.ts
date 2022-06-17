@@ -11,4 +11,6 @@ export interface ArtworkModel {
   artistLastName: string;
   genreId: number;
   genreName: string;
+  galleryName: string;
+  museumName: string;
 }

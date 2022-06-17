@@ -1,1 +1,20 @@
-<p>profile works!</p>
+<div>
+<div class="pb-2 fs-22 mb-4 ms-2 fw-bold me-auto color">
+  <span><u>My Profile</u></span>
+</div>
+  <div class="pb-2 fs-20 mb-2 ms-2 me-auto">
+    <i>
+    <span *ngIf="!admin" class="light-color" >Museum Visitor </span>
+    <span *ngIf="admin" class="light-color" >Museum Admin</span>
+    </i>
+  </div>
+  <div class="pb-2 fs-20 mb-2 ms-2 me-auto">
+    <span class="light-color" >Name: </span>
+    <span class="light-color fw-bold">{{loggedUser.firstName+' '+loggedUser.lastName}}</span>
+  </div>
+  <div class="pb-2 fs-20 mb-4 ms-2 me-auto">
+    <span class="light-color" >Email: </span>
+    <span class="light-color fw-bold">{{loggedUser.email}}</span>
+  </div>
+
+</div>

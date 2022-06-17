@@ -13,6 +13,8 @@ import {GalleryService} from "./services/gallery.service";
 import {CountryService} from "./services/country.service";
 import {RoomService} from "./services/room.service";
 import {ArtworkService} from "./services/artwork.service";
+import { ArtistViewModalComponent } from './modals/artist-view-modal/artist-view-modal.component';
+import {ArtistViewModalService} from "./services/artist-view-modal.service";
 
 @NgModule({
   imports: [
@@ -25,7 +27,8 @@ import {ArtworkService} from "./services/artwork.service";
     ErrorMessagesComponent,
     FirstKeyPipe,
     RoleDirective,
-    ToasterComponent
+    ToasterComponent,
+    ArtistViewModalComponent
   ],
   exports: [
     ErrorMessagesComponent,
@@ -40,7 +43,8 @@ import {ArtworkService} from "./services/artwork.service";
     MuseumService,
     GalleryService,
     RoomService,
-    ArtworkService
+    ArtworkService,
+    ArtistViewModalService
   ],
   bootstrap: []
 })

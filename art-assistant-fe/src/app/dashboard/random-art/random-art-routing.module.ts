@@ -4,8 +4,8 @@ import { AuthorisationGuard } from '../../core/guards/authorisation.guard';
 import {RandomArtComponent} from "./random-art.component";
 
 const routes: Routes = [
-  {path: '', component: RandomArtComponent
-    // canActivate: [AuthorisationGuard], data: {neededRoles: ['ROLE_USER','ROLE_ADMIN']}
+  {path: '', component: RandomArtComponent,
+    canActivate: [AuthorisationGuard], data: {neededRoles: ['ROLE_USER','ROLE_ADMIN']}
     },];
 
 @NgModule({

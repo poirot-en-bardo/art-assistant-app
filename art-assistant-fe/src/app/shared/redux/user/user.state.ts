@@ -34,7 +34,7 @@ export class UserState {
       return patchState({loggedUser: getState().loggedUser});
     }
 
-    return this.authorizationService.getSignedInUser().pipe(tap((userModel) => {
+    return this.authorizationService.getSignedInUser()?.pipe(tap((userModel) => {
       patchState({loggedUser: userModel});
     }));
   }

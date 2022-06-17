@@ -1,0 +1,44 @@
+@import 'src/styles/variables';
+
+.modal {
+
+  &__close-btn {
+    outline: none;
+    border: none;
+    background: $color-white;
+    font-size: 25px;
+    color: $color-grey-2;
+  }
+
+  &__view-img {
+    height: 200px;
+  }
+
+  &__title {
+    font-weight: 500;
+    font-size: 25px;
+  }
+
+  &__read-more-btn {
+    display: contents;
+    color: $color-grey-2;
+  }
+
+  &__delete-button {
+    border-radius: 50%;
+    background-color: $color-primary;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+
+  &__name-link {
+    text-decoration: none;
+    color: $color-black;
+  }
+
+  &__privacy-selector {
+    padding-right: 24px;
+  }
+
+}

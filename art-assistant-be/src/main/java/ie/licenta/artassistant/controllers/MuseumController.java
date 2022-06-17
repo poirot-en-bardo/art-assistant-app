@@ -100,8 +100,7 @@ public class MuseumController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = MuseumResponseDTO.class)))
     })
     @PostMapping("/admin/museum")
-    public ResponseEntity<MuseumResponseDTO> addMuseum(@Valid @RequestBody MuseumRequestDTO museumRequestDTO,
-                                                       @RequestHeader("session_id") String sessionId) {
+    public ResponseEntity<MuseumResponseDTO> addMuseum(@Valid @RequestBody MuseumRequestDTO museumRequestDTO) {
         return new ResponseEntity<>(museumService.addMuseum(museumRequestDTO), HttpStatus.CREATED);
     }
 
@@ -119,8 +118,7 @@ public class MuseumController {
     })
     @PutMapping("/admin/museum/{id}")
     public ResponseEntity<MuseumResponseDTO> updateMuseumById(@Valid @RequestBody MuseumRequestDTO MuseumRequestDTO,
-                                                              @PathVariable int id,
-                                                              @RequestHeader("session_id") String sessionId) {
+                                                              @PathVariable int id) {
         return new ResponseEntity<>(museumService.updateMuseum(id, MuseumRequestDTO), HttpStatus.OK);
     }
 }

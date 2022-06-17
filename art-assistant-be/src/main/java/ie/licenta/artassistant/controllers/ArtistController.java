@@ -43,8 +43,7 @@ public class ArtistController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtistResponseDTO.class)))
     })
     @GetMapping("/user/artist/{id}")
-    public ResponseEntity<ArtistResponseDTO> getArtistById(@PathVariable int id,
-                                                           @RequestHeader("session_id") String sessionId) {
+    public ResponseEntity<ArtistResponseDTO> getArtistById(@PathVariable int id) {
         return new ResponseEntity<>(artistService.getArtistById(id), HttpStatus.OK);
     }
 
@@ -60,8 +59,7 @@ public class ArtistController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtistResponseDTO.class)))
     })
     @PostMapping("/admin/artist")
-    public ResponseEntity<ArtistResponseDTO> addArtist(@Valid @RequestBody ArtistRequestDTO artistRequestDTO,
-                                                       @RequestHeader("session_id") String sessionId) {
+    public ResponseEntity<ArtistResponseDTO> addArtist(@Valid @RequestBody ArtistRequestDTO artistRequestDTO) {
         return new ResponseEntity<>(artistService.addArtist(artistRequestDTO), HttpStatus.CREATED);
     }
 
@@ -79,8 +77,7 @@ public class ArtistController {
     })
     @PutMapping("/admin/artist/{id}")
     public ResponseEntity<ArtistResponseDTO> updateArtistById(@Valid @RequestBody ArtistRequestDTO artistRequestDTO,
-                                                                @PathVariable int id,
-                                                                @RequestHeader("session_id") String sessionId) {
+                                                                @PathVariable int id) {
         return new ResponseEntity<>(artistService.updateArtist(id, artistRequestDTO), HttpStatus.OK);
     }
 
@@ -96,8 +93,7 @@ public class ArtistController {
                     content = @Content(mediaType = "application/json"))
     })
     @DeleteMapping("/admin/artist/{id}")
-    public ResponseEntity<Void> deleteArtistById(@PathVariable int id,
-                                                           @RequestHeader("session_id") String sessionId){
+    public ResponseEntity<Void> deleteArtistById(@PathVariable int id){
         artistService.deleteArtistById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

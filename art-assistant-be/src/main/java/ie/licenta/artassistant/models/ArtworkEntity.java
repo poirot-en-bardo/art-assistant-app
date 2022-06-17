@@ -35,9 +35,6 @@ public class ArtworkEntity {
     @Column(name = "IMAGE_PATH")
     private byte[] imagePath;
 
-//    @Column(name = "ROOM_ID")
-//    private int roomId;
-
     @Column(name = "POSITION")
     private int position;
 

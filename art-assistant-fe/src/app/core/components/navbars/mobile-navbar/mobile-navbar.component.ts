@@ -10,6 +10,7 @@ import { AuthorisationEnum } from '../../../constants/authorisation.constants';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { GetLoggedUser, RemoveLoggedUser } from '../../../../shared/redux/user/user.action';
 import { UserState } from '../../../../shared/redux/user/user.state';
+import {AuthenticationRoutesConstants} from "../../../../shared/constants/authentication-routes.constants";
 
 
 @Component({
@@ -41,7 +42,6 @@ export class MobileNavbarComponent extends BaseComponent implements OnInit {
     this.loggedUser$.pipe(takeUntil(this.unsubscribe$)).subscribe((userModel) => {
       if (userModel) {
         this.loggedUser = userModel;
-        console.log(this.loggedUser);
       }
     });
   }
@@ -53,6 +53,7 @@ export class MobileNavbarComponent extends BaseComponent implements OnInit {
   signOut() {
     this.localStorageService.removeItem(AuthorisationEnum.JWT);
     this.store.dispatch(new RemoveLoggedUser());
-    window.location.reload();
+    this.router.navigate([AuthenticationRoutesConstants.HOME]);
+    setTimeout(() => window.location.reload(), 400);
   }
 }

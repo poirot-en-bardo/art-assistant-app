@@ -72,7 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/open/**").permitAll()
                 .antMatchers("/api/user/**").permitAll()
                 .antMatchers("/api/users/**").permitAll()
-//                .antMatchers("/api/admin/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers("/api/admin/**").permitAll()
                 .antMatchers("/",
         "/favicon.ico",
         "/**/*.png",

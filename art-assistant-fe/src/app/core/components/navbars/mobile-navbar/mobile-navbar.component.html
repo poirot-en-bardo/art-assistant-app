@@ -3,9 +3,11 @@
     <button class="mobile-navbar__link" (click)="onTabSelected(this.navigatedTab.HOME)" [ngClass]="{'mobile-navbar__link-active' : this.currentUrl.includes(this.navigatedTab.HOME)}" >
       <img class="mobile-navbar__icon" [src] = "MUSEUM_SRC" />
     </button>
+    <div *ngIf="loggedUser">
     <button class="mobile-navbar__link" (click)="onTabSelected(this.navigatedTab.RANDOM_ARTWORK)" [ngClass]="{'mobile-navbar__link-active' : this.currentUrl.includes(this.navigatedTab.RANDOM_ARTWORK)}" >
       <i class="fa-solid fa-compass"></i>
     </button>
+    </div>
 
     <div *ngIf="!loggedUser" routerLink="/authentication/sign-in" class="align-self-center mobile-navbar__link" display="dynamic">
       <i class = "fa-solid fa-user  ms-5 me-2 af-tabs__profile"></i>Log in

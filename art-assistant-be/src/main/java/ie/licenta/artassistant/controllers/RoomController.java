@@ -47,7 +47,6 @@ public class RoomController {
     })
     @GetMapping("/user/room/{id}")
     public ResponseEntity<RoomResponseDTO> getRoomById(@PathVariable int id
-//                                                           @RequestHeader("session_id") String sessionId
     ) {
         return new ResponseEntity<>(roomService.getRoomById(id), HttpStatus.OK);
     }
@@ -67,7 +66,6 @@ public class RoomController {
     @GetMapping("/user/rooms")
     public ResponseEntity<List<RoomResponseDTO>> getRoomsByGalleryId(
             @RequestParam(required = true) int galleryId
-//            @RequestHeader("session_id") String sessionId
     ) {
         return new ResponseEntity<>(roomService
                 .getAllRoomsByGalleryId(galleryId), HttpStatus.OK);
@@ -85,8 +83,7 @@ public class RoomController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = RoomResponseDTO.class)))
     })
     @PostMapping("/admin/room")
-    public ResponseEntity<RoomResponseDTO> addRoom(@Valid @RequestBody RoomRequestDTO roomRequestDTO,
-                                                       @RequestHeader("session_id") String sessionId) {
+    public ResponseEntity<RoomResponseDTO> addRoom(@Valid @RequestBody RoomRequestDTO roomRequestDTO) {
         return new ResponseEntity<>(roomService.addRoom(roomRequestDTO), HttpStatus.CREATED);
     }
 
@@ -104,8 +101,7 @@ public class RoomController {
     })
     @PutMapping("/admin/room/{id}")
     public ResponseEntity<RoomResponseDTO> updateRoomById(@Valid @RequestBody RoomRequestDTO roomRequestDTO,
-                                                              @PathVariable int id,
-                                                              @RequestHeader("session_id") String sessionId) {
+                                                              @PathVariable int id) {
         return new ResponseEntity<>(roomService.updateRoom(id, roomRequestDTO), HttpStatus.OK);
     }
 
@@ -121,8 +117,7 @@ public class RoomController {
                     content = @Content(mediaType = "application/json"))
     })
     @DeleteMapping("/admin/room/{id}")
-    public ResponseEntity<Void> deleteRoomById(@PathVariable int id,
-                                                 @RequestHeader("session_id") String sessionId){
+    public ResponseEntity<Void> deleteRoomById(@PathVariable int id){
         roomService.deleteRoomById(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

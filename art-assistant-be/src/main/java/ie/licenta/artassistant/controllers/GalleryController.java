@@ -46,7 +46,6 @@ public class GalleryController {
     })
     @GetMapping("/user/gallery/{id}")
     public ResponseEntity<GalleryResponseDTO> getGalleryById(@PathVariable int id
-//                                                             @RequestHeader("session_id") String sessionId
     ) {
         return new ResponseEntity<>(galleryService.getGalleryById(id), HttpStatus.OK);
     }
@@ -82,8 +81,7 @@ public class GalleryController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = GalleryResponseDTO.class)))
     })
     @PostMapping("/admin/gallery")
-    public ResponseEntity<GalleryResponseDTO> addGallery(@Valid @RequestBody GalleryRequestDTO galleryRequestDTO,
-                                                         @RequestHeader("session_id") String sessionId) {
+    public ResponseEntity<GalleryResponseDTO> addGallery(@Valid @RequestBody GalleryRequestDTO galleryRequestDTO) {
         return new ResponseEntity<>(galleryService.addGallery(galleryRequestDTO), HttpStatus.CREATED);
     }
 
@@ -102,8 +100,7 @@ public class GalleryController {
     })
     @PutMapping("/admin/gallery/{id}")
     public ResponseEntity<GalleryResponseDTO> updateGalleryById(@Valid @RequestBody GalleryRequestDTO galleryRequestDTO,
-                                                                @PathVariable int id,
-                                                                @RequestHeader("session_id") String sessionId) {
+                                                                @PathVariable int id) {
         return new ResponseEntity<>(galleryService.updateGallery(id, galleryRequestDTO), HttpStatus.OK);
     }
 }

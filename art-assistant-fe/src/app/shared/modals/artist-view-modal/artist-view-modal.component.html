@@ -1,0 +1,16 @@
+<div class="modal-header">
+  <div class="modal__title p-2 color">Artist Details</div>
+  <button type="button" class="modal__close-btn" aria-label="Close" (click)="close()">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+</div>
+
+<div class="modal-body p-3 ms-1 color">
+  <div *ngIf="artist">
+    <div class="fw-bold fs-20 text-center">{{artist.firstName+' '+artist.lastName}}</div>
+    <div class="fw-bold text-center">{{artist.birthYear+'-'+artist?.deathYear}}</div>
+    <div class="mt-4 mb-1"><span class="fw-bold fst-italic">Country: </span>{{artist.countryName}}</div>
+    <div><span class="fw-bold fst-italic">Biography: </span>{{artist.biography}}</div>
+  </div>
+<!--  edit artist button-->
+</div>

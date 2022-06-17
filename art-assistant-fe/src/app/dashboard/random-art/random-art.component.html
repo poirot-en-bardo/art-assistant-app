@@ -1,1 +1,15 @@
-<p>random-artwork works!</p>
+<div class="card">
+  <img class="card-img-top" alt="Picture" [src]="artwork?.imagePath">
+  <div class="card-body">
+    <h4 class="card-title text-center"><i>{{artwork?.title}}</i></h4>
+    <div class="text-center"> <i><b>Museum:</b></i> {{artwork?.museumName}}</div>
+    <div class="text-center"> <i><b>Gallery:</b></i> {{artwork?.galleryName}}</div>
+    <div class="mt-3"> <i><b>Artist:</b></i> {{artwork?.artistFirstName+" "+artwork?.artistLastName}}</div>
+    <!--                      click to modal-->
+    <div> <i><b>Year:</b></i> {{artwork?.year}}</div>
+    <div> <i><b>Genre:</b></i> {{artwork?.genreName}}</div>
+    <!--                      click to modal-->
+    <div> <i><b>Technique:</b></i> {{artwork?.technique}}</div>
+    <div class = "card-text"> <i><b>Description:</b></i> {{artwork?.description}}</div>
+  </div>
+</div>

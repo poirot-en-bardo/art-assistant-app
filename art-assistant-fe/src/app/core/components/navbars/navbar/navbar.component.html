@@ -10,10 +10,12 @@
                 [ngClass]="{'af-tabs__link--active' : this.currentUrl.includes(navigatedTab.HOME)}">
           Museums
         </button>
+        <div *ngIf = "loggedUser">
         <button class="af-tabs__link" (click)="onTabSelected(this.navigatedTab.RANDOM_ARTWORK)"
                 [ngClass]="{'af-tabs__link--active' : this.currentUrl.includes(navigatedTab.RANDOM_ARTWORK)}">
           Art Randomiser
         </button>
+        </div>
 
 
         <div *ngIf="!loggedUser" routerLink="/authentication/sign-in" class="align-self-center hand" placement="bottom-right" display="dynamic">

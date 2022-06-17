@@ -34,7 +34,10 @@ public interface ArtMapper {
             @Mapping(target = "artistLastName", source = "artist.lastName"),
             @Mapping(target = "genreName", source = "genre.name"),
             @Mapping(target = "genreId", source = "genre.id"),
-            @Mapping(target = "roomId", source = "room.id")
+            @Mapping(target = "roomId", source = "room.id"),
+            @Mapping(target = "galleryName", source = "room.gallery.name"),
+            @Mapping(target = "museumName", source = "room.gallery.museum.name")
+
     })
     ArtworkResponseDTO artworkEntityToArtworkResponseDTO(ArtworkEntity artworkEntity);
 
@@ -43,7 +46,9 @@ public interface ArtMapper {
             @Mapping(target = "artistLastName", source = "artist.lastName"),
             @Mapping(target = "genreName", source = "genre.name"),
             @Mapping(target = "genreId", source = "genre.id"),
-            @Mapping(target = "roomId", source = "room.id")
+            @Mapping(target = "roomId", source = "room.id"),
+            @Mapping(target = "galleryName", source = "room.gallery.name"),
+            @Mapping(target = "museumName", source = "room.gallery.museum.name")
 
     })
     List<ArtworkResponseDTO> artworkEntityListToArtworkResponseDTOList(List<ArtworkEntity> artworkEntityList);

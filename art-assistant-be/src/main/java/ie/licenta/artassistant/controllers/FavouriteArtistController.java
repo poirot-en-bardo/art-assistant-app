@@ -44,9 +44,7 @@ public class FavouriteArtistController {
                     content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ArtworkResponseDTO.class))))
     })
     @GetMapping("/user/favourite_artists")
-    public ResponseEntity<List<FavouriteArtistResponseDTO>> getArtworksByGalleryIdAndRoomNumber(
-            @RequestHeader("session_id") String sessionId,
-            @RequestAttribute("userId") int userId) {
+    public ResponseEntity<List<FavouriteArtistResponseDTO>> getArtworksByGalleryIdAndRoomNumber(@RequestAttribute("userId") int userId) {
         return new ResponseEntity<>(favouriteArtistService.getFavouriteArtistsByUserId(userId), HttpStatus.OK);
     }
 
@@ -63,7 +61,6 @@ public class FavouriteArtistController {
     })
     @PostMapping("/user/favourite_artist")
     public ResponseEntity<FavouriteArtistResponseDTO> addArtist(@Valid @RequestBody FavouriteArtistRequestDTO favouriteArtistRequestDTO,
-                                                                @RequestHeader("session_id") String sessionId,
                                                                 @RequestAttribute("userId") int userId) {
         return new ResponseEntity<>(favouriteArtistService.addFavouriteArtist(userId, favouriteArtistRequestDTO), HttpStatus.CREATED);
     }
@@ -81,7 +78,6 @@ public class FavouriteArtistController {
     })
     @DeleteMapping("/user/favourite_artist/{artistId}")
     public ResponseEntity<FavouriteArtistResponseDTO> deleteFavouriteArtistById(@PathVariable int artistId,
-                                                                                @RequestHeader("session_id") String sessionId,
                                                                                 @RequestAttribute("userId") int userId) {
         FavouriteArtistIdEntity idEntity = new FavouriteArtistIdEntity(userId, artistId);
         favouriteArtistService.deleteFavouriteArtistById(idEntity);

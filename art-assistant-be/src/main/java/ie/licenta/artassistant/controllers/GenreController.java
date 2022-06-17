@@ -41,8 +41,7 @@ public class GenreController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = GenreResponseDTO.class)))
     })
     @GetMapping("/user/genre/{id}")
-    public ResponseEntity<GenreResponseDTO> getGenreById(@PathVariable int id,
-                                                             @RequestHeader("session_id") String sessionId) {
+    public ResponseEntity<GenreResponseDTO> getGenreById(@PathVariable int id) {
         return new ResponseEntity<>(genreService.getGenreById(id), HttpStatus.OK);
     }
 
@@ -58,8 +57,7 @@ public class GenreController {
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = GenreResponseDTO.class)))
     })
     @PostMapping("/admin/genre")
-    public ResponseEntity<GenreResponseDTO> addGenre(@Valid @RequestBody GenreRequestDTO genreRequestDTO,
-                                                         @RequestHeader("session_id") String sessionId) {
+    public ResponseEntity<GenreResponseDTO> addGenre(@Valid @RequestBody GenreRequestDTO genreRequestDTO) {
         return new ResponseEntity<>(genreService.addGenre(genreRequestDTO), HttpStatus.CREATED);
     }
 
@@ -77,8 +75,7 @@ public class GenreController {
     })
     @PutMapping("/admin/genre/{id}")
     public ResponseEntity<GenreResponseDTO> updateGenreById(@Valid @RequestBody GenreRequestDTO genreRequestDTO,
-                                                                @PathVariable int id,
-                                                                @RequestHeader("session_id") String sessionId) {
+                                                                @PathVariable int id) {
         return new ResponseEntity<>(genreService.updateGenre(id, genreRequestDTO), HttpStatus.OK);
     }
 }

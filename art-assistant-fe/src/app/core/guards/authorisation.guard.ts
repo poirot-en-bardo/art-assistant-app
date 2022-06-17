@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate } from '@angular/router';
-import { AuthorisationService } from '../services/authorisation.service';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, CanActivate} from '@angular/router';
+import {AuthorisationService} from '../services/authorisation.service';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 
 @Injectable()
@@ -10,11 +10,16 @@ export class AuthorisationGuard implements CanActivate {
   constructor(private authorisationService: AuthorisationService) {
   }
 
-  canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
+  canActivate(route: ActivatedRouteSnapshot): boolean {
     const allowedRoles = route.data['neededRoles'];
-    return this.authorisationService.getSignedInUser().pipe(map(
+    let user = this.authorisationService.getSignedInUser()?.pipe()
+    let roles = this.authorisationService.getSignedInUser()?.pipe(map(
       (response) => {
+        console.log(response);
         return allowedRoles.some((item: string) => response.roles.includes(item));
       }));
+    if (roles) {
+      return true;
+    } else return false;
   }
 }

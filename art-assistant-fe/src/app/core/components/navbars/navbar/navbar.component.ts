@@ -10,6 +10,7 @@ import { AuthoriseResponseModel } from '../../../../shared/models/authorise-resp
 import { takeUntil } from 'rxjs/operators';
 import { BaseComponent } from '../../base/base.component';
 import { GetLoggedUser, RemoveLoggedUser } from '../../../../shared/redux/user/user.action';
+import {AuthenticationRoutesConstants} from "../../../../shared/constants/authentication-routes.constants";
 
 @Component({
   selector: 'app-navbar',
@@ -23,7 +24,6 @@ export class NavbarComponent extends BaseComponent implements OnInit {
 
   currentUrl = '';
   navigatedTab = NavbarRoutesConstants;
-  personAvatar = '';
 
   constructor(private store: Store, private router: Router, private localStorageService: LocalStorageService) {
     super();
@@ -34,13 +34,10 @@ export class NavbarComponent extends BaseComponent implements OnInit {
       this.currentUrl = this.router.url.toString();
     });
 
-    console.log(this.localStorageService.getItem(AuthorisationEnum.JWT));
     this.store.dispatch(new GetLoggedUser());
-    console.log(new GetLoggedUser());
     this.loggedUser$.pipe(takeUntil(this.unsubscribe$)).subscribe((userModel) => {
       if (userModel) {
         this.loggedUser = userModel;
-        console.log(this.loggedUser);
       }
     });
   }
@@ -57,6 +54,7 @@ export class NavbarComponent extends BaseComponent implements OnInit {
   signOut() {
     this.localStorageService.removeItem(AuthorisationEnum.JWT);
     this.store.dispatch(new RemoveLoggedUser());
-    window.location.reload();
+    this.router.navigate([AuthenticationRoutesConstants.HOME]);
+    setTimeout(() => window.location.reload(), 400);
   }
 }

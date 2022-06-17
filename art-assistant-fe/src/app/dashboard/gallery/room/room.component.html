@@ -23,15 +23,16 @@
                   <div class="card">
                     <img class="card-img-top" alt="Picture" [src]="artworks[index]?.imagePath">
                     <div class="card-body">
-                      <h4 class="card-title"><i>{{artworks[index]?.title}}</i></h4>
-                      <div> <i><b>Artist:</b></i> {{artworks[index]?.artistFirstName+" "+artworks[index]?.artistLastName}}</div>
+                      <h4 class="card-title text-center"><i>{{artworks[index]?.title}}</i></h4>
+                      <div > <i><b>Artist:</b></i> {{artworks[index]?.artistFirstName+" "+artworks[index]?.artistLastName}}
 <!--                      click to modal-->
+                      <span class="hand read-more-btn" (click)="viewArtistModal()">[View Artist]</span>
+                      </div>
                       <div> <i><b>Year:</b></i> {{artworks[index]?.year}}</div>
                       <div> <i><b>Genre:</b></i> {{artworks[index]?.genreName}}</div>
 <!--                      click to modal-->
                       <div> <i><b>Technique:</b></i> {{artworks[index]?.technique}}</div>
                       <div class = "card-text"> <i><b>Description:</b></i> {{artworks[index]?.description}}</div>
-
                     </div>
                   </div>
                 </div>

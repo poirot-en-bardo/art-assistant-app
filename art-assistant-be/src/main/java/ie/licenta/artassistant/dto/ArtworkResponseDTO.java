@@ -34,4 +34,8 @@ public class ArtworkResponseDTO {
     private String genreName;
 
     private int genreId;
+
+    private String museumName;
+
+    private String galleryName;
 }

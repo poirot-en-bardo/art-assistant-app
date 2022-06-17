@@ -15,7 +15,7 @@ export class RoleDirective implements OnInit {
   }
 
   ngOnInit() {
-    this.authorizationService.getSignedInUser().subscribe(
+    this.authorizationService.getSignedInUser()?.subscribe(
       ((response) => {
         if (this.hasRoles.filter(role => response.roles.includes(role)).length > 0) {
           this.viewContainer.createEmbeddedView(this.templateRef);

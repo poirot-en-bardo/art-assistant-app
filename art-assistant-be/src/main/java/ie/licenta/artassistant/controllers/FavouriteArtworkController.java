@@ -45,7 +45,6 @@ public class FavouriteArtworkController {
     })
     @GetMapping("/user/favourite_artworks")
     public ResponseEntity<List<FavouriteArtworkResponseDTO>> getArtworksByGalleryIdAndRoomNumber(
-            @RequestHeader("session_id") String sessionId,
             @RequestAttribute("userId") int userId) {
         return new ResponseEntity<>(favouriteArtworkService.getFavouriteArtworksByUserId(userId), HttpStatus.OK);
     }
@@ -63,7 +62,6 @@ public class FavouriteArtworkController {
     })
     @PostMapping("/user/favourite_artwork")
     public ResponseEntity<FavouriteArtworkResponseDTO> addArtwork(@Valid @RequestBody FavouriteArtworkRequestDTO favouriteArtworkRequestDTO,
-                                                                @RequestHeader("session_id") String sessionId,
                                                                 @RequestAttribute("userId") int userId) {
         return new ResponseEntity<>(favouriteArtworkService.addFavouriteArtwork(userId, favouriteArtworkRequestDTO), HttpStatus.CREATED);
     }
@@ -81,7 +79,6 @@ public class FavouriteArtworkController {
     })
     @DeleteMapping("/user/favourite_artwork/{artworkId}")
     public ResponseEntity<FavouriteArtworkResponseDTO> deleteFavouriteArtworkById(@PathVariable int artworkId,
-                                                                                @RequestHeader("session_id") String sessionId,
                                                                                 @RequestAttribute("userId") int userId) {
         FavouriteArtworkIdEntity idEntity = new FavouriteArtworkIdEntity(userId, artworkId);
         favouriteArtworkService.deleteFavouriteArtworkById(idEntity);

@@ -19,9 +19,6 @@ public class CommentEntity {
     @Column(name = "ID", updatable = false)
     private int id;
 
-    @Column(name = "RATING")
-    private int rating;
-
     @Column(name = "TEXT")
     private String text;
 
@@ -34,6 +31,6 @@ public class CommentEntity {
     private UserEntity user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "RESOURCE_ID", referencedColumnName = "ID")
+    @JoinColumn(name = "ARTWORK_ID", referencedColumnName = "ID")
     private ArtworkEntity artwork;
 }

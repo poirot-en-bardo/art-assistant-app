@@ -2,7 +2,7 @@
   <div class="container">
     <div >
       <div class="col-6">
-        <h3 class="mb-3">Room {{room?.id}}</h3>
+        <h3 class="mb-3 dark-color">Room {{room?.id}}</h3>
       </div>
 
       <div class="col-6 text-right">
@@ -39,7 +39,35 @@
               </div>
             </div>
           </div>
+    </div>
+    <div *ngIf="commentList[index]" class = "comment-section ms-3 mt-3">
+      <span class="fw-bold fs-18 ms-4">Comments</span>
+      <div *ngFor="let comment of commentList[index]; let i = index" #triggerScrollElement >
+        <div class = "pb-2 pt-2">
+          <div class="row">
+            <div class="col-10 col-lg-11">
+              <div class="p-2">
+              <span class="fw-bold">
+                <i class="fas fa-circle mh-color__grey-2 fs-10 pb-1" ></i>
+                {{comment?.userFirstName+' '+comment?.userLastName}}
+              </span>
+                <span class="mh-color__grey-2">
+                {{comment.createTimestamp | date: 'mediumDate'}}
+              </span>
+              </div>
+              <div class="ps-2">
+                <span class="mh-color__grey-2">{{comment.text}} </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+      <!--  <button type="submit" class="mh-btn mh-btn&#45;&#45;secondary mt-3 ms-5 mb-3" *ngIf="show < childComments.length" (click)="increaseShow()">Show more</button>-->
+      <!--  <app-add-comment [item] = "item"></app-add-comment>-->
+    </div>
+
+
+
+  </div>
 </section>
 

@@ -5,10 +5,13 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../../shared/shared.module';
 import {GalleryRoutingModule} from "./gallery-routing.module";
 import { RoomComponent } from './room/room.component';
+import { CommentsComponent } from './room/comments/comments.component';
+import {GalleryComponent} from "./gallery.component";
 
 @NgModule({
   declarations: [
-    RoomComponent
+    RoomComponent,
+    CommentsComponent
   ],
   imports: [
     CoreModule,
@@ -19,7 +22,7 @@ import { RoomComponent } from './room/room.component';
     ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: []
+  bootstrap: [GalleryComponent]
 })
 
 export class GalleryModule {

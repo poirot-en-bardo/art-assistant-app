@@ -8,6 +8,9 @@ import {ArtworkModel} from "../../../shared/models/artwork.model";
 import {take, takeUntil} from "rxjs";
 import {ImageUtils} from '../../../shared/utils/image.utils';
 import {ArtistViewModalService} from "../../../shared/services/artist-view-modal.service";
+import {CommentService} from "./comment.service";
+import {CommentModel} from "../../../shared/models/comment.model";
+import {CommentListModel} from "../../../shared/models/comment-list.model";
 
 @Component({
   selector: 'app-room',
@@ -17,11 +20,14 @@ import {ArtistViewModalService} from "../../../shared/services/artist-view-modal
 export class RoomComponent extends BaseComponent implements OnInit {
 
   room: RoomModel;
-  artworks: ArtworkModel[];
+  artworks: ArtworkModel[]=[];
   index: number;
+  commentList: any = [];
+
 
   constructor(private roomService: RoomService, private artworkService: ArtworkService,
-              private route: ActivatedRoute, private artistModalService: ArtistViewModalService) {
+              private route: ActivatedRoute, private artistModalService: ArtistViewModalService,
+              private commentService: CommentService) {
     super();
   }
 
@@ -43,14 +49,31 @@ export class RoomComponent extends BaseComponent implements OnInit {
   getArtworks() {
     this.artworkService.getArtworksByRoomId(this.room.id).pipe(takeUntil(this.unsubscribe$))
       .subscribe(artworks => {
-        this.artworks = artworks;
-        this.artworks.forEach(artwork => {
-            if (artwork.imagePath !== null)
+          this.artworks = artworks;
+          this.artworks.forEach((artwork, index) => {
+            if (artwork.imagePath !== null) {
               artwork.imagePath = ImageUtils.appendImageType(artwork.imagePath);
-          }
-        )
-      })
+            }
+            this.commentService.getCommentsByArtworkId(artwork.id).pipe(takeUntil(this.unsubscribe$)).subscribe(
+              (items) => {
+                if (items) {
+                  this.commentList.push(items);
+                }
+                console.log(this.commentList[1]); // commentList[index] pt comments
+              }
+            )
+          })
+        }
+      )
   }
+
+  // getComments() {
+  //   this.commentService.getCommentsByArtworkId(this.artworks[this.index].id).pipe(takeUntil(this.unsubscribe$)).subscribe(
+  //     (items) => {
+  //       this.commentList = items;
+  //       console.log(this.commentList);
+  //     });
+  // }
 
   prev() {
     if (this.index < this.artworks.length - 1) {

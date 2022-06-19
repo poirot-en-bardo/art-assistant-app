@@ -15,8 +15,6 @@ public class CommentResponseDTO {
 
     private int id;
 
-    private int rating;
-
     private String text;
 
     private LocalDateTime createdAt;
@@ -24,4 +22,6 @@ public class CommentResponseDTO {
     private String userFirstName;
 
     private String userLastName;
+
+    private String userId;
 }

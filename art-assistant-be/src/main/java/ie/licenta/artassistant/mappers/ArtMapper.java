@@ -71,10 +71,21 @@ public interface ArtMapper {
 
     @Mappings({
             @Mapping(target = "userFirstName", source = "user.firstName"),
-            @Mapping(target = "userLastName", source = "user.lastName")
+            @Mapping(target = "userLastName", source = "user.lastName"),
+            @Mapping(target = "userId", source = "user.id")
     })
     CommentResponseDTO commentEntityToCommentResponseDTO(CommentEntity commentEntity);
+
+    @Mappings({
+            @Mapping(target = "userFirstName", source = "user.firstName"),
+            @Mapping(target = "userLastName", source = "user.lastName"),
+            @Mapping(target = "userId", source = "user.id")
+    })
     List<CommentResponseDTO> commentEntityListToCommentResponseDTOList(List<CommentEntity> commentEntity);
+    @Mappings({
+            @Mapping(target = "user.id", source = "userId"),
+            @Mapping(target = "artwork.id", source = "artworkId")
+    })
     CommentEntity commentRequestDTOToCommentEntity(CommentRequestDTO commentRequestDTO);
 
     @Mapping(target = "id", source = "id")

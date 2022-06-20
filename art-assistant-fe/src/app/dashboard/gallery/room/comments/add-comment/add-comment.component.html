@@ -1,0 +1,13 @@
+<form [formGroup]="commentForm" (submit)="addComment()" class="w-75">
+  <div class="pt-4 d-flex flex-column">
+    <div class="af-input-group mb-2">
+          <textarea #inputComment class="af-input-group__input" placeholder="Leave a comment" rows="2"
+                    [formControlName]="CommentForm.MESSAGE"></textarea>
+    </div>
+    <div>
+      <button type="submit" class="af-btn af-btn--secondary" (click)="reset()"
+              [disabled]="!commentForm.valid">Add comment
+      </button>
+    </div>
+  </div>
+</form>

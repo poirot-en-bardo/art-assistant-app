@@ -1,25 +1,28 @@
-<div class = "comment-section ms-4">
+<app-add-comment [artwork] = "artwork" (commentEvent)="postComment($event)"></app-add-comment>
+<div *ngIf="comments" class = "comment-section">
   <div *ngFor="let comment of comments; let i = index" #triggerScrollElement >
-    <div class = "ms-5 pb-2 pt-2">
+    <div class = "pb-2 pt-2">
       <div class="row">
         <div class="col-10 col-lg-11">
           <div class="p-2">
               <span class="fw-bold">
-                {{comment.userFirstName+' '+comment.userLastName}} <i class="fas fa-circle mh-color__grey-2 fs-10 pb-1" ></i>
+                {{comment.userFirstName+' '+comment.userLastName}}
               </span>
-            <span class="mh-color__grey-2">
-                {{comment.createTimestamp | date: 'mediumDate'}}
+            <i class="fas fa-circle af-color__grey-2 fs-10 pb-1"></i>
+            <span class="af-color__grey-2">
+                {{comment.createdAt | date: 'mediumDate'}}
               </span>
           </div>
           <div class="ps-2">
-            <span class="mh-color__grey-2">{{comment.text}} </span>
+            <span class="af-color__grey-2">{{comment.text}} </span>
           </div>
         </div>
       </div>
     </div>
   </div>
-<!--  <button type="submit" class="mh-btn mh-btn&#45;&#45;secondary mt-3 ms-5 mb-3" *ngIf="show < childComments.length" (click)="increaseShow()">Show more</button>-->
-<!--  <app-add-comment [item] = "item"></app-add-comment>-->
+
+
 </div>
+
 
 

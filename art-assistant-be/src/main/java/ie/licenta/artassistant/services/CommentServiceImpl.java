@@ -54,7 +54,7 @@ public class CommentServiceImpl implements  CommentService {
     @Override
     public List<CommentResponseDTO> getAllCommentsByArtwork(int artworkId) {
         Optional<List<CommentEntity>> commentListOptional = Optional.ofNullable(
-                commentRepository.findAllByArtworkId(artworkId));
+                commentRepository.findAllByArtworkIdOrderByCreatedAtDesc(artworkId));
         if (commentListOptional.isEmpty()) {
             throw new ArtNotFoundException(ErrorCode.ERR_04_COMMENT_NOT_FOUND);
         }

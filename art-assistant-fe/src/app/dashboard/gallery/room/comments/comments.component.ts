@@ -1,24 +1,34 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {BaseComponent} from "../../../../core/components/base/base.component";
-import {CommentService} from "../comment.service";
-import {takeUntil} from "rxjs";
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {CommentModel} from "../../../../shared/models/comment.model";
+import {FileChangeBaseComponent} from "../../../../core/components/base/file-change-base.component";
+import {ArtworkModel} from "../../../../shared/models/artwork.model";
 
 @Component({
   selector: 'app-comments',
   templateUrl: './comments.component.html',
   styleUrls: ['./comments.component.scss']
 })
-export class CommentsComponent extends BaseComponent implements OnInit {
+export class CommentsComponent extends FileChangeBaseComponent implements OnInit {
   @Input() comments: CommentModel[];
-  currentDate = new Date().toDateString();
+  @Input() artwork: ArtworkModel;
 
-  constructor(private commentService: CommentService) {
+  @ViewChild("inputComment") inputComment: ElementRef;
+
+
+
+
+  constructor() {
     super();
   }
 
   ngOnInit(): void {
     console.log(this.comments)
   }
+
+
+  postComment(comment: CommentModel): void {
+    this.comments.unshift(comment);
+  }
+
 
 }

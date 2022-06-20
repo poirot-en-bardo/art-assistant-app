@@ -1,8 +1,8 @@
 export interface CommentModel {
 
-  id: string;
+  id: number;
   text: string;
-  createTimestamp: string;
+  createdAt: string;
   userId: number;
   userFirstName: string;
   userLastName: string;

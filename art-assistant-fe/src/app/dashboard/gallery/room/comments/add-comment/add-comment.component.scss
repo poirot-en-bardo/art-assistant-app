@@ -1,10 +1,5 @@
-@import "src/styles/components/general";
 @import 'src/styles/components/inputs';
 @import 'src/styles/variables';
 @import 'src/styles/components/buttons';
 @import "src/styles.scss";
-
-.read-more-btn {
-  display: contents;
-  color: $color-primary-3;
-}
+//@import "src/styles/components/modal.scss";

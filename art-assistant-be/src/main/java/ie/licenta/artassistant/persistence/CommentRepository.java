@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface CommentRepository extends JpaRepository<CommentEntity, Integer> {
 
-    List<CommentEntity> findAllByArtworkId(int artworkId);
+    List<CommentEntity> findAllByArtworkIdOrderByCreatedAtDesc(int artworkId);
 }

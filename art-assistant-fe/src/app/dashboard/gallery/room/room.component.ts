@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {BaseComponent} from "../../../core/components/base/base.component";
 import {RoomService} from "../../../shared/services/room.service";
 import {ArtworkService} from "../../../shared/services/artwork.service";
@@ -11,6 +11,8 @@ import {ArtistViewModalService} from "../../../shared/services/artist-view-modal
 import {CommentService} from "./comment.service";
 import {CommentModel} from "../../../shared/models/comment.model";
 import {CommentListModel} from "../../../shared/models/comment-list.model";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {CommentForm} from "./comments/add-comment/comment-form";
 
 @Component({
   selector: 'app-room',
@@ -24,15 +26,23 @@ export class RoomComponent extends BaseComponent implements OnInit {
   index: number;
   commentList: any = [];
 
+  public commentForm: FormGroup;
+  @ViewChild("inputComment") inputComment: ElementRef;
+
+
 
   constructor(private roomService: RoomService, private artworkService: ArtworkService,
               private route: ActivatedRoute, private artistModalService: ArtistViewModalService,
-              private commentService: CommentService) {
+              private commentService: CommentService, private formBuilder: FormBuilder) {
     super();
   }
 
   ngOnInit(): void {
     this.index = 0;
+    this.commentForm = this.formBuilder.group({
+        [CommentForm.MESSAGE]: ['', Validators.required]
+      }
+    )
     this.getData();
   }
 
@@ -93,6 +103,21 @@ export class RoomComponent extends BaseComponent implements OnInit {
         this.artistModalService.openModal(response);
       }
     )
+  }
+
+  public get CommentForm(): typeof CommentForm {
+    return  CommentForm;
+  }
+
+  addComment(): void {
+    let comment: CommentModel;
+    // comment.userId
+    // this.store.dispatch(new AddComment(this.item.id, this.commentForm.value))
+    // this.item.noOfComments += 1
+  }
+
+  reset() {
+    this.inputComment.nativeElement.value = '';
   }
 
 }

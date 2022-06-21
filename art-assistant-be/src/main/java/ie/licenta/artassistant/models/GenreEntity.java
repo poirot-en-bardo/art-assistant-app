@@ -1,5 +1,6 @@
 package ie.licenta.artassistant.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,5 +26,6 @@ public class GenreEntity {
     private String description;
 
     @OneToMany(mappedBy = "genre", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<ArtworkEntity> artworks;
 }

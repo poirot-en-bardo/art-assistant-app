@@ -14,5 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class FavouriteArtworkResponseDTO {
 
-    private List<Integer> artworkIds;
+    private int userId;
+
+    private List<FavouriteArtwork> favouriteArtworks;
 }

@@ -18,7 +18,12 @@ export class CommentService {
     return this.http.get<CommentModel[]>(`${environment.apiBaseUrl}/${CommentApiConstants.API_GET_COMMENTS}?artworkId=${artworkId}`);
   }
 
-  addComment(body: CommentRequestModel): Observable<CommentModel> {
+  public addComment(body: CommentRequestModel): Observable<CommentModel> {
     return this.http.post<CommentModel>(`${environment.apiBaseUrl}/${CommentApiConstants.API_POST_COMMENT}`, body);
   }
+
+  public deleteComment(commentId: number): Observable<any> {
+    return this.http.delete(`${environment.apiBaseUrl}/${CommentApiConstants.API_POST_COMMENT}/${commentId}`);
+  }
+
 }

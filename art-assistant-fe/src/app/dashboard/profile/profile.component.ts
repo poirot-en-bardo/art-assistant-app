@@ -27,7 +27,6 @@ export class ProfileComponent extends BaseComponent implements OnInit {
     this.loggedUser$.pipe(takeUntil(this.unsubscribe$)).subscribe((userModel) => {
       if (userModel) {
         this.loggedUser = userModel;
-        console.log(this.loggedUser);
         if(this.loggedUser.roles.includes("ROLE_ADMIN")){
           this.admin = true;
         }

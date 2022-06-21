@@ -72,6 +72,7 @@ public class ArtworkServiceImpl implements  ArtworkService {
         if (artworkListOptional.isEmpty()) {
             throw new ArtNotFoundException(ErrorCode.ERR_03_ARTWORK_NOT_FOUND);
         }
+        List<ArtworkEntity> entities = artworkListOptional.get();
         return artMapper.artworkEntityListToArtworkResponseDTOList(artworkListOptional.get());
     }
 

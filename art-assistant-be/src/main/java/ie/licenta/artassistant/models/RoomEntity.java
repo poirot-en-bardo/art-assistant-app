@@ -1,14 +1,14 @@
 package ie.licenta.artassistant.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "ROOM")
@@ -26,5 +26,6 @@ public class RoomEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "GALLERY_ID", referencedColumnName = "ID")
+//    @JsonIgnore
     private GalleryEntity gallery;
 }

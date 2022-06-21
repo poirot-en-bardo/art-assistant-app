@@ -15,6 +15,7 @@ import {RoomService} from "./services/room.service";
 import {ArtworkService} from "./services/artwork.service";
 import { ArtistViewModalComponent } from './modals/artist-view-modal/artist-view-modal.component';
 import {ArtistViewModalService} from "./services/artist-view-modal.service";
+import {FavouriteService} from "./services/favourite.service";
 
 @NgModule({
   imports: [
@@ -44,7 +45,8 @@ import {ArtistViewModalService} from "./services/artist-view-modal.service";
     GalleryService,
     RoomService,
     ArtworkService,
-    ArtistViewModalService
+    ArtistViewModalService,
+    FavouriteService
   ],
   bootstrap: []
 })

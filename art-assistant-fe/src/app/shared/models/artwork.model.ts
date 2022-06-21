@@ -13,4 +13,5 @@ export interface ArtworkModel {
   genreName: string;
   galleryName: string;
   museumName: string;
+  favourite: boolean;
 }

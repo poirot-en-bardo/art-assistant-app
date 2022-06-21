@@ -25,7 +25,6 @@ export class RandomArtComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
-    console.log(this.artwork);
   }
 
   getData() {

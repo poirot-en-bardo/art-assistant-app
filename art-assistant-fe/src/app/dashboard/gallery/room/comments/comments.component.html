@@ -15,6 +15,12 @@
           </div>
           <div class="ps-2">
             <span class="af-color__grey-2">{{comment.text}} </span>
+
+          <span *ngIf="admin || comment.userId == loggedUser.id">
+          <button class="float-end delete-button" (click)="deleteComment(comment.id)">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+          </span>
           </div>
         </div>
       </div>

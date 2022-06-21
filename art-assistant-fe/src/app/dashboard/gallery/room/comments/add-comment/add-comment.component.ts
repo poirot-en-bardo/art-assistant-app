@@ -62,7 +62,6 @@ export class AddCommentComponent extends BaseComponent implements OnInit {
       artworkId: this.artwork.id
     }
     this.commentService.addComment(newComment).pipe(takeUntil(this.unsubscribe$)).subscribe((response) => {
-      console.log(response);
       let postComment: CommentModel = {
         id: response.id,
         text: response.text,

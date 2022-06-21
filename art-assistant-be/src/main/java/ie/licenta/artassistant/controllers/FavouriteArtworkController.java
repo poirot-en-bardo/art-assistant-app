@@ -41,11 +41,11 @@ public class FavouriteArtworkController {
             @ApiResponse(responseCode = "400", description = "Invalid request",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtBadRequestException.class))),
             @ApiResponse(responseCode = "200", description = "Successful retrieval",
-                    content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ArtworkResponseDTO.class))))
+                    content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = FavouriteArtwork.class))))
     })
-    @GetMapping("/user/favourite_artworks")
-    public ResponseEntity<List<FavouriteArtworkResponseDTO>> getArtworksByGalleryIdAndRoomNumber(
-            @RequestAttribute("userId") int userId) {
+    @GetMapping("/user/favourite_artworks/{userId}")
+    public ResponseEntity<List<FavouriteArtwork>> getArtworksByGalleryIdAndRoomNumber(
+            @PathVariable int userId) {
         return new ResponseEntity<>(favouriteArtworkService.getFavouriteArtworksByUserId(userId), HttpStatus.OK);
     }
 
@@ -58,12 +58,12 @@ public class FavouriteArtworkController {
             @ApiResponse(responseCode = "400", description = "Invalid input",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtBadRequestException.class))),
             @ApiResponse(responseCode = "201", description = "Favourite Artwork added successfully",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtworkResponseDTO.class)))
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = FavouriteArtwork.class)))
     })
     @PostMapping("/user/favourite_artwork")
-    public ResponseEntity<FavouriteArtworkResponseDTO> addArtwork(@Valid @RequestBody FavouriteArtworkRequestDTO favouriteArtworkRequestDTO,
-                                                                @RequestAttribute("userId") int userId) {
-        return new ResponseEntity<>(favouriteArtworkService.addFavouriteArtwork(userId, favouriteArtworkRequestDTO), HttpStatus.CREATED);
+    public ResponseEntity<FavouriteArtwork> addArtwork(
+            @Valid @RequestBody FavouriteArtworkRequestDTO favouriteArtworkRequestDTO) {
+        return new ResponseEntity<>(favouriteArtworkService.addFavouriteArtwork(favouriteArtworkRequestDTO), HttpStatus.CREATED);
     }
 
     @Operation(summary = "Delete a favourite Artwork by id")
@@ -77,9 +77,11 @@ public class FavouriteArtworkController {
             @ApiResponse(responseCode = "200", description = "Successfully deleted the Artwork",
                     content = @Content(mediaType = "application/json"))
     })
-    @DeleteMapping("/user/favourite_artwork/{artworkId}")
-    public ResponseEntity<FavouriteArtworkResponseDTO> deleteFavouriteArtworkById(@PathVariable int artworkId,
-                                                                                @RequestAttribute("userId") int userId) {
+    @DeleteMapping("/user/favourite_artwork")
+    public ResponseEntity<Void> deleteFavouriteArtworkById(
+            @RequestParam(required = true) int userId,
+            @RequestParam(required = true) int artworkId
+    ) {
         FavouriteArtworkIdEntity idEntity = new FavouriteArtworkIdEntity(userId, artworkId);
         favouriteArtworkService.deleteFavouriteArtworkById(idEntity);
         return new ResponseEntity<>(HttpStatus.OK);

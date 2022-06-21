@@ -18,19 +18,23 @@
         <div id="artworkCarousel" class="carousel slide" data-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active mb-3" *ngIf="artworks[index]">
-              <!--                     *ngFor="let artwork of artworks; let i = index" [ngClass]="{'active': i == 0 }">-->
               <div class="card">
                 <img class="card-img-top" alt="Picture" [src]="artworks[index]?.imagePath">
                 <div class="card-body">
                   <h4 class="card-title text-center"><i>{{artworks[index]?.title}}</i></h4>
+                  <span>
+          <button class="float-end favourite-btn" (click)="addFavourite(artworks[index].id)">
+            <i *ngIf="!favourite" class="fa-heart fa-regular"></i>
+            <i *ngIf="favourite" class="fa-heart fa-solid"></i>
+          </button>
+                    </span>
                   <div>
                     <i><b>Artist:</b></i> {{artworks[index]?.artistFirstName + " " + artworks[index]?.artistLastName}}
-                    <!--                      click to modal-->
                     <span class="hand read-more-btn" (click)="viewArtistModal()">[View Artist]</span>
                   </div>
                   <div><i><b>Year:</b></i> {{artworks[index]?.year}}</div>
                   <div><i><b>Genre:</b></i> {{artworks[index]?.genreName}}</div>
-                  <!--                      click to modal-->
+                    <!--                      click to modal-->
                   <div><i><b>Technique:</b></i> {{artworks[index]?.technique}}</div>
                   <div class="card-text"><i><b>Description:</b></i> {{artworks[index]?.description}}</div>
                 </div>

@@ -15,7 +15,6 @@ export class AuthorisationGuard implements CanActivate {
     let user = this.authorisationService.getSignedInUser()?.pipe()
     let roles = this.authorisationService.getSignedInUser()?.pipe(map(
       (response) => {
-        console.log(response);
         return allowedRoles.some((item: string) => response.roles.includes(item));
       }));
     if (roles) {

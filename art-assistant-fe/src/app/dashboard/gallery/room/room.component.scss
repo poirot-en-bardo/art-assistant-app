@@ -8,3 +8,11 @@
   display: contents;
   color: $color-primary-3;
 }
+
+.favourite-btn {
+    border-radius: 80%;
+    background-color: $color-primary;
+    border: none;
+    color: white;
+    cursor: pointer;
+}

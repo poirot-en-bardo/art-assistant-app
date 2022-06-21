@@ -41,6 +41,8 @@ public interface ArtMapper {
     })
     ArtworkResponseDTO artworkEntityToArtworkResponseDTO(ArtworkEntity artworkEntity);
 
+
+
     @Mappings({
             @Mapping(target = "artistFirstName", source = "artist.firstName"),
             @Mapping(target = "artistLastName", source = "artist.lastName"),
@@ -52,6 +54,10 @@ public interface ArtMapper {
 
     })
     List<ArtworkResponseDTO> artworkEntityListToArtworkResponseDTOList(List<ArtworkEntity> artworkEntityList);
+
+
+    List<FavouriteArtwork> artworkResponseDTOListToFavouriteArtworkList(List<ArtworkResponseDTO> artworkResponseDTOS);
+
 
     @Mappings({
             @Mapping(target = "artist.id", source = "artistId"),
@@ -94,12 +100,32 @@ public interface ArtMapper {
     List<CountryResponseDTO> countryEntityListToCountryResponseDTOList(List<CountryEntity> countryEntity);
     CountryEntity countryRequestDTOToCountryEntity(CountryRequestDTO countryRequestDTO);
 
+
+
+    @Mappings({
+            @Mapping(target = "artistFirstName", source = "artist.firstName"),
+            @Mapping(target = "artistLastName", source = "artist.lastName"),
+            @Mapping(target = "museumName", source = "room.gallery.museum.name")
+
+    })
+    FavouriteArtwork artworkEntityToFavouriteArtwork(ArtworkEntity artworkEntity);
+
+    @Mappings({
+            @Mapping(target = "artistFirstName", source = "artist.firstName"),
+            @Mapping(target = "artistLastName", source = "artist.lastName"),
+            @Mapping(target = "museumName", source = "room.gallery.museum.name")
+
+    })
+    List<FavouriteArtwork> artworkEntityListToFavouriteArtworkList(List<ArtworkEntity> artworkEntity);
+
     FavouriteArtistResponseDTO favouriteArtistEntityToFavouriteArtistResponseDTO(FavouriteArtistEntity favouriteArtistEntity);
     List<FavouriteArtistResponseDTO> favouriteArtistEntityListToFavouriteArtistResponseDTOList(List<FavouriteArtistEntity> favouriteArtistEntity);
     FavouriteArtistEntity favouriteArtistRequestDTOToFavouriteArtistEntity(FavouriteArtistRequestDTO favouriteArtistRequestDTO);
 
     FavouriteArtworkResponseDTO favouriteArtworkEntityToFavouriteArtworkResponseDTO(FavouriteArtworkEntity favouriteArtworkEntity);
-    List<FavouriteArtworkResponseDTO> favouriteArtworkEntityListToFavouriteArtworkResponseDTOList(List<FavouriteArtworkEntity> favouriteArtworkEntity);
+
+
+//    List<FavouriteArtworkResponseDTO> favouriteArtworkListToFavouriteArtworkResponseDTOList(Integer userId, List<FavouriteArtwork> favouriteArtworks);
     FavouriteArtworkEntity favouriteArtworkRequestDTOToFavouriteArtworkEntity(FavouriteArtworkRequestDTO favouriteArtworkRequestDTO);
 
     @Mappings({

@@ -1,3 +1,11 @@
 @import 'src/styles/components/inputs';
 @import 'src/styles/variables';
 @import 'src/styles/components/buttons';
+
+.delete-button {
+  border-radius: 50%;
+  background-color: $color-primary;
+  border: none;
+  color: white;
+  cursor: pointer;
+}

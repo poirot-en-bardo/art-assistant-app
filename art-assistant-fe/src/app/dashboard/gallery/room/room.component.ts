@@ -140,15 +140,10 @@ export class RoomComponent extends BaseComponent implements OnInit {
   addFavourite(id: number) {
     if (this.favourite) {
       this.favourite = false;
-      this.favouriteService.deleteFavourite(id).pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
-        this.store.dispatch(new RemoveFavouriteArtwork(id));
-        }
-      )
+      this.store.dispatch(new RemoveFavouriteArtwork(id));
     } else {
       this.favourite = true;
-      this.favouriteService.addFavouriteArtwork(id).pipe(takeUntil(this.unsubscribe$)).subscribe(response => {
-        this.store.dispatch(new AddFavouriteArtwork(id));
-      })
+      this.store.dispatch(new AddFavouriteArtwork(id));
     }
   }
 

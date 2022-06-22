@@ -19,6 +19,8 @@ import {FavouriteService} from "./services/favourite.service";
 import { GenreViewModalComponent } from './modals/genre-view-modal/genre-view-modal.component';
 import {GenreService} from "./services/genre.service";
 import {GenreViewModalService} from "./services/genre-view-modal.service";
+import { MuseumModalComponent } from './modals/museum-modal/museum-modal.component';
+import {AdminModalService} from "./services/admin-modal.service";
 
 @NgModule({
   imports: [
@@ -33,7 +35,8 @@ import {GenreViewModalService} from "./services/genre-view-modal.service";
     RoleDirective,
     ToasterComponent,
     ArtistViewModalComponent,
-    GenreViewModalComponent
+    GenreViewModalComponent,
+    MuseumModalComponent
   ],
   exports: [
     ErrorMessagesComponent,
@@ -50,6 +53,7 @@ import {GenreViewModalService} from "./services/genre-view-modal.service";
     RoomService,
     ArtworkService,
     ArtistViewModalService,
+    AdminModalService,
     GenreService,
     GenreViewModalService,
     FavouriteService

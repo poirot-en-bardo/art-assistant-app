@@ -1,10 +1,15 @@
 <div>
   <div class="pb-2 fs-26 mb-2 fw-bold me-auto color text-center">
     <span><u>{{museum?.name}}</u></span>
+    <span *ngIf="this.loggedUser.admin">
+          <button class="float-end edit-btn" (click)="editMuseum()">
+            <i class="fa fa-edit fa-xs"></i>
+          </button>
+    </span>
   </div>
   <div class="pb-2 fs-18 mb-4 fw-bold me-auto subtitle text-center hand" (click)="openMaps()">
     <a>
-    {{museum?.address}}, {{museum?.countryName}}
+      {{museum?.address}}, {{museum?.countryName}}
     </a>
   </div>
 
@@ -14,12 +19,15 @@
 
   <div>
     <input class="form-control pb-1 pt-1 mb-4" type="text" [(ngModel)]="searchText"
-           (input)="search()" placeholder="Search by gallery name" />
+           (input)="search()" placeholder="Search by gallery name"/>
   </div>
 
-
+  <div *ngIf="loggedUser.admin" class="text-center">
+    <button (click)="addGallery()" type="button"
+            class="add-btn mt-1 mb-2 me-4">Add Gallery</button>
+  </div>
   <div *ngFor="let gallery of galleries; let i = index" #triggerScrollElement>
-    <a class="link"  (click) = "goToGallery(gallery.id)">
+    <a class="link" (click)="goToGallery(gallery.id)">
       <span class="fw-bold light-color link hand">
         {{gallery.name}}
       </span>

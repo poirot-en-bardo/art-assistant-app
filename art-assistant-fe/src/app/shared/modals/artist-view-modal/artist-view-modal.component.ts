@@ -15,6 +15,7 @@ export class ArtistViewModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.artist);
   }
 
   close() {

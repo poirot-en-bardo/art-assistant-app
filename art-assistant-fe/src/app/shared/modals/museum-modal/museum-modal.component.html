@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <div class="modal__title p-2 color">Edit Museum</div>
+  <button type="button" class="modal__close-btn" aria-label="Close" (click)="close()">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+</div>
+
+<div class="modal-body p-3 ms-1 color">
+  <form [formGroup]="museumForm">
+    <div class="input-group mb-3 row">
+      <b>Name:</b>
+      <input id="name" class="af-input color" placeholder="Name" [formControlName]="MUSEUM_FORM.NAME"
+      [value]="museum.name" [ngModel]="museum.name"/>
+<!--      <app-error-messages [form]="museumForm" [field]="MUSEUM_FORM.NAME"></app-error-messages>-->
+    </div>
+  </form>
+</div>
+<div class="modal-footer me-2">
+<!--  <button (click)="addGoodJob()" class="mh-btn mh-btn&#45;&#45;primary" type="button"-->
+<!--          [disabled]="goodJobForm.get(ADD_GOODJOB_FORM.MESSAGE)?.errors?.required || isLoading==true">Finish-->
+<!--  </button>-->
+</div>

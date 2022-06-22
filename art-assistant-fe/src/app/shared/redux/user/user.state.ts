@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { tap } from 'rxjs/operators';
-import { AuthoriseResponseModel } from '../../models/authorise-response.model';
-import { AuthorisationService } from '../../../core/services/authorisation.service';
-import { GetLoggedUser, RemoveLoggedUser } from './user.action';
+import {Injectable} from '@angular/core';
+import {Action, Selector, State, StateContext} from '@ngxs/store';
+import {tap} from 'rxjs/operators';
+import {AuthoriseResponseModel} from '../../models/authorise-response.model';
+import {AuthorisationService} from '../../../core/services/authorisation.service';
+import {GetLoggedUser, RemoveLoggedUser} from './user.action';
 
 export interface UserStateModel {
   loggedUser?: AuthoriseResponseModel
@@ -35,6 +35,9 @@ export class UserState {
     }
 
     return this.authorizationService.getSignedInUser()?.pipe(tap((userModel) => {
+      if (userModel.roles.includes("ROLE_ADMIN")) {
+        userModel.admin = true;
+      }
       patchState({loggedUser: userModel});
     }));
   }

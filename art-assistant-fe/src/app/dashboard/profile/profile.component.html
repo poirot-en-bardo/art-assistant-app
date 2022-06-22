@@ -4,8 +4,8 @@
 </div>
   <div class="pb-2 fs-20 mb-2 ms-2 me-auto">
     <i>
-    <span *ngIf="!admin" class="light-color" >Museum Visitor </span>
-    <span *ngIf="admin" class="light-color" >Museum Admin</span>
+    <span *ngIf="!loggedUser.admin" class="light-color" >Museum Visitor </span>
+    <span *ngIf="loggedUser.admin" class="light-color" >Museum Admin</span>
     </i>
   </div>
   <div class="pb-2 fs-20 mb-2 ms-2 me-auto">

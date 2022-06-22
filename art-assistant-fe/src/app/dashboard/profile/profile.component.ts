@@ -16,8 +16,6 @@ export class ProfileComponent extends BaseComponent implements OnInit {
   private loggedUser$: Observable<AuthoriseResponseModel>;
   loggedUser: AuthoriseResponseModel;
 
-  admin: boolean = false;
-
   constructor(private store: Store) {
     super();
   }
@@ -27,9 +25,6 @@ export class ProfileComponent extends BaseComponent implements OnInit {
     this.loggedUser$.pipe(takeUntil(this.unsubscribe$)).subscribe((userModel) => {
       if (userModel) {
         this.loggedUser = userModel;
-        if(this.loggedUser.roles.includes("ROLE_ADMIN")){
-          this.admin = true;
-        }
       }
     });
   }

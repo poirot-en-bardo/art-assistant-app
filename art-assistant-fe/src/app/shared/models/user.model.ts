@@ -8,6 +8,6 @@ export interface UserSignUpModel {
   lastName: string,
   email: string,
   password: string,
-  roles: string[]
-    //TODO with roles?
+  roles: string[],
+  admin: boolean
 }

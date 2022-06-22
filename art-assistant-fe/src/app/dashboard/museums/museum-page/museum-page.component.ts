@@ -10,6 +10,8 @@ import {Select, Store} from "@ngxs/store";
 import {UserState} from "../../../shared/redux/user/user.state";
 import {AuthoriseResponseModel} from "../../../shared/models/authorise-response.model";
 import {GetLoggedUser} from "../../../shared/redux/user/user.action";
+import {AdminModalService} from "../../../shared/services/admin-modal.service";
+import {ModalConstants} from "../../../shared/constants/modal.constants";
 
 @Component({
   selector: 'app-museum-page',
@@ -27,7 +29,8 @@ export class MuseumPageComponent extends BaseComponent implements OnInit {
   searchText = "";
 
   constructor(private galleryService: GalleryService, private museumService: MuseumService,
-              private route: ActivatedRoute, private store: Store, private router: Router) {
+              private route: ActivatedRoute, private store: Store, private router: Router,
+              private modalService: AdminModalService) {
     super();
   }
 
@@ -36,6 +39,7 @@ export class MuseumPageComponent extends BaseComponent implements OnInit {
     this.loggedUser$.pipe(takeUntil(this.unsubscribe$)).subscribe((userModel) => {
       if (userModel) {
         this.loggedUser = userModel;
+        console.log(this.loggedUser.admin);
       }
     });
     this.getData();
@@ -84,6 +88,14 @@ export class MuseumPageComponent extends BaseComponent implements OnInit {
     }
     // ['../../gallery', gallery.id]
     this.router.navigate([`../../gallery/${galleryId}`]);
+
+  }
+
+  editMuseum() {
+    this.modalService.openModal(this.museum, ModalConstants.MUSEUM);
+  }
+
+  addGallery() {
 
   }
 }

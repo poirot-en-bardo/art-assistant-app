@@ -3,5 +3,6 @@ export interface AuthoriseResponseModel {
   firstName: string,
   lastName: string,
   email: string,
-  roles: string[]
+  roles: string[],
+  admin: boolean
 }

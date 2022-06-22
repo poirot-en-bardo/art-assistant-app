@@ -58,4 +58,10 @@ export class GalleryComponent extends BaseComponent implements OnInit {
         this.rooms = rooms;
       })
   }
+
+  editGallery() {
+
+  }
+
+  addRoom() {}
 }

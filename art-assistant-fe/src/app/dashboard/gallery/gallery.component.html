@@ -3,6 +3,13 @@
   <span><u>{{gallery?.name}} Gallery</u></span>
 </div>
 
+<div *ngIf="loggedUser.admin" class="text-center">
+  <button (click)="editGallery()" type="button"
+          class="mb-3 edit-btn me-3"><i class="fa fa-edit fa-xs"></i></button>
+  <button (click)="addRoom()" type="button"
+          class="add-btn mt-4 mb-2 me-4">Add Room</button>
+</div>
+
 <div *ngFor="let room of rooms; let i = index" class="btn-group btn-matrix mt-5">
   <button type="button" [routerLink]="['room', room.id]"
           class="btn btn-default af-btn af-btn--primary m-2">Room {{room.id}}</button>

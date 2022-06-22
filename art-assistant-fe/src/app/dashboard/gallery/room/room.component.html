@@ -5,13 +5,23 @@
         <h3 class="mb-3 dark-color">Room {{room?.id}}</h3>
       </div>
 
-      <div class="col-6 text-right">
+      <div class="text-right">
         <a class="btn btn-primary mb-3 me-2 mr-1" (click)="next()" role="button" data-slide="prev">
           <i class="fa fa-arrow-left"></i>
         </a>
-        <a class="btn btn-primary mb-3 " (click)="prev()" role="button" data-slide="next">
+        <a class="btn btn-primary mb-3" (click)="prev()" role="button" data-slide="next">
           <i class="fa fa-arrow-right"></i>
         </a>
+        <div class="text-center">
+        <span *ngIf="loggedUser.admin">
+          <button (click)="editRoom()" type="button"
+                  class="mb-3 edit-btn me-3"><i class="fa fa-edit fa-xs"></i></button>
+        </span>
+        <span *ngIf="loggedUser.admin" >
+          <button (click)="addArtwork()" type="button"
+                  class="add-btn mb-2">Add Artwork</button>
+        </span>
+        </div>
       </div>
 
       <div>
@@ -39,6 +49,10 @@
                     <!--                      click to modal-->
                   <div><i><b>Technique:</b></i> {{artworks[index]?.technique}}</div>
                   <div class="card-text"><i><b>Description:</b></i> {{artworks[index]?.description}}</div>
+                  <div *ngIf="loggedUser.admin" class="text-center">
+                    <button (click)="editArtwork()" type="button"
+                            class="add-btn mt-4 mb-2 me-4">Edit Artwork</button>
+                  </div>
                 </div>
               </div>
             </div>

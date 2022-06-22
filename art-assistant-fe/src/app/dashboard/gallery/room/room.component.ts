@@ -9,8 +9,6 @@ import {Observable, take, takeUntil} from "rxjs";
 import {ImageUtils} from '../../../shared/utils/image.utils';
 import {ArtistViewModalService} from "../../../shared/services/artist-view-modal.service";
 import {CommentService} from "./comment.service";
-import {CommentModel} from "../../../shared/models/comment.model";
-import {CommentListModel} from "../../../shared/models/comment-list.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CommentForm} from "./comments/add-comment/comment-form";
 import {Select, Store} from "@ngxs/store";
@@ -24,7 +22,6 @@ import {
   GetFavouriteArtworks,
   RemoveFavouriteArtwork
 } from "../../../shared/redux/favourites/favourites.action";
-import {FavouriteService} from "../../../shared/services/favourite.service";
 import {GenreService} from "../../../shared/services/genre.service";
 import {GenreViewModalService} from "../../../shared/services/genre-view-modal.service";
 
@@ -37,6 +34,10 @@ export class RoomComponent extends BaseComponent implements OnInit {
   @Select(FavouriteState.getFavouriteArtworks)
   private favourites$: Observable<FavouriteArtworkModel[]>;
   favourites: FavouriteArtworkModel[];
+
+  @Select(UserState.getLoggedUser)
+  private loggedUser$: Observable<AuthoriseResponseModel>;
+  loggedUser: AuthoriseResponseModel;
 
   room: RoomModel;
   artworks: ArtworkModel[] = [];
@@ -62,6 +63,12 @@ export class RoomComponent extends BaseComponent implements OnInit {
         [CommentForm.MESSAGE]: ['', Validators.required]
       }
     )
+    this.store.dispatch(new GetLoggedUser());
+    this.loggedUser$.pipe(takeUntil(this.unsubscribe$)).subscribe((userModel) => {
+      if (userModel) {
+        this.loggedUser = userModel;
+      }
+    });
     this.getData();
   }
 
@@ -144,6 +151,18 @@ export class RoomComponent extends BaseComponent implements OnInit {
       this.favourite = true;
       this.store.dispatch(new AddFavouriteArtwork(id));
     }
+  }
+
+  editRoom() {
+
+  }
+
+  addArtwork() {
+
+  }
+
+  editArtwork() {
+
   }
 
 }

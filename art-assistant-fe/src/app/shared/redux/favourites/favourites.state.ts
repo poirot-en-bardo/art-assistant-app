@@ -5,6 +5,7 @@ import {FavouriteService} from "../../services/favourite.service";
 import {AddFavouriteArtwork, GetFavouriteArtworks, RemoveFavouriteArtwork} from "./favourites.action";
 import {tap} from "rxjs/operators";
 import {ShowSuccessToaster} from "../toaster/toaster.action";
+import {ImageUtils} from "../../utils/image.utils";
 
 export interface FavouriteStateModel {
   favourites?: FavouriteArtworkModel[];
@@ -31,7 +32,7 @@ export class FavouriteState {
   }
 
   @Action(GetFavouriteArtworks)
-  getAllSupportGroupNotifications({getState, patchState}: StateContext<FavouriteStateModel>) {
+  getFavouriteArtworks({getState, patchState}: StateContext<FavouriteStateModel>) {
     const favourites = getState().favourites;
     if(favourites) {
       patchState({
@@ -40,6 +41,11 @@ export class FavouriteState {
     }
     return this.favouriteService.getFavouriteArtworks().pipe(
       tap((favourites: FavouriteArtworkModel[]) => {
+        favourites.forEach(artwork => {
+          if (artwork.imagePath !== null) {
+            artwork.imagePath = ImageUtils.appendImageType(artwork.imagePath);
+          }
+        })
         patchState({favourites});
       })
     );

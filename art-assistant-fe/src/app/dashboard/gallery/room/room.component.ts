@@ -80,7 +80,6 @@ export class RoomComponent extends BaseComponent implements OnInit {
           this.favourites$.pipe(takeUntil(this.unsubscribe$)).subscribe((favourites) => {
             if (favourites) {
               this.favourites = favourites;
-              console.log(favourites);
               this.favourite = favourites.some(fav => fav.id == this.artworks[this.index].id);
             }
           });

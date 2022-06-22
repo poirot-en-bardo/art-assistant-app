@@ -1,0 +1,18 @@
+@import "src/styles/components/general";
+@import '/src/styles/components/buttons';
+
+
+.artwork-image {
+  width: 150px;
+}
+
+.remove-btn {
+  border-radius: $button-border-radius;
+  border: 1px solid $color-primary;
+  padding: 5px 10px 5px 10px;
+  background-color: $color-primary;
+  transition: 0.4s;
+  cursor: pointer;
+  color: $color-white;
+  font-size: 15px;
+}

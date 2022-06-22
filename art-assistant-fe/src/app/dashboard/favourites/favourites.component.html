@@ -1,1 +1,40 @@
-<p>favourites works!</p>
+<div>
+  <div class="pb-2 fs-22 mb-4 ms-2 fw-bold me-auto color">
+    <span><u>Favourite Artworks</u></span>
+  </div>
+  <div *ngIf="!favourites">You don't have any favourite artworks yet</div>
+  <div *ngFor="let artwork of favourites" class="container">
+    <div class="row pb-2 pt-2">
+      <div class="col-xs-3 col-md-4">
+        <img class="artwork-image" alt="Picture" [src]="artwork?.imagePath">
+      </div>
+
+      <div class="col-xs-9 col-md-8">
+        <div class="fs-18 color">
+          <div class="row">
+            <div class="col-xs-9 col-md-8 fw-bold fst-italic">
+              {{artwork.title}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-9 col-md-8">
+              By {{artwork.artistFirstName + ' ' + artwork.artistLastName}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-9 col-md-8">
+              Museum: {{artwork.museumName}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-9 col-md-8">
+              <button (click)="removeFavourite(artwork.id)" type="button"
+                      class="remove-btn mt-3 ms-4">Remove</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

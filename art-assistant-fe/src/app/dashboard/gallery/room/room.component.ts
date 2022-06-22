@@ -25,6 +25,8 @@ import {
   RemoveFavouriteArtwork
 } from "../../../shared/redux/favourites/favourites.action";
 import {FavouriteService} from "../../../shared/services/favourite.service";
+import {GenreService} from "../../../shared/services/genre.service";
+import {GenreViewModalService} from "../../../shared/services/genre-view-modal.service";
 
 @Component({
   selector: 'app-room',
@@ -49,7 +51,8 @@ export class RoomComponent extends BaseComponent implements OnInit {
   constructor(private roomService: RoomService, private artworkService: ArtworkService,
               private route: ActivatedRoute, private artistModalService: ArtistViewModalService,
               private commentService: CommentService, private formBuilder: FormBuilder,
-              private store: Store, private favouriteService: FavouriteService) {
+              private store: Store, private genreService: GenreService,
+              private genreModalService: GenreViewModalService) {
     super();
   }
 
@@ -121,15 +124,12 @@ export class RoomComponent extends BaseComponent implements OnInit {
     )
   }
 
-  public get CommentForm(): typeof CommentForm {
-    return CommentForm;
-  }
-
-  addComment(): void {
-    let comment: CommentModel;
-    // comment.userId
-    // this.store.dispatch(new AddComment(this.item.id, this.commentForm.value))
-    // this.item.noOfComments += 1
+  viewGenreModal() {
+    this.genreService.getGenreById(this.artworks[this.index].genreId).pipe(takeUntil(this.unsubscribe$)).subscribe(
+      response => {
+        this.genreModalService.openModal(response);
+      }
+    )
   }
 
   reset() {

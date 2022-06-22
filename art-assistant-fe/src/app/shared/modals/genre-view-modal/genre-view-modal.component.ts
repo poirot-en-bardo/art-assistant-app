@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {GenreModel} from "../../models/genre.model";
 
 @Component({
   selector: 'app-genre-view-modal',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GenreViewModalComponent implements OnInit {
 
-  constructor() { }
+  @Input() genre: GenreModel;
+
+  constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
+  }
+
+  close() {
+    this.activeModal.close(null);
   }
 
 }

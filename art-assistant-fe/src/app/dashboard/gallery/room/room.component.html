@@ -33,7 +33,9 @@
                     <span class="hand read-more-btn" (click)="viewArtistModal()">[View Artist]</span>
                   </div>
                   <div><i><b>Year:</b></i> {{artworks[index]?.year}}</div>
-                  <div><i><b>Genre:</b></i> {{artworks[index]?.genreName}}</div>
+                  <div><i><b>Genre:</b></i> {{artworks[index]?.genreName}}
+                  <span class="hand read-more-btn" (click)="viewGenreModal()">[View Genre] </span>
+                  </div>
                     <!--                      click to modal-->
                   <div><i><b>Technique:</b></i> {{artworks[index]?.technique}}</div>
                   <div class="card-text"><i><b>Description:</b></i> {{artworks[index]?.description}}</div>

@@ -1,1 +1,13 @@
-<p>genre-view-modal works!</p>
+<div class="modal-header">
+  <div class="modal__title p-2 color">Genre Details</div>
+  <button type="button" class="modal__close-btn" aria-label="Close" (click)="close()">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+</div>
+
+<div class="modal-body p-3 ms-1 color">
+  <div *ngIf="genre">
+    <div class="fw-bold fs-20 text-center">{{genre.name}}</div>
+    <div class="mt-4 mb-1"><span class="fw-bold fst-italic">Description: </span>{{genre.description}}</div>
+  </div>
+</div>

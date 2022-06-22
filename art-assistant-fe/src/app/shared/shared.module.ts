@@ -17,6 +17,8 @@ import { ArtistViewModalComponent } from './modals/artist-view-modal/artist-view
 import {ArtistViewModalService} from "./services/artist-view-modal.service";
 import {FavouriteService} from "./services/favourite.service";
 import { GenreViewModalComponent } from './modals/genre-view-modal/genre-view-modal.component';
+import {GenreService} from "./services/genre.service";
+import {GenreViewModalService} from "./services/genre-view-modal.service";
 
 @NgModule({
   imports: [
@@ -48,6 +50,8 @@ import { GenreViewModalComponent } from './modals/genre-view-modal/genre-view-mo
     RoomService,
     ArtworkService,
     ArtistViewModalService,
+    GenreService,
+    GenreViewModalService,
     FavouriteService
   ],
   bootstrap: []

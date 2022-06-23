@@ -25,7 +25,7 @@ export class GalleryService {
   }
 
   public addGallery(gallery: GalleryModel): Observable<any> {
-    return this.http.post(`${environment.apiBaseUrl}/${GalleryApiConstants.API_GALLERY_USER}`, gallery);
+    return this.http.post(`${environment.apiBaseUrl}/${GalleryApiConstants.API_GALLERY_ADMIN}`, gallery);
   }
 
 }

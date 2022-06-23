@@ -91,7 +91,7 @@ export class MuseumPageComponent extends BaseComponent implements OnInit {
   }
 
   editMuseum() {
-    this.modalService.openModal(this.museum, ModalConstants.MUSEUM).then((newMuseum) => {
+    this.modalService.openModal(this.museum, null, ModalConstants.MUSEUM).then((newMuseum) => {
         this.museumService.updateMuseum(newMuseum, this.museum.id).pipe(takeUntil(this.unsubscribe$)).subscribe(
           response => this.museum = response
         )
@@ -99,6 +99,11 @@ export class MuseumPageComponent extends BaseComponent implements OnInit {
   }
 
   addGallery() {
-
+    this.modalService.openModal(null, this.museum, ModalConstants.GALLERY).then((newGallery) => {
+      console.log(newGallery);
+      this.galleryService.addGallery(newGallery).pipe(takeUntil(this.unsubscribe$)).subscribe(
+        response => this.galleries.unshift(response)
+      )
+    })
   }
 }

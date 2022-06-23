@@ -21,6 +21,7 @@ import {GenreService} from "./services/genre.service";
 import {GenreViewModalService} from "./services/genre-view-modal.service";
 import { MuseumModalComponent } from './modals/museum-modal/museum-modal.component';
 import {AdminModalService} from "./services/admin-modal.service";
+import { GalleryModalComponent } from './modals/gallery-modal/gallery-modal.component';
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import {AdminModalService} from "./services/admin-modal.service";
     ToasterComponent,
     ArtistViewModalComponent,
     GenreViewModalComponent,
-    MuseumModalComponent
+    MuseumModalComponent,
+    GalleryModalComponent
   ],
   exports: [
     ErrorMessagesComponent,

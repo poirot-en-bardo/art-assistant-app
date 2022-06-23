@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <div class="modal__title p-2 color">
+    <span *ngIf="!gallery">Add Gallery</span>
+    <span *ngIf="gallery">Edit Gallery</span>
+  </div>
+  <button type="button" class="modal__close-btn" aria-label="Close" (click)="close()">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+</div>
+
+<div class="modal-body p-3 ms-1 color">
+  <form [formGroup]="galleryForm">
+    <div class="mb-3 row">
+      <b>Name:</b>
+      <input class="af-input color" placeholder="Name" [formControlName]="GALLERY_FORM.NAME"
+             [value]="gallery?.name" [ngModel]="gallery?.name"/>
+      <!--      <app-error-messages [form]="museumForm" [field]="MUSEUM_FORM.NAME"></app-error-messages>-->
+    </div>
+
+    <div *ngIf="gallery" class="mb-3 row">
+      <b>Museum:</b>
+      <select class="af-input color" [formControlName]="GALLERY_FORM.MUSEUM" [(ngModel)]="gallery.museumId">
+        <option *ngFor="let museum of museums" [value]="museum.id">{{museum.name}}</option>
+      </select>
+    </div>
+  </form>
+</div>
+<div class="modal-footer me-2">
+  <button *ngIf="gallery" class="af-btn af-btn--primary me-auto" (click)="deleteGallery()">
+    Delete Gallery
+  </button>
+  <button (click)="addGallery()" class="af-btn af-btn--primary" type="button"
+          [disabled]="galleryForm.get(GALLERY_FORM.NAME)?.errors?.required">Save
+  </button>
+</div>

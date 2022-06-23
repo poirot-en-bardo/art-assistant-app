@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {ArtistModel} from "../../models/artist.model";
 import {MuseumModel} from "../../models/museum.model";
 import {FormBuilder, Validators} from "@angular/forms";
 import {MUSEUM_FORM} from "./museum-modal.config";
@@ -20,7 +19,7 @@ export class MuseumModalComponent extends BaseComponent implements OnInit {
 
   @Input() museum: MuseumModel;
 
-  MUSEUM_FORM=MUSEUM_FORM;
+  MUSEUM_FORM = MUSEUM_FORM;
   countries: CountryModel[];
 
 

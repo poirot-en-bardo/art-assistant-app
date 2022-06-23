@@ -23,7 +23,7 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public List<CountryResponseDTO> getAllCountries() {
-        Optional<List<CountryEntity>> countryListOptional = Optional.of(countryRepository.findAll());
+        Optional<List<CountryEntity>> countryListOptional = Optional.of(countryRepository.findAllByOrderByNameAsc());
         if (countryListOptional.isEmpty()) {
             throw new ArtNotFoundException(ErrorCode.ERR_14_COUNTRY_NOT_FOUND);
         }

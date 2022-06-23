@@ -1,7 +1,7 @@
 <div>
   <div class="pb-2 fs-26 mb-2 fw-bold me-auto color text-center">
     <span><u>{{museum?.name}}</u></span>
-    <span *ngIf="this.loggedUser.admin">
+    <span *ngIf="this.loggedUser?.admin">
           <button class="float-end edit-btn" (click)="editMuseum()">
             <i class="fa fa-edit fa-xs"></i>
           </button>
@@ -22,7 +22,7 @@
            (input)="search()" placeholder="Search by gallery name"/>
   </div>
 
-  <div *ngIf="loggedUser.admin" class="text-center">
+  <div *ngIf="loggedUser?.admin" class="text-center">
     <button (click)="addGallery()" type="button"
             class="add-btn mt-1 mb-2 me-4">Add Gallery</button>
   </div>

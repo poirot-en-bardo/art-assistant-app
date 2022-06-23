@@ -20,6 +20,6 @@ export class MuseumService {
   }
 
   public updateMuseum(museum: MuseumModel, museumId: number): Observable<any> {
-    return this.http.put(`${environment.apiBaseUrl}/${MuseumApiConstants.API_MUSEUM_OPEN}/${museumId}`, museum);
+    return this.http.put(`${environment.apiBaseUrl}/${MuseumApiConstants.API_MUSEUM_POST}/${museumId}`, museum);
   }
 }

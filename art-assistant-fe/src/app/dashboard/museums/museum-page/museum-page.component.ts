@@ -39,7 +39,6 @@ export class MuseumPageComponent extends BaseComponent implements OnInit {
     this.loggedUser$.pipe(takeUntil(this.unsubscribe$)).subscribe((userModel) => {
       if (userModel) {
         this.loggedUser = userModel;
-        console.log(this.loggedUser.admin);
       }
     });
     this.getData();
@@ -92,7 +91,11 @@ export class MuseumPageComponent extends BaseComponent implements OnInit {
   }
 
   editMuseum() {
-    this.modalService.openModal(this.museum, ModalConstants.MUSEUM);
+    this.modalService.openModal(this.museum, ModalConstants.MUSEUM).then((newMuseum) => {
+        this.museumService.updateMuseum(newMuseum, this.museum.id).pipe(takeUntil(this.unsubscribe$)).subscribe(
+          response => this.museum = response
+        )
+    });
   }
 
   addGallery() {

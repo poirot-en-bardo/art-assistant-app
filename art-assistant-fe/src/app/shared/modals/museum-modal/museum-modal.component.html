@@ -7,16 +7,29 @@
 
 <div class="modal-body p-3 ms-1 color">
   <form [formGroup]="museumForm">
-    <div class="input-group mb-3 row">
+    <div class="mb-3 row">
       <b>Name:</b>
-      <input id="name" class="af-input color" placeholder="Name" [formControlName]="MUSEUM_FORM.NAME"
-      [value]="museum.name" [ngModel]="museum.name"/>
-<!--      <app-error-messages [form]="museumForm" [field]="MUSEUM_FORM.NAME"></app-error-messages>-->
+      <input class="af-input color" placeholder="Name" [formControlName]="MUSEUM_FORM.NAME"
+             [value]="museum.name" [ngModel]="museum.name"/>
+      <!--      <app-error-messages [form]="museumForm" [field]="MUSEUM_FORM.NAME"></app-error-messages>-->
+    </div>
+    <div class="mb-3 row">
+      <b>Address:</b>
+      <input class="af-input color" placeholder="Address" [formControlName]="MUSEUM_FORM.ADDRESS"
+             [value]="museum.address" [ngModel]="museum.address"/>
+      <!--      <app-error-messages [form]="museumForm" [field]="MUSEUM_FORM.NAME"></app-error-messages>-->
+    </div>
+    <div class="mb-3 row">
+      <b>Country:</b>
+      <select class="af-input color" [formControlName]="MUSEUM_FORM.COUNTRY" [(ngModel)]="museum.countryId">
+        <option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
+      </select>
     </div>
   </form>
 </div>
 <div class="modal-footer me-2">
-<!--  <button (click)="addGoodJob()" class="mh-btn mh-btn&#45;&#45;primary" type="button"-->
-<!--          [disabled]="goodJobForm.get(ADD_GOODJOB_FORM.MESSAGE)?.errors?.required || isLoading==true">Finish-->
-<!--  </button>-->
+  <button (click)="saveMuseum()" class="af-btn af-btn--primary" type="button"
+          [disabled]="museumForm.get(MUSEUM_FORM.NAME)?.errors?.required ||
+                      museumForm.get(MUSEUM_FORM.ADDRESS)?.errors?.required">Save
+  </button>
 </div>

@@ -10,11 +10,15 @@ export class AdminModalService {
   constructor(private modalService: NgbModal) {
   }
 
-  public openModal(object: any, modal: ModalConstants): void {
+  public openModal(object: any, modal: ModalConstants): Promise<any> {
+    let modalRef;
     if(modal == ModalConstants.MUSEUM) {
-      const modalRef = this.modalService.open(MuseumModalComponent);
+      modalRef = this.modalService.open(MuseumModalComponent);
       modalRef.componentInstance.museum = object;
     }
+
+    // @ts-ignore
+    return modalRef.result;
 //elsseeee
 
   }

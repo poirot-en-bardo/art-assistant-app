@@ -41,6 +41,8 @@
              id="file-selector" type="file">
       <img *ngIf="picturePreview" [src]="picturePreview"
            class="view-img rounded mt-3 d-flex align-items-center"/>
+      <img *ngIf="room?.map && !picturePreview" [src]="room.map"
+           class="view-img rounded mt-3 d-flex align-items-center"/>
 
 
     </div>

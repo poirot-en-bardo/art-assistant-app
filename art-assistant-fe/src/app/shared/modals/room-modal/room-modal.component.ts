@@ -56,7 +56,11 @@ export class RoomModalComponent extends FileChangeBaseComponent implements OnIni
   }
 
   addRoom() {
-    this.image = ImageUtils.extractImage(this.file);
+    if (this.file) {
+      this.image = ImageUtils.extractImage(this.file);
+    } else if (this.room?.map) {
+      this.image = ImageUtils.extractImage(this.room?.map);
+    }
     const newRoom = this.roomForm.getRawValue();
     let result = {
       galleryId: 0,
@@ -64,7 +68,7 @@ export class RoomModalComponent extends FileChangeBaseComponent implements OnIni
       floor: newRoom.floor,
       map: this.image
     }
-    if(this.gallery) {
+    if (this.gallery) {
       result.galleryId = this.gallery.id;
     } else {
       result.galleryId = newRoom.gallery;

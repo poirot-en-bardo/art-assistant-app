@@ -23,6 +23,7 @@ import { MuseumModalComponent } from './modals/museum-modal/museum-modal.compone
 import {AdminModalService} from "./services/admin-modal.service";
 import { GalleryModalComponent } from './modals/gallery-modal/gallery-modal.component';
 import { RoomModalComponent } from './modals/room-modal/room-modal.component';
+import { ArtworkModalComponent } from './modals/artwork-modal/artwork-modal.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { RoomModalComponent } from './modals/room-modal/room-modal.component';
     GenreViewModalComponent,
     MuseumModalComponent,
     GalleryModalComponent,
-    RoomModalComponent
+    RoomModalComponent,
+    ArtworkModalComponent
   ],
   exports: [
     ErrorMessagesComponent,

@@ -5,7 +5,7 @@ import {ArtworkService} from "../../../shared/services/artwork.service";
 import {ActivatedRoute} from "@angular/router";
 import {RoomModel} from "../../../shared/models/room.model";
 import {ArtworkModel} from "../../../shared/models/artwork.model";
-import {Observable, take, takeUntil} from "rxjs";
+import {Observable, takeUntil} from "rxjs";
 import {ImageUtils} from '../../../shared/utils/image.utils';
 import {ArtistViewModalService} from "../../../shared/services/artist-view-modal.service";
 import {CommentService} from "./comment.service";
@@ -24,6 +24,8 @@ import {
 } from "../../../shared/redux/favourites/favourites.action";
 import {GenreService} from "../../../shared/services/genre.service";
 import {GenreViewModalService} from "../../../shared/services/genre-view-modal.service";
+import {AdminModalService} from "../../../shared/services/admin-modal.service";
+import {ModalConstants} from "../../../shared/constants/modal.constants";
 
 @Component({
   selector: 'app-room',
@@ -55,7 +57,8 @@ export class RoomComponent extends BaseComponent implements OnInit {
               private route: ActivatedRoute, private artistModalService: ArtistViewModalService,
               private commentService: CommentService, private formBuilder: FormBuilder,
               private store: Store, private genreService: GenreService,
-              private genreModalService: GenreViewModalService) {
+              private genreModalService: GenreViewModalService,
+              public modalService: AdminModalService) {
     super();
   }
 
@@ -159,7 +162,18 @@ export class RoomComponent extends BaseComponent implements OnInit {
   }
 
   editRoom() {
-
+      this.modalService.openModal(this.room, null, ModalConstants.ROOM).then((newRoom) => {
+        if(newRoom) {
+          this.roomService.updateRoom(newRoom, this.room.id).pipe(takeUntil(this.unsubscribe$)).subscribe(
+            response => {
+              if(response.map !== null){
+                response.map = ImageUtils.appendImageType(response.map);
+              }
+              this.room = response
+            }
+          )
+        }
+      })
   }
 
   addArtwork() {

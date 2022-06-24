@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {BaseComponent} from "../../../core/components/base/base.component";
 import {RoomService} from "../../../shared/services/room.service";
 import {ArtworkService} from "../../../shared/services/artwork.service";
@@ -39,6 +39,8 @@ export class RoomComponent extends BaseComponent implements OnInit {
   private loggedUser$: Observable<AuthoriseResponseModel>;
   loggedUser: AuthoriseResponseModel;
 
+  @Input() roomIndex:number;
+
   room: RoomModel;
   artworks: ArtworkModel[] = [];
   index: number;
@@ -76,6 +78,9 @@ export class RoomComponent extends BaseComponent implements OnInit {
     this.route.params.pipe(takeUntil(this.unsubscribe$)).subscribe(params => {
       this.roomService.getRoomById(params['roomId']).pipe(takeUntil(this.unsubscribe$))
         .subscribe(room => {
+          if(room.map !== null) {
+            room.map = ImageUtils.appendImageType(room.map);
+          }
           this.room = room;
           this.getArtworks();
         })
@@ -90,7 +95,7 @@ export class RoomComponent extends BaseComponent implements OnInit {
           this.favourites$.pipe(takeUntil(this.unsubscribe$)).subscribe((favourites) => {
             if (favourites) {
               this.favourites = favourites;
-              this.favourite = favourites.some(fav => fav.id == this.artworks[this.index].id);
+              this.favourite = favourites.some(fav => fav.id == this.artworks[this.index]?.id);
             }
           });
           this.artworks.forEach((artwork, index) => {

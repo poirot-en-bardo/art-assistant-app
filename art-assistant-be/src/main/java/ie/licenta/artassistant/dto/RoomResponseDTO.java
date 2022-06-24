@@ -19,6 +19,8 @@ public class RoomResponseDTO {
 
     private int floor;
 
+    private int number;
+
     private byte[] map;
 
     private int galleryId;

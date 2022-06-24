@@ -54,6 +54,7 @@ export class MuseumPageComponent extends BaseComponent implements OnInit {
     })
 
   }
+
   getGalleries() {
     this.galleryService.getGalleriesByMuseumId(this.museum.id).pipe(takeUntil(this.unsubscribe$))
       .subscribe(galleries => {
@@ -61,28 +62,27 @@ export class MuseumPageComponent extends BaseComponent implements OnInit {
       });
   }
 
-  search(){
-    if(this.searchText!== ""){
+  search() {
+    if (this.searchText !== "") {
       let searchValue = this.searchText.toLocaleLowerCase();
 
-      this.galleries = this.galleries.filter((gallery:any) =>{
-        if(gallery.name.toLocaleLowerCase().match(searchValue))
+      this.galleries = this.galleries.filter((gallery: any) => {
+        if (gallery.name.toLocaleLowerCase().match(searchValue))
           return gallery;
       });
-    }
-    else {
+    } else {
       this.getGalleries();
     }
   }
 
-  openMaps(){
+  openMaps() {
     let address = this.museum.address + this.museum.countryName;
-    let url = "https://www.google.com.sa/maps/search/"+ encodeURI(address);
+    let url = "https://www.google.com.sa/maps/search/" + encodeURI(address);
     window.open(url, '_blank');
   }
 
   goToGallery(galleryId: number) {
-    if(!this.loggedUser) {
+    if (!this.loggedUser) {
       alert("Please log in to access the Gallery Page");
     }
     // ['../../gallery', gallery.id]
@@ -92,18 +92,22 @@ export class MuseumPageComponent extends BaseComponent implements OnInit {
 
   editMuseum() {
     this.modalService.openModal(this.museum, null, ModalConstants.MUSEUM).then((newMuseum) => {
+      if (newMuseum) {
         this.museumService.updateMuseum(newMuseum, this.museum.id).pipe(takeUntil(this.unsubscribe$)).subscribe(
           response => this.museum = response
         )
+      }
     });
   }
 
   addGallery() {
     this.modalService.openModal(null, this.museum, ModalConstants.GALLERY).then((newGallery) => {
-      console.log(newGallery);
-      this.galleryService.addGallery(newGallery).pipe(takeUntil(this.unsubscribe$)).subscribe(
-        response => this.galleries.unshift(response)
-      )
+      if (newGallery) {
+        this.galleryService.addGallery(newGallery).pipe(takeUntil(this.unsubscribe$)).subscribe(
+          response => this.galleries.unshift(response)
+        )
+      }
     })
+
   }
 }

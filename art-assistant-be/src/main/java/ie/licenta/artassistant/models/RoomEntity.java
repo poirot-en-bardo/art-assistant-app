@@ -21,6 +21,9 @@ public class RoomEntity {
     @Column(name = "FLOOR")
     private int floor;
 
+    @Column(name = "NUMBER")
+    private int number;
+
     @Column(name = "MAP")
     private byte[] map;
 

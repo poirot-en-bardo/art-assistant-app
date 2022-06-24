@@ -1,0 +1,56 @@
+<div class="modal-header">
+  <div class="modal__title p-2 color">
+    <span *ngIf="!room">Add Room</span>
+    <span *ngIf="room">Edit Room</span>
+  </div>
+  <button type="button" class="modal__close-btn" aria-label="Close" (click)="close()">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+</div>
+
+<div class="modal-body p-3 ms-1 color">
+  <form [formGroup]="roomForm">
+    <div *ngIf="room" class="mb-3 row">
+      <b>Gallery:</b>
+      <select class="af-input color" [formControlName]="ROOM_FORM.GALLERY" [(ngModel)]="room.galleryId">
+        <option *ngFor="let gallery of galleries" [value]="gallery.id">{{gallery.name}}</option>
+      </select>
+    </div>
+
+    <div class="mb-3 row">
+      <b>Room Number:</b>
+      <input type="number" class="af-input color" placeholder="Room Number" [formControlName]="ROOM_FORM.NUMBER"
+             [value]="room?.number" [ngModel]="room?.number"/>
+      <app-error-messages [form]="roomForm" [field]="ROOM_FORM.NUMBER"></app-error-messages>
+    </div>
+
+
+    <div class="mb-3 row">
+      <b>Floor:</b>
+      <input type="number" class="af-input color" placeholder="Floor" [formControlName]="ROOM_FORM.FLOOR"
+             [value]="room?.floor" [ngModel]="room?.floor"/>
+      <app-error-messages [form]="roomForm" [field]="ROOM_FORM.FLOOR"></app-error-messages>
+    </div>
+
+    <div  class="mb-3 row">
+      <b>Map:</b>
+      <label class="af-btn--secondary color" for="file-selector"
+             type="button">Upload map</label>
+      <input (change)="fileChangeEvent($event)" accept="image/gif, image/jpeg, image/png"
+             class="d-none" [formControlName]="ROOM_FORM.MAP"
+             id="file-selector" type="file">
+      <img *ngIf="picturePreview" [src]="picturePreview"
+           class="view-img rounded mt-3 d-flex align-items-center"/>
+
+
+    </div>
+  </form>
+</div>
+<div class="modal-footer me-2">
+  <button *ngIf="room" class="af-btn af-btn--primary me-auto" (click)="deleteRoom()">
+    Delete Room
+  </button>
+  <button (click)="addRoom()" class="af-btn af-btn--primary" type="button"
+          [disabled]="roomForm.get(ROOM_FORM.FLOOR)?.errors?.required">Save
+  </button>
+</div>

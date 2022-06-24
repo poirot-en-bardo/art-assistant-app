@@ -22,4 +22,8 @@ export class RoomService {
   public updateRoom(room: RoomModel, roomId: number): Observable<any> {
     return this.http.put(`${environment.apiBaseUrl}/${RoomApiConstants.API_ROOM_USER}/${roomId}`, room);
   }
+
+  public addRoom(room: RoomModel): Observable<any> {
+    return this.http.post(`${environment.apiBaseUrl}/${RoomApiConstants.API_ROOM_ADMIN}`, room);
+  }
 }

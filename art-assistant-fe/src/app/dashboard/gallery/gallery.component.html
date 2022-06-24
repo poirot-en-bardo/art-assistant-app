@@ -12,7 +12,7 @@
 
 <div *ngFor="let room of rooms; let i = index" class="btn-group btn-matrix mt-5">
   <button type="button" [routerLink]="['room', room.id]"
-          class="btn btn-default af-btn af-btn--primary m-2">Room {{room.id}}</button>
+          class="btn btn-default af-btn af-btn--primary m-2">Room {{room.number}}</button>
 </div>
 
 <router-outlet></router-outlet>

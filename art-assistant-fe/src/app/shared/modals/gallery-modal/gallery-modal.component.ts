@@ -7,7 +7,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {MuseumService} from "../../services/museum.service";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {Store} from "@ngxs/store";
-import {take, takeUntil} from "rxjs";
+import {takeUntil} from "rxjs";
 import {ShowSuccessToaster} from "../../redux/toaster/toaster.action";
 
 @Component({
@@ -23,12 +23,12 @@ export class GalleryModalComponent extends BaseComponent implements OnInit {
   GALLERY_FORM = GALLERY_FORM;
   museums: MuseumModel[];
 
-  galleryForm = this.formBuider.group({
-    [GALLERY_FORM.NAME]: ['', Validators.required],
+  galleryForm = this.formBuilder.group({
+    [GALLERY_FORM.NAME]: ['', [Validators.required, Validators.maxLength(200)]],
     [GALLERY_FORM.MUSEUM]: ['', Validators.required]
   });
 
-  constructor(public activeModal: NgbActiveModal, private formBuider: FormBuilder,
+  constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder,
               private store: Store, private museumService: MuseumService) {
     super();
   }

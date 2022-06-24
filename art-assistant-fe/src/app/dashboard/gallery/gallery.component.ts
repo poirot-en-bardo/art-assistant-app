@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BaseComponent} from "../../core/components/base/base.component";
 import {ArtworkService} from "../../shared/services/artwork.service";
 import {ActivatedRoute} from "@angular/router";
-import {Observable, take, takeUntil} from "rxjs";
+import {Observable, takeUntil} from "rxjs";
 import {RoomService} from "../../shared/services/room.service";
 import {RoomModel} from "../../shared/models/room.model";
 import {GalleryModel} from "../../shared/models/gallery.model";
@@ -11,6 +11,8 @@ import {Select, Store} from "@ngxs/store";
 import {UserState} from "../../shared/redux/user/user.state";
 import {AuthoriseResponseModel} from "../../shared/models/authorise-response.model";
 import {GetLoggedUser} from "../../shared/redux/user/user.action";
+import {AdminModalService} from "../../shared/services/admin-modal.service";
+import {ModalConstants} from "../../shared/constants/modal.constants";
 
 @Component({
   selector: 'app-gallery',
@@ -26,8 +28,8 @@ export class GalleryComponent extends BaseComponent implements OnInit {
   rooms: RoomModel[];
   gallery: GalleryModel;
 
-  constructor(private store: Store, private galleryService: GalleryService, private roomService: RoomService, private artworkService: ArtworkService,
-              private route: ActivatedRoute) {
+  constructor(private store: Store, private galleryService: GalleryService, private roomService: RoomService,
+              private artworkService: ArtworkService, private route: ActivatedRoute, public modalService: AdminModalService) {
     super();
   }
 
@@ -60,8 +62,23 @@ export class GalleryComponent extends BaseComponent implements OnInit {
   }
 
   editGallery() {
+    this.modalService.openModal(this.gallery, null, ModalConstants.GALLERY).then((newGallery) => {
+      if (newGallery) {
+        this.galleryService.updateGallery(newGallery, this.gallery.id).pipe(takeUntil(this.unsubscribe$)).subscribe(
+          response => this.gallery = response
 
+        )
+      }
+    })
   }
 
-  addRoom() {}
+  addRoom() {
+    this.modalService.openModal(null, this.gallery, ModalConstants.ROOM).then((newRoom) => {
+      if (newRoom) {
+        this.roomService.addRoom(newRoom).pipe(takeUntil(this.unsubscribe$)).subscribe(
+          response => this.rooms.push(response)
+          )
+      }
+    })
+  }
 }

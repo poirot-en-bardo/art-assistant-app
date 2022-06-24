@@ -5,6 +5,7 @@ import ie.licenta.artassistant.common.ErrorCode;
 import ie.licenta.artassistant.dto.GenreRequestDTO;
 import ie.licenta.artassistant.dto.GenreResponseDTO;
 import ie.licenta.artassistant.mappers.ArtMapper;
+import ie.licenta.artassistant.models.CountryEntity;
 import ie.licenta.artassistant.models.GenreEntity;
 import ie.licenta.artassistant.persistence.GenreRepository;
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -22,7 +24,13 @@ import java.util.List;
     
     @Override
     public List<GenreResponseDTO> getAllGenres() {
-        return null;
+
+        Optional<List<GenreEntity>> genreListOptional = Optional.of(genreRepository.findAllByOrderByNameAsc());
+        if (genreListOptional.isEmpty()) {
+            throw new ArtNotFoundException(ErrorCode.ERR_06_GENRE_NOT_FOUND);
+        }
+        return artMapper
+                .genreEntityListToGenreResponseDTOList(genreListOptional.get());
     }
 
     @Override

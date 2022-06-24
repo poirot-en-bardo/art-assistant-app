@@ -4,6 +4,7 @@ import {ModalConstants} from "../constants/modal.constants";
 import {MuseumModalComponent} from "../modals/museum-modal/museum-modal.component";
 import {GalleryModalComponent} from "../modals/gallery-modal/gallery-modal.component";
 import {RoomModalComponent} from "../modals/room-modal/room-modal.component";
+import {ArtworkModalComponent} from "../modals/artwork-modal/artwork-modal.component";
 
 @Injectable()
 export class AdminModalService {
@@ -32,11 +33,15 @@ export class AdminModalService {
         modalRef.componentInstance.gallery = extra;
         break;
       }
+      case ModalConstants.ARTWORK: {
+        modalRef = this.modalService.open(ArtworkModalComponent);
+        modalRef.componentInstance.artwork = object;
+        modalRef.componentInstance.room = extra;
+        break;
+      }
     }
 
     // @ts-ignore
     return modalRef.result;
-//elsseeee
-
   }
 }

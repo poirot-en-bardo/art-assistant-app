@@ -177,11 +177,38 @@ export class RoomComponent extends BaseComponent implements OnInit {
   }
 
   addArtwork() {
-
+      this.modalService.openModal(null, this.room, ModalConstants.ARTWORK).then(newArtwork => {
+        if(newArtwork) {
+          this.artworkService.addArtwork(newArtwork).pipe(takeUntil(this.unsubscribe$)).subscribe(
+            response => window.location.reload()
+          )
+        }
+      })
   }
 
   editArtwork() {
+      this.modalService.openModal(this.artworks[this.index], null, ModalConstants.ARTWORK).then(newArtwork => {
+        if(newArtwork) {
+          this.artworkService.updateArtwork(newArtwork, this.artworks[this.index].id).pipe(takeUntil(this.unsubscribe$))
+            .subscribe(response => {
+              if(response.imagePath !== null) {
+                response.imagePath = ImageUtils.appendImageType(response.imagePath);
+              }
+              this.artworks[this.index] = response;
+            })
+        }
+      })
+  }
 
+  deleteArtwork(id: number) {
+    if (confirm('Are you sure you want to remove the artwork?')) {
+      this.artworkService.deleteArtworkById(id).pipe(takeUntil(this.unsubscribe$)).subscribe(() => {
+          this.artworks = this.artworks.filter((item) => {
+            return item.id !== id;
+          })
+        }
+      )
+    }
   }
 
 }

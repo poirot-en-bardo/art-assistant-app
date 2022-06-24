@@ -49,9 +49,6 @@
   </form>
 </div>
 <div class="modal-footer me-2">
-  <button *ngIf="room" class="af-btn af-btn--primary me-auto" (click)="deleteRoom()">
-    Delete Room
-  </button>
   <button (click)="addRoom()" class="af-btn af-btn--primary" type="button"
           [disabled]="roomForm.get(ROOM_FORM.FLOOR)?.errors?.required">Save
   </button>

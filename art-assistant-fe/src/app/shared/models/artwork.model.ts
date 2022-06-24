@@ -9,6 +9,7 @@ export interface ArtworkModel {
   position: number;
   artistFirstName: string;
   artistLastName: string;
+  artistId: number;
   genreId: number;
   genreName: string;
   galleryName: string;

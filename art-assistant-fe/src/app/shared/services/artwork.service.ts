@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 import {ArtworkModel} from "../models/Artwork.model";
 import {ArtworkApiConstants} from "../../core/constants/Artwork-api.constants";
 import {ArtistModel} from "../models/artist.model";
+import {CommentApiConstants} from "../../core/constants/comment-api.constants";
 
 @Injectable()
 export class ArtworkService {
@@ -22,11 +23,11 @@ export class ArtworkService {
   }
 
   public updateArtwork(artwork: ArtworkModel, artworkId: number): Observable<any> {
-    return this.http.put(`${environment.apiBaseUrl}/${ArtworkApiConstants.API_ARTWORK_USER}/${artworkId}`, artwork);
+    return this.http.put(`${environment.apiBaseUrl}/${ArtworkApiConstants.API_ARTWORK_ADMIN}/${artworkId}`, artwork);
   }
 
   public addArtwork(artwork: ArtworkModel): Observable<any> {
-    return this.http.post(`${environment.apiBaseUrl}/${ArtworkApiConstants.API_ARTWORK_USER}`, artwork);
+    return this.http.post(`${environment.apiBaseUrl}/${ArtworkApiConstants.API_ARTWORK_ADMIN}`, artwork);
   }
 
   public getArtworkIds(): Observable<number[]> {
@@ -35,5 +36,9 @@ export class ArtworkService {
 
   public getArtistByArtworkId(artworkId: number): Observable<ArtistModel> {
     return this.http.get<ArtistModel>(`${environment.apiBaseUrl}/${ArtworkApiConstants.API_ARTIST_ARTWORK_ID}/${artworkId}`)
+  }
+
+  public deleteArtworkById(artworkId: number): Observable<any> {
+    return this.http.delete(`${environment.apiBaseUrl}/${ArtworkApiConstants.API_ARTWORK_ADMIN}/${artworkId}`);
   }
 }

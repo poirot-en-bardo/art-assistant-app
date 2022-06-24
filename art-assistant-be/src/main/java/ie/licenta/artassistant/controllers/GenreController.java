@@ -7,6 +7,7 @@ import ie.licenta.artassistant.dto.*;
 import ie.licenta.artassistant.services.GenreService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -18,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @ApiOperation("Genre API")
@@ -28,6 +30,24 @@ import javax.validation.Valid;
 public class GenreController {
 
     private final GenreService genreService;
+
+
+    @Operation(summary = "Get all genres")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "500", description = "Server error",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtInternalServerErrorException.class))),
+            @ApiResponse(responseCode = "404", description = "Genres not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtNotFoundException.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid request",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtBadRequestException.class))),
+            @ApiResponse(responseCode = "200", description = "Successful retrieval",
+                    content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = GenreResponseDTO.class))))
+    })
+    @GetMapping("/user/genre")
+    public ResponseEntity<List<GenreResponseDTO>> getAllGenres() {
+        return new ResponseEntity<>(genreService.getAllGenres(), HttpStatus.OK);
+    }
+
 
     @Operation(summary = "Get genre by id")
     @ApiResponses(value = {

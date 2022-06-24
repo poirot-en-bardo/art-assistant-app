@@ -18,6 +18,12 @@ public interface ArtMapper {
     ArtistResponseDTO artistEntityToArtistResponseDTO(ArtistEntity artistEntity);
 
     @Mappings({
+            @Mapping(target = "countryName", source = "country.name")
+    })
+    List<ArtistResponseDTO> artistEntityListToArtistResponseDTOList(List<ArtistEntity> artistEntity);
+
+
+    @Mappings({
             @Mapping(target = "country.id", source = "countryId")
     })
     ArtistEntity artistRequestDTOToArtistEntity(ArtistRequestDTO artistRequestDTO);
@@ -32,6 +38,7 @@ public interface ArtMapper {
     @Mappings({
             @Mapping(target = "artistFirstName", source = "artist.firstName"),
             @Mapping(target = "artistLastName", source = "artist.lastName"),
+            @Mapping(target = "artistId", source = "artist.id"),
             @Mapping(target = "genreName", source = "genre.name"),
             @Mapping(target = "genreId", source = "genre.id"),
             @Mapping(target = "roomId", source = "room.id"),
@@ -46,6 +53,7 @@ public interface ArtMapper {
     @Mappings({
             @Mapping(target = "artistFirstName", source = "artist.firstName"),
             @Mapping(target = "artistLastName", source = "artist.lastName"),
+            @Mapping(target = "artistId", source = "artist.id"),
             @Mapping(target = "genreName", source = "genre.name"),
             @Mapping(target = "genreId", source = "genre.id"),
             @Mapping(target = "roomId", source = "room.id"),
@@ -146,6 +154,7 @@ public interface ArtMapper {
 
 
     GenreResponseDTO genreEntityToGenreResponseDTO(GenreEntity genreEntity);
+    List<GenreResponseDTO> genreEntityListToGenreResponseDTOList(List<GenreEntity> genreEntity);
     GenreEntity genreRequestDTOToGenreEntity(GenreRequestDTO genreRequestDTO);
     @Mappings({
             @Mapping(target = "id", source = "genreId"),

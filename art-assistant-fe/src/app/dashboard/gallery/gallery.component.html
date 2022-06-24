@@ -3,7 +3,7 @@
   <span><u>{{gallery?.name}} Gallery</u></span>
 </div>
 
-<div *ngIf="loggedUser.admin" class="text-center">
+<div *ngIf="loggedUser?.admin" class="text-center">
   <button (click)="editGallery()" type="button"
           class="mb-3 edit-btn me-3"><i class="fa fa-edit fa-xs"></i></button>
   <button (click)="addRoom()" type="button"

@@ -77,9 +77,4 @@ export class RoomModalComponent extends FileChangeBaseComponent implements OnIni
     this.store.dispatch(new ShowSuccessToaster());
   }
 
-  deleteRoom() {
-
-  }
-
-
 }

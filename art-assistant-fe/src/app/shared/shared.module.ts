@@ -24,6 +24,7 @@ import {AdminModalService} from "./services/admin-modal.service";
 import { GalleryModalComponent } from './modals/gallery-modal/gallery-modal.component';
 import { RoomModalComponent } from './modals/room-modal/room-modal.component';
 import { ArtworkModalComponent } from './modals/artwork-modal/artwork-modal.component';
+import {ArtistService} from "./services/artist.service";
 
 @NgModule({
   imports: [
@@ -51,6 +52,7 @@ import { ArtworkModalComponent } from './modals/artwork-modal/artwork-modal.comp
     ToasterComponent
   ],
   providers: [
+    ArtistService,
     AuthorisationService,
     AuthenticationService,
     CountryService,

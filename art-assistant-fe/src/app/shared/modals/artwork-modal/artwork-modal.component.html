@@ -1,1 +1,102 @@
-<p>artwork-modal works!</p>
+<div class="modal-header">
+  <div class="modal__title p-2 color">
+    <span *ngIf="!artwork">Add Artwork</span>
+    <span *ngIf="artwork">Edit Artwork</span>
+  </div>
+  <button type="button" class="modal__close-btn" aria-label="Close" (click)="close()">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+</div>
+
+<div class="modal-body p-3 ms-1 color">
+  <form [formGroup]="artworkForm">
+    <div class="mb-3 row">
+      <b>Title:</b>
+      <input class="af-input color" placeholder="Title" [formControlName]="ARTWORK_FORM.TITLE"
+             [value]="artwork?.title" [ngModel]="artwork?.title"/>
+      <app-error-messages [form]="artworkForm" [field]="ARTWORK_FORM.TITLE"></app-error-messages>
+    </div>
+
+    <div class="mb-3 row">
+      <b>Artist:</b>
+      <select *ngIf="artwork" class="af-input color" [formControlName]="ARTWORK_FORM.ARTIST" [(ngModel)]="artwork.artistId">
+        <option *ngFor="let artist of artists" [value]="artist.id">{{artist.lastName +' '+ artist.firstName}}</option>
+      </select>
+      <select *ngIf="!artwork" class="af-input color" [formControlName]="ARTWORK_FORM.ARTIST">
+        <option *ngFor="let artist of artists" [value]="artist.id">{{artist.lastName +' '+ artist.firstName}}</option>
+      </select>
+      <app-error-messages [form]="artworkForm" [field]="ARTWORK_FORM.ARTIST"></app-error-messages>
+    </div>
+
+    <div class="mb-3 row">
+      <b>Year:</b>
+      <input type="number" class="af-input color" placeholder="Year" [formControlName]="ARTWORK_FORM.YEAR"
+             [value]="artwork?.year" [ngModel]="artwork?.year"/>
+      <app-error-messages [form]="artworkForm" [field]="ARTWORK_FORM.YEAR"></app-error-messages>
+    </div>
+
+    <div class="mb-3 row">
+      <b>Genre:</b>
+      <select *ngIf="artwork" class="af-input color" [formControlName]="ARTWORK_FORM.GENRE" [(ngModel)]="artwork.genreId">
+        <option *ngFor="let genre of genres" [value]="genre.id">{{genre.name}}</option>
+      </select>
+      <select *ngIf="!artwork" class="af-input color" [formControlName]="ARTWORK_FORM.GENRE">
+        <option *ngFor="let genre of genres" [value]="genre.id">{{genre.name}}</option>
+      </select>
+      <app-error-messages [form]="artworkForm" [field]="ARTWORK_FORM.GENRE"></app-error-messages>
+    </div>
+
+    <div class="mb-3 row">
+      <b>Technique:</b>
+      <input class="af-input color" placeholder="Technique" [formControlName]="ARTWORK_FORM.TECHNIQUE"
+             [value]="artwork?.technique" [ngModel]="artwork?.technique"/>
+      <app-error-messages [form]="artworkForm" [field]="ARTWORK_FORM.TECHNIQUE"></app-error-messages>
+    </div>
+
+    <div class="mb-3">
+      <b>Description:</b>
+      <textarea class="af-input af-input--large" [formControlName]="ARTWORK_FORM.DESCRIPTION" rows="4"
+                [value]="artwork?.description" [ngModel]="artwork?.description"></textarea>
+    </div>
+
+    <div class="mb-3 row">
+      <b>Position:</b>
+      <input type="number" class="af-input color" placeholder="Position" [formControlName]="ARTWORK_FORM.POSITION"
+             [value]="artwork?.position" [ngModel]="artwork?.position"/>
+      <app-error-messages [form]="artworkForm" [field]="ARTWORK_FORM.POSITION"></app-error-messages>
+    </div>
+
+    <div *ngIf="artwork" class="mb-3 row">
+      <b>Room:</b>
+      <select class="af-input color" [formControlName]="ARTWORK_FORM.ROOM" [(ngModel)]="artwork.roomId">
+        <option *ngFor="let room of rooms" [value]="room.id">{{room.number}}</option>
+      </select>
+    </div>
+
+    <div  class="mb-3 row">
+      <b>Image:</b>
+      <label class="af-btn--secondary color" for="file-selector"
+             type="button">Upload image</label>
+      <input (change)="fileChangeEvent($event)" accept="image/gif, image/jpeg, image/png"
+             class="d-none" [formControlName]="ARTWORK_FORM.IMAGE"
+             id="file-selector" type="file">
+      <img *ngIf="picturePreview" [src]="picturePreview"
+           class="view-img rounded mt-3 d-flex align-items-center"/>
+      <img *ngIf="artwork?.imagePath && !picturePreview" [src]="artwork.imagePath"
+           class="view-img rounded mt-3 d-flex align-items-center"/>
+
+
+    </div>
+  </form>
+</div>
+<div class="modal-footer me-2">
+  <button (click)="addArtwork()" class="af-btn af-btn--primary" type="button"
+          [disabled]="artworkForm.get(ARTWORK_FORM.TITLE)?.errors?.required ||
+                      artworkForm.get(ARTWORK_FORM.ARTIST)?.errors?.required ||
+                      artworkForm.get(ARTWORK_FORM.YEAR)?.errors?.required ||
+                      artworkForm.get(ARTWORK_FORM.GENRE)?.errors?.required ||
+                      artworkForm.get(ARTWORK_FORM.TECHNIQUE)?.errors?.required ||
+                      artworkForm.get(ARTWORK_FORM.DESCRIPTION)?.errors?.required ||
+                      artworkForm.get(ARTWORK_FORM.POSITION)?.errors?.required">Save
+  </button>
+</div>

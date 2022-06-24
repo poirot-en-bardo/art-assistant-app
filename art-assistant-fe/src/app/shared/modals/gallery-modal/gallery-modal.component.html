@@ -26,9 +26,6 @@
   </form>
 </div>
 <div class="modal-footer me-2">
-  <button *ngIf="gallery" class="af-btn af-btn--primary me-auto" (click)="deleteGallery()">
-    Delete Gallery
-  </button>
   <button (click)="addGallery()" class="af-btn af-btn--primary" type="button"
           [disabled]="galleryForm.get(GALLERY_FORM.NAME)?.errors?.required">Save
   </button>

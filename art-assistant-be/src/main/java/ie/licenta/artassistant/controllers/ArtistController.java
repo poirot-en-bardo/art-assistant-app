@@ -6,9 +6,11 @@ import ie.licenta.artassistant.common.ArtInternalServerErrorException;
 import ie.licenta.artassistant.common.ArtNotFoundException;
 import ie.licenta.artassistant.dto.ArtistRequestDTO;
 import ie.licenta.artassistant.dto.ArtistResponseDTO;
+import ie.licenta.artassistant.dto.CountryResponseDTO;
 import ie.licenta.artassistant.services.ArtistService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -20,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @ApiOperation("Artist API")
@@ -45,6 +48,22 @@ public class ArtistController {
     @GetMapping("/user/artist/{id}")
     public ResponseEntity<ArtistResponseDTO> getArtistById(@PathVariable int id) {
         return new ResponseEntity<>(artistService.getArtistById(id), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Get all artists")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "500", description = "Server error",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtInternalServerErrorException.class))),
+            @ApiResponse(responseCode = "404", description = "Artists not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtNotFoundException.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid request",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtBadRequestException.class))),
+            @ApiResponse(responseCode = "200", description = "Successful retrieval",
+                    content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = ArtistResponseDTO.class))))
+    })
+    @GetMapping("/user/artist")
+    public ResponseEntity<List<ArtistResponseDTO>> getAllArtists() {
+        return new ResponseEntity<>(artistService.getAllArtists(), HttpStatus.OK);
     }
 
     @Operation(summary = "Add a new artist")

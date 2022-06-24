@@ -52,7 +52,7 @@ public class CountryController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "500", description = "Server error",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtInternalServerErrorException.class))),
-            @ApiResponse(responseCode = "404", description = "Museums not found",
+            @ApiResponse(responseCode = "404", description = "Countries not found",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtNotFoundException.class))),
             @ApiResponse(responseCode = "400", description = "Invalid request",
                     content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtBadRequestException.class))),

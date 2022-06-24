@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {BaseComponent} from "../../../core/components/base/base.component";
 import {RoomService} from "../../../shared/services/room.service";
 import {ArtworkService} from "../../../shared/services/artwork.service";
@@ -26,6 +26,7 @@ import {GenreService} from "../../../shared/services/genre.service";
 import {GenreViewModalService} from "../../../shared/services/genre-view-modal.service";
 import {AdminModalService} from "../../../shared/services/admin-modal.service";
 import {ModalConstants} from "../../../shared/constants/modal.constants";
+import {CommentModel} from "../../../shared/models/comment.model";
 
 @Component({
   selector: 'app-room',
@@ -42,6 +43,8 @@ export class RoomComponent extends BaseComponent implements OnInit {
   loggedUser: AuthoriseResponseModel;
 
   @Input() roomIndex:number;
+  @Output() deleteRoomEvent= new EventEmitter<number>();
+
 
   room: RoomModel;
   artworks: ArtworkModel[] = [];
@@ -176,6 +179,13 @@ export class RoomComponent extends BaseComponent implements OnInit {
       })
   }
 
+  deleteRoom(id: number) {
+    if(confirm('Are you sure you want to delete this room?')) {
+      this.roomService.deleteRoomById(id).pipe(takeUntil(this.unsubscribe$)).subscribe(
+        () => this.deleteRoomEvent.emit(id))
+    }
+  }
+
   addArtwork() {
       this.modalService.openModal(null, this.room, ModalConstants.ARTWORK).then(newArtwork => {
         if(newArtwork) {
@@ -210,5 +220,7 @@ export class RoomComponent extends BaseComponent implements OnInit {
       )
     }
   }
+
+
 
 }

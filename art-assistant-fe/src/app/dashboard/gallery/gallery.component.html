@@ -13,6 +13,10 @@
 <div *ngFor="let room of rooms; let i = index" class="btn-group btn-matrix mt-5">
   <button type="button" [routerLink]="['room', room.id]"
           class="btn btn-default af-btn af-btn--primary m-2">Room {{room.number}}</button>
+  <button class="delete-btn tag-box__action-button tag-box__action-button--delete"
+          (click)="deleteRoom(room.id)">
+    <i class="fa fa-trash-can fa-xs tag-box__action-button-image"></i>
+  </button>
 </div>
 
 <router-outlet></router-outlet>

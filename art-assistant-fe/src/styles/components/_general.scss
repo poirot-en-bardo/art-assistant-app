@@ -64,3 +64,11 @@
     box-shadow: 0 2px 10px $color-primary;
   }
 }
+
+.delete-button {
+  border-radius: 50%;
+  background-color: $color-primary;
+  border: none;
+  color: white;
+  cursor: pointer;
+}

@@ -28,4 +28,9 @@ export class GalleryService {
     return this.http.post(`${environment.apiBaseUrl}/${GalleryApiConstants.API_GALLERY_ADMIN}`, gallery);
   }
 
+  public deleteGallery(id: number): Observable<any> {
+    return this.http.delete(`${environment.apiBaseUrl}/${GalleryApiConstants.API_GALLERY_ADMIN}/${id}`);
+
+  }
+
 }

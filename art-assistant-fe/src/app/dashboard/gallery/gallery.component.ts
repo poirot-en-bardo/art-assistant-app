@@ -21,12 +21,11 @@ import {ModalConstants} from "../../shared/constants/modal.constants";
 })
 export class GalleryComponent extends BaseComponent implements OnInit {
 
-  @Select(UserState.getLoggedUser)
-  private loggedUser$: Observable<AuthoriseResponseModel>;
   loggedUser: AuthoriseResponseModel;
-
   rooms: RoomModel[];
   gallery: GalleryModel;
+  @Select(UserState.getLoggedUser)
+  private loggedUser$: Observable<AuthoriseResponseModel>;
 
   constructor(private store: Store, private galleryService: GalleryService, private roomService: RoomService,
               private artworkService: ArtworkService, private route: ActivatedRoute, public modalService: AdminModalService) {
@@ -66,7 +65,6 @@ export class GalleryComponent extends BaseComponent implements OnInit {
       if (newGallery) {
         this.galleryService.updateGallery(newGallery, this.gallery.id).pipe(takeUntil(this.unsubscribe$)).subscribe(
           response => this.gallery = response
-
         )
       }
     })
@@ -77,8 +75,19 @@ export class GalleryComponent extends BaseComponent implements OnInit {
       if (newRoom) {
         this.roomService.addRoom(newRoom).pipe(takeUntil(this.unsubscribe$)).subscribe(
           response => this.rooms.push(response)
-          )
+        )
       }
     })
+  }
+
+  deleteRoom(id: number) {
+    if (confirm('Are you sure you want to delete this room?')) {
+      this.roomService.deleteRoomById(id).pipe(takeUntil(this.unsubscribe$)).subscribe(
+        () => this.rooms = this.rooms.filter((item) => {
+            return item.id !== id;
+          }
+        )
+      )
+    }
   }
 }

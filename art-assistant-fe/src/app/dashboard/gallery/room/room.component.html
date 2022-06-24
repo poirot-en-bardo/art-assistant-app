@@ -16,14 +16,15 @@
           <i class="fa fa-arrow-right"></i>
         </a>
         <div class="text-center">
-        <span *ngIf="loggedUser.admin">
+        <span *ngIf="loggedUser?.admin">
           <button (click)="editRoom()" type="button"
                   class="mb-3 edit-btn me-3"><i class="fa fa-edit fa-xs"></i></button>
         </span>
-        <span *ngIf="loggedUser.admin" >
+          <span *ngIf="loggedUser?.admin">
           <button (click)="addArtwork()" type="button"
                   class="add-btn mb-2">Add Artwork</button>
         </span>
+          
         </div>
       </div>
 
@@ -47,16 +48,18 @@
                   </div>
                   <div><i><b>Year:</b></i> {{artworks[index]?.year}}</div>
                   <div><i><b>Genre:</b></i> {{artworks[index]?.genreName}}
-                  <span class="hand read-more-btn" (click)="viewGenreModal()">[View Genre] </span>
+                    <span class="hand read-more-btn" (click)="viewGenreModal()">[View Genre] </span>
                   </div>
-                    <!--                      click to modal-->
+                  <!--                      click to modal-->
                   <div><i><b>Technique:</b></i> {{artworks[index]?.technique}}</div>
                   <div class="card-text"><i><b>Description:</b></i> {{artworks[index]?.description}}</div>
                   <div *ngIf="loggedUser.admin" class="text-center">
                     <button (click)="editArtwork()" type="button"
-                            class="add-btn mt-4 mb-2 me-2">Edit Artwork</button>
+                            class="add-btn mt-4 mb-2 me-2">Edit Artwork
+                    </button>
                     <button (click)="deleteArtwork(artworks[index].id)" type="button"
-                            class="add-btn mt-4 mb-2 me-4">Delete Artwork</button>
+                            class="add-btn mt-4 mb-2 me-4">Delete Artwork
+                    </button>
 
                   </div>
                 </div>

@@ -24,14 +24,21 @@
 
   <div *ngIf="loggedUser?.admin" class="text-center">
     <button (click)="addGallery()" type="button"
-            class="add-btn mt-1 mb-2 me-4">Add Gallery</button>
+            class="add-btn mt-1 mb-2 me-4">Add Gallery
+    </button>
   </div>
-  <div *ngFor="let gallery of galleries; let i = index" #triggerScrollElement>
+  <div *ngFor="let gallery of galleries; let i = index">
+    <span>
     <a class="link" (click)="goToGallery(gallery.id)">
       <span class="fw-bold light-color link hand">
         {{gallery.name}}
       </span>
     </a>
+      </span>
+    <span *ngIf="loggedUser?.admin">
+            <button class="float-end delete-button" (click)="deleteGallery(gallery.id)">
+            <i class="fa-solid fa-trash"></i>
+          </button></span>
   </div>
 </div>
 <router-outlet></router-outlet>

@@ -108,6 +108,13 @@ export class MuseumPageComponent extends BaseComponent implements OnInit {
         )
       }
     })
+  }
 
+  deleteGallery(id: number) {
+    this.galleryService.deleteGallery(id).pipe(takeUntil(this.unsubscribe$)).subscribe(
+      () => this.galleries = this.galleries.filter((item) => {
+        return item.id !== id;
+      })
+    )
   }
 }

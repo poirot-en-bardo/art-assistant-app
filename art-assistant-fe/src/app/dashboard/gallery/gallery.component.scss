@@ -1,2 +1,15 @@
 @import '/src/styles/components/buttons';
 @import "src/styles/components/general";
+
+.delete-btn{
+  position: absolute;
+  border-radius: 50%;
+  background-color: $color-primary;
+  border: none;
+  color: white;
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+  top: -12px;
+  right: -10px;
+}

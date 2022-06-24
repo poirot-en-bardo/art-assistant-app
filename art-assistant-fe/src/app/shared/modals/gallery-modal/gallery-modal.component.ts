@@ -60,7 +60,5 @@ export class GalleryModalComponent extends BaseComponent implements OnInit {
     this.store.dispatch(new ShowSuccessToaster());
   }
 
-  deleteGallery() {
-  }
 
 }

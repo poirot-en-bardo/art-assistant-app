@@ -103,4 +103,22 @@ public class GalleryController {
                                                                 @PathVariable int id) {
         return new ResponseEntity<>(galleryService.updateGallery(id, galleryRequestDTO), HttpStatus.OK);
     }
+
+    @Operation(summary = "Delete a gallery by id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "500", description = "Server error",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtInternalServerErrorException.class))),
+            @ApiResponse(responseCode = "404", description = "Gallery not found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtNotFoundException.class))),
+            @ApiResponse(responseCode = "400", description = "Invalid gallery id",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = ArtBadRequestException.class))),
+            @ApiResponse(responseCode = "200", description = "Successfully deleted the gallery",
+                    content = @Content(mediaType = "application/json"))
+    })
+    @DeleteMapping("/admin/gallery/{id}")
+    public ResponseEntity<Void> deleteGalleryById(@PathVariable int id){
+        galleryService.deleteGalleryById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

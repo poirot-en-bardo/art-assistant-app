@@ -24,6 +24,8 @@ import {AddCommentComponent} from "./room/comments/add-comment/add-comment.compo
     ReactiveFormsModule,
   ],
   providers: [],
+  exports: [
+  ],
   bootstrap: [GalleryComponent]
 })
 
